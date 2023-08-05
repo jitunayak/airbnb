@@ -7,8 +7,8 @@ function Header() {
   const { login, user, isAuthenticated, isLoading, getPermissions } =
     useKindeAuth();
 
-  console.log(user);
-  console.log(getPermissions().permissions);
+  console.log(user && user);
+  console.log(user && getPermissions().permissions);
 
   return (
     <HeaderWrapper>
