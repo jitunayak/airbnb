@@ -5,10 +5,13 @@ export const Button = styled("button", {
   borderRadius: "2rem",
   fontSize: "12px",
   fontWeight: "normal",
-  padding: "8px 10px",
   width: "fit-content",
   display: "flex",
-
+  alignItems: "center",
+  justifyContent: "center",
+  justifyItems: "center",
+  height: "fit-content",
+  gap: ".2rem",
   variants: {
     color: {
       primary: {
@@ -38,6 +41,28 @@ export const Button = styled("button", {
         "&:hover": {
           boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.09);",
         },
+      },
+    },
+    round: {
+      s: {
+        borderRadius: ".6rem",
+      },
+      m: {
+        borderRadius: "1rem",
+      },
+      l: {
+        borderRadius: "2rem",
+      },
+    },
+    size: {
+      s: {
+        padding: "8px 10px",
+      },
+      m: {
+        padding: "10px 12px",
+      },
+      l: {
+        padding: "12px 14px",
       },
     },
   },
