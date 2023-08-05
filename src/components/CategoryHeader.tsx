@@ -1,7 +1,12 @@
 import { styled } from "@stitches/react";
+import { useState } from "react";
 
+interface ICategory {
+  url: string;
+  title: string;
+}
 function CategoryHeader() {
-  const categories: { url: string; title: string }[] = [
+  const categories: ICategory[] = [
     {
       url: "https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpg",
       title: "Farms",
@@ -31,30 +36,74 @@ function CategoryHeader() {
       title: "Coutryside",
     },
   ];
+
+  const [selectedCategory, setselectedCategory] = useState<ICategory>(
+    categories[0]
+  );
+
+  const isSelectedItem = (category: ICategory) =>
+    selectedCategory.title === category.title;
+
   return (
-    <Group>
+    <ListWrapper>
       {categories.map((category) => {
         return (
-          <Stack>
-            <img src={category.url} alt="" width="24" height="24"></img>
-            <TitleText>{category.title}</TitleText>
-          </Stack>
+          <ListContainer onClick={() => setselectedCategory(category)}>
+            <img
+              src={category.url}
+              alt=""
+              width="20"
+              height="20"
+              style={isSelectedItem(category) ? {} : { opacity: ".7" }}
+            ></img>
+            <TitleText
+              color={isSelectedItem(category) ? "primary" : "secondary"}
+            >
+              {category.title}
+            </TitleText>
+            <Underline
+              color={isSelectedItem(category) ? "primary" : "invisible"}
+            />
+          </ListContainer>
         );
       })}
-    </Group>
+    </ListWrapper>
   );
 }
 
 export default CategoryHeader;
 
-export const Stack = styled("span", {
+const Underline = styled("span", {
+  width: "100%",
+  height: "2px",
+  backgroundColor: "transparent",
+  "&:hover": {
+    backgroundColor: "#ccc",
+  },
+
+  variants: {
+    color: {
+      primary: {
+        backgroundColor: "Black",
+      },
+      invisible: {
+        backgroundColor: "transparent",
+      },
+      secondary: {
+        backgroundColor: "#ccc",
+      },
+    },
+  },
+});
+export const ListContainer = styled("span", {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   alignContent: "center",
   cursor: "pointer",
+  gap: ".4rem",
 });
-export const Group = styled("span", {
+export const ListWrapper = styled("span", {
   display: "flex",
   gap: "2rem",
   marginTop: "2rem",
@@ -64,8 +113,20 @@ export const Group = styled("span", {
 });
 export const TitleText = styled("span", {
   fontSize: "13px",
+  fontWeight: "500",
   color: "gray",
   "&:hover": {
     color: "Black",
+  },
+  defaultVariants: {
+    color: "secondary",
+  },
+  variants: {
+    color: {
+      primary: {
+        color: "black",
+      },
+      secondary: { color: "gray" },
+    },
   },
 });
