@@ -4,8 +4,8 @@ export const Button = styled("button", {
   backgroundColor: "gainsboro",
   borderRadius: "2rem",
   fontSize: "12px",
-  fontWeight: "normal",
   width: "fit-content",
+  fontweight: "600",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -57,7 +57,7 @@ export const Button = styled("button", {
         borderRadius: "2rem",
       },
       xl: {
-        borderRadius: "100rem",
+        borderRadius: "100%",
       },
     },
     size: {

@@ -22,7 +22,9 @@ function Header() {
         <Button color="primary">Search</Button>
       </Button>
 
-      {isAuthenticated && !isLoading && user && <span>{user?.given_name}</span>}
+      {isAuthenticated && !isLoading && user && (
+        <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
+      )}
       {!user && <Button onClick={() => login({})}>Login</Button>}
     </HeaderWrapper>
   );
@@ -36,4 +38,18 @@ const HeaderWrapper = styled("div", {
   alignItems: "center",
   gridTemplateColumns: "repeat(3,auto)",
   marginLeft: "2rem",
+});
+const RoundIcon = styled("span", {
+  borderRadius: "100%",
+  color: "white",
+  fontWeight: "500",
+  backgroundColor: "black",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "0.5rem",
+  display: "flex",
+  height: "16px",
+  width: "16px",
+  fontSize: "10px",
+  cursor: "pointer",
 });
