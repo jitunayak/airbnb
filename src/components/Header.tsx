@@ -6,13 +6,13 @@ function Header() {
   return (
     <HeaderWrapper>
       <AirBnbIcon />
-      <Button color={"outline"}>
-        <Button color={"text"}>Anywhere</Button>
+      <Button color="outline" shadow="1">
+        <Button color="text">Anywhere</Button>
         <Divider />
-        <Button color={"text"}>Any week</Button>
+        <Button color="text">Any week</Button>
         <Divider />
-        <Button color={"textSecondary"}>Add guest</Button>
-        <Button color={"primary"}>Search</Button>
+        <Button color="textSecondary">Add guest</Button>
+        <Button color="primary">Search</Button>
       </Button>
     </HeaderWrapper>
   );

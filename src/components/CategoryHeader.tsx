@@ -35,6 +35,10 @@ function CategoryHeader() {
       url: "https://a0.muscache.com/pictures/6ad4bd95-f086-437d-97e3-14d12155ddfe.jpg",
       title: "Coutryside",
     },
+    {
+      url: "https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg",
+      title: "Cabins",
+    },
   ];
 
   const [selectedCategory, setselectedCategory] = useState<ICategory>(
@@ -54,7 +58,7 @@ function CategoryHeader() {
               alt=""
               width="20"
               height="20"
-              style={isSelectedItem(category) ? {} : { opacity: ".7" }}
+              style={isSelectedItem(category) ? {} : { opacity: ".5" }}
             ></img>
             <TitleText
               color={isSelectedItem(category) ? "primary" : "secondary"}
@@ -115,6 +119,8 @@ export const TitleText = styled("span", {
   fontSize: "13px",
   fontWeight: "500",
   color: "gray",
+  whiteSpace: "nowrap",
+
   "&:hover": {
     color: "Black",
   },

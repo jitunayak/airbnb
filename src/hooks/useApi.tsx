@@ -1,3 +1,5 @@
+import { IRoom } from "../types/IRoom";
+
 const useApi = () => {
   const fetchHomePageResults = async () => {
     const response = await fetch(
@@ -6,12 +8,88 @@ const useApi = () => {
     return response.json();
   };
 
-  //   const fetchRooms = async()=>{
-  //     new Promise((resolve, reject)=>{
-  //         resolve()
-  //     })
-  //   }
-  return { fetchHomePageResults };
+  const fetchRooms = async (): Promise<IRoom[]> => {
+    return new Promise((resolve) => {
+      const results: IRoom[] = [
+        {
+          id: "1",
+          rating: 4.8,
+          address: {
+            country: "India",
+            market: "Ooty",
+            street: "",
+          },
+          amenities: ["TV", "Geyser", "Wifi"],
+          currency: "INR",
+
+          images: [
+            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
+            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/724a57b5-3670-412c-8a9c-d363018880e3.jpeg?im_w=720",
+            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/b45cb018-12a0-42d4-8f5f-594784b75790.jpeg?im_w=720",
+          ],
+          listingUrl: "https://a0.muscache.com/",
+          name: "Wildvibes A frame Cabin ooty",
+          price: 5720,
+          propertyType: "Cabins",
+          thumbnail:
+            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
+          summary:
+            "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
+        },
+        {
+          id: "1",
+          rating: 5.0,
+          address: {
+            country: "Sri Lanka",
+            market: "Hemmathagama",
+            street: "Sabaragamuwa Province",
+          },
+          amenities: ["TV", "Geyser", "Wifi"],
+          currency: "INR",
+          price: 14311,
+          images: [
+            "https://a0.muscache.com/im/pictures/d3b2b902-6143-46e1-90fc-f6eee6f66e42.jpg?im_w=720",
+            "https://a0.muscache.com/im/pictures/32368483/311c7115_original.jpg?im_w=720",
+            "https://a0.muscache.com/im/pictures/36344e78-9c3c-4f9b-adca-c3d0327ed2d9.jpg?im_w=720",
+          ],
+          listingUrl: "https://a0.muscache.com/",
+          name: "Wildvibes A frame Cabin ooty",
+          propertyType: "Cabins",
+          thumbnail:
+            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
+          summary:
+            "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
+        },
+        {
+          id: "1",
+          rating: 4.9,
+          address: {
+            country: "India",
+            market: "Igatpuri",
+            street: "",
+          },
+          amenities: ["TV", "Geyser", "Wifi"],
+          currency: "INR",
+
+          images: [
+            "https://a0.muscache.com/im/pictures/miso/Hosting-31049657/original/37d0a827-358b-4551-859b-e6a64c8e7f1d.jpeg?im_w=720",
+            "https://a0.muscache.com/im/pictures/miso/Hosting-31049657/original/5b2f9870-23bc-4cc4-b93d-cf8946b8b929.jpeg?im_w=720",
+            "https://a0.muscache.com/im/pictures/miso/Hosting-31049657/original/f7cf2a5e-1ef3-4f46-b3bd-8b9afaec2b71.jpeg?im_w=720",
+          ],
+          listingUrl: "https://a0.muscache.com/",
+          name: "Wildvibes A frame Cabin ooty",
+          price: 15990,
+          propertyType: "Cabins",
+          thumbnail:
+            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
+          summary:
+            "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
+        },
+      ];
+      resolve(results);
+    });
+  };
+  return { fetchHomePageResults, fetchRooms };
 };
 
 export default useApi;

@@ -14,4 +14,5 @@ export interface IRoom {
     market: string;
     country: string;
   };
+  rating: number;
 }

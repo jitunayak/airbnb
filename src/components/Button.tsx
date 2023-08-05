@@ -12,6 +12,9 @@ export const Button = styled("button", {
   justifyItems: "center",
   height: "fit-content",
   gap: ".2rem",
+  defaultVariants: {
+    shadow: "0",
+  },
   variants: {
     color: {
       primary: {
@@ -53,6 +56,9 @@ export const Button = styled("button", {
       l: {
         borderRadius: "2rem",
       },
+      xl: {
+        borderRadius: "100rem",
+      },
     },
     size: {
       s: {
@@ -63,6 +69,15 @@ export const Button = styled("button", {
       },
       l: {
         padding: "12px 14px",
+      },
+    },
+    shadow: {
+      0: {},
+      1: {
+        boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.1)",
+        "&:hover": {
+          boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.2)",
+        },
       },
     },
   },
