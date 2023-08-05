@@ -1,5 +1,5 @@
 import { styled } from "@stitches/react";
-import { AirBnbIcon } from "./AirBnbIcon";
+import { AirBnbIcon } from "../assets/AirBnbIcon";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 function Header() {

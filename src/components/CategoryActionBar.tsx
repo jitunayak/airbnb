@@ -6,7 +6,7 @@ function CategoryActionBar() {
   return (
     <HeaderWrapper>
       <CategoryHeader />
-      <Filters/>
+      <Filters />
     </HeaderWrapper>
   );
 }

@@ -1,8 +1,7 @@
 // import './App.css'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import CategoryActionBar from "./components/CategoryActionBar";
-import Header from "./components/Header";
 import HomeResults from "./components/HomeResults";
+import StickyHeader from "./components/StickyHeader";
 
 function App() {
   const queryClient = new QueryClient();
@@ -10,8 +9,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Header />
-        <CategoryActionBar />
+        <StickyHeader />
         <HomeResults />
       </QueryClientProvider>
     </>

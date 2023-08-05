@@ -1,5 +1,5 @@
 import { Button } from "./Button";
-import { FiltersIcon } from "./FiltersIcon";
+import { FiltersIcon } from "../assets/FiltersIcon";
 function Filters() {
   return (
     <>

@@ -6,6 +6,11 @@ const useApi = () => {
     return response.json();
   };
 
+  //   const fetchRooms = async()=>{
+  //     new Promise((resolve, reject)=>{
+  //         resolve()
+  //     })
+  //   }
   return { fetchHomePageResults };
 };
 
