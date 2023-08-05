@@ -20,27 +20,31 @@ const HomeResultItem: React.FC<IProps> = ({ item }) => {
   };
   const isLastIndex = () => thumbnailIndex === item.images.length - 1;
 
+  const imagePositionIndicatorRenderer = (index: number) => (
+    <span
+      style={{
+        color: "white",
+        userSelect: "none",
+        opacity: thumbnailIndex === index ? "1" : ".7",
+        fontSize: thumbnailIndex === index ? "50px" : "40px",
+      }}
+    >
+      .
+    </span>
+  );
+
   const imageSlidingIndicator = (item: IRoom) => {
     return (
-      <span style={{}}>
+      <div>
         {Array(item.images.length)
-          .fill(0)
+          .fill(1)
           .map((__, index) => {
-            return (
-              <span
-                style={{
-                  color: "white",
-                  opacity: thumbnailIndex === index ? "1" : ".7",
-                  fontSize: thumbnailIndex === index ? "50px" : "40px",
-                }}
-              >
-                .
-              </span>
-            );
+            return imagePositionIndicatorRenderer(index);
           })}
-      </span>
+      </div>
     );
   };
+  
   const ImageSliderControl = () => {
     return (
       <>
@@ -58,14 +62,7 @@ const HomeResultItem: React.FC<IProps> = ({ item }) => {
 
   return (
     <ItemWrapper>
-      <div
-        style={{
-          height: "300px",
-          width: "300px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+      <ImageWrapper>
         <CardImage src={item.images[thumbnailIndex]} height={300} width={300} />
         <HeartIconWrapper>
           <HeartIcon />
@@ -73,31 +70,22 @@ const HomeResultItem: React.FC<IProps> = ({ item }) => {
         <ImageSliderControlWrapper>
           <ImageSliderControl />
         </ImageSliderControlWrapper>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            marginTop: "25%",
-          }}
-        >
+        <ImagePositionIndicator>
           {imageSlidingIndicator(item)}
-        </div>
-      </div>
+        </ImagePositionIndicator>
+      </ImageWrapper>
       <CardTitle>
-        <span style={{ fontWeight: "600", fontSize: "14px" }}>
+        <Title>
           {item.address.market},{item.address.country}
-        </span>
+        </Title>
         <RatingWrapper>
           <StarIcon />
           <span style={{ fontSize: "13px" }}>{item.rating}</span>
         </RatingWrapper>
       </CardTitle>
       <div style={{ marginTop: "1rem" }}>
-        <span style={{ fontWeight: "600", fontSize: "13px" }}>
-          ₹{item.price}
-        </span>{" "}
-        <span style={{ fontWeight: "normal", fontSize: "13px" }}>night</span>
+        <Price>₹{item.price.toLocaleString()}</Price>
+        <span style={{ fontWeight: "normal", fontSize: "13px" }}> night</span>
       </div>
     </ItemWrapper>
   );
@@ -121,8 +109,18 @@ const HeartIconWrapper = styled("span", {
   position: "absolute",
   paddingLeft: "260px",
   paddingTop: "10px",
+  cursor: "pointer",
 });
+const Title = styled("span", { fontWeight: "600", fontSize: "14px" });
 
+const Price = styled("span", { fontWeight: "600", fontSize: "13px" });
+
+const ImageWrapper = styled("div", {
+  height: "300px",
+  width: "300px",
+  display: "flex",
+  flexDirection: "column",
+});
 const CardImage = styled("img", {
   borderRadius: "1rem",
   position: "absolute",
@@ -152,4 +150,9 @@ const ImageSliderControlWrapper = styled("span", {
   marginTop: "45%",
 });
 
+const ImagePositionIndicator = styled("span", {
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "25%",
+});
 export default HomeResultItem;
