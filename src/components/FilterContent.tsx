@@ -14,7 +14,6 @@ function FilterContent() {
         </Group>
       </SubCard>
       <Divider />
-      <Divider />
       <SubCard>
         <Title>Amenities</Title>
         <Description>Host should be familiar</Description>

@@ -51,10 +51,11 @@ const MenuItem = styled("div", {
   variants: {
     variant: {
       primary: {
-        fontWeight: "600",
+        fontWeight: "500",
       },
       seconday: {
         fontWeight: "400",
+        color: "gray",
       },
       danger: {
         color: "red",
