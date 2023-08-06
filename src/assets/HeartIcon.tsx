@@ -1,4 +1,7 @@
-export const HeartIcon = () => {
+interface IProps {
+  color?: string;
+}
+export const HeartIcon: React.FC<IProps> = ({ color }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,9 +10,10 @@ export const HeartIcon = () => {
       style={{
         strokeWidth: 2,
         overflow: "visible",
-        stroke: "var(--f-mkcy-f)",
-        fill: "#ccc",
+        stroke: "white",
+        fill: color ? color : "#636363",
         display: "block",
+        opacity: color ? "1" : ".7",
       }}
       focusable="false"
     >

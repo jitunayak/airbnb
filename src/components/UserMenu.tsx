@@ -59,7 +59,7 @@ const MenuItem = styled("div", {
       danger: {
         color: "red",
         "&:hover": {
-          fontWeight: "bold",
+          fontWeight: "500",
         },
       },
     },

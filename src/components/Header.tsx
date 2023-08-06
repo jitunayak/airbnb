@@ -16,7 +16,7 @@ function Header() {
   return (
     <HeaderWrapper>
       <AirBnbIcon />
-      <Button color="outline" shadow="1" style={{ marginLeft: "10rem" }}>
+      <Button color="outline" shadow="1" style={{ marginLeft: "4rem" }}>
         <Button color="text">Anywhere</Button>
         <Divider />
         <Button color="text">Any week</Button>
