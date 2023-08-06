@@ -25,6 +25,14 @@ export const Button = styled("button", {
           boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.2);",
         },
       },
+      primaryDark: {
+        backgroundColor: "#1a1a1a",
+        color: "white",
+        "&:hover": {
+          opacity: ".9",
+          boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.2);",
+        },
+      },
       secondary: {
         backgroundColor: "gainsboro",
         "&:hover": {

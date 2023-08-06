@@ -112,7 +112,7 @@ const useApi = () => {
             "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
         },
         {
-          id: "1",
+          id: "7",
           rating: 4.8,
           address: {
             country: "India",
@@ -137,7 +137,7 @@ const useApi = () => {
             "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
         },
         {
-          id: "4",
+          id: "8",
           rating: 4.9,
           address: {
             country: "India",
@@ -163,7 +163,7 @@ const useApi = () => {
             "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
         },
         {
-          id: "2",
+          id: "5",
           rating: 5.0,
           address: {
             country: "Sri Lanka",
@@ -187,7 +187,7 @@ const useApi = () => {
             "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
         },
         {
-          id: "3",
+          id: "6",
           rating: 4.9,
           address: {
             country: "India",

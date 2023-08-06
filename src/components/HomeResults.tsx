@@ -29,11 +29,14 @@ function HomeResults() {
 
 const ResultContainer = styled("div", {
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-around",
   flexWrap: "wrap",
   gap: "1rem",
-  marginTop: "12rem",
+  alignContent: "space-around",
   zIndex: "1",
+  top: "1rem",
+  position: "absolute",
+  marginTop: "10rem",
 });
 
 export default HomeResults;
