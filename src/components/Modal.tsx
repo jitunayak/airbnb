@@ -35,8 +35,7 @@ const Modal: React.FC<IProps> = ({
         setShowModal(false);
       }
     }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [onClose]);
 
   const handleSubmit = useCallback(() => {
     if (onSubmit) {
@@ -45,15 +44,14 @@ const Modal: React.FC<IProps> = ({
     setTimeout(() => {
       handleClose();
     }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [handleClose, onSubmit]);
 
   if (!showModal) {
     return;
   }
 
   return (
-    <ModalWrapper>
+    <ModalWrapper animate={showModal ? "slideUp" : "default"}>
       <ModalContainer>
         <HeaderWrapper>
           <Title>{title}</Title>
@@ -85,21 +83,40 @@ const Modal: React.FC<IProps> = ({
 export default Modal;
 
 const ModalWrapper = styled("div", {
-  //   backgroundColor: "#ccc",
-  //   opacity: ".6",
   position: "fixed",
-  width: "100%",
-  //   height: "100vh",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: "rgba(255, 255, 255, 0.75)",
+  variants: {
+    animate: {
+      slideUp: {
+        transform: "translate-y-full",
+        opacity: "1",
+      },
+      default: {
+        transform: "translate-y-0",
+        opacity: "0",
+      },
+    },
+  },
 });
 
 const ModalContainer = styled("div", {
-  backgroundColor: "White",
-  width: "50%",
   position: "absolute",
-  margin: "2rem",
-  //   padding: "1rem",
+  top: "40px",
+  left: "10%",
+  right: "10%",
+  //   bottom: "40px",
+  //   border: "1px solid #ccc",
+  background: "#fff",
+  overflow: "auto",
+  WebkitOverflowScrolling: "touch",
   borderRadius: ".8rem",
-  boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.4);",
+  outline: "none",
+  padding: "20px",
+  boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.4)",
 });
 
 const Title = styled("span", {
