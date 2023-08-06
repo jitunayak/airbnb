@@ -1,20 +1,22 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
+import { useState } from "react";
 import { AirBnbIcon } from "../assets/AirBnbIcon";
 import HumBurgerIcon from "../assets/HumBurgerIcon";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
+import UserMenu from "./UserMenu";
 function Header() {
-  const { login, user, isAuthenticated, isLoading, getPermissions, logout } =
+  const { login, user, isAuthenticated, isLoading, getPermissions } =
     useKindeAuth();
 
   console.log(user && user);
   console.log(user && getPermissions().permissions);
-
+  const [showUserMenu, setShowUserMenu] = useState(false);
   return (
     <HeaderWrapper>
       <AirBnbIcon />
-      <Button color="outline" shadow="1">
+      <Button color="outline" shadow="1" style={{ marginLeft: "10rem" }}>
         <Button color="text">Anywhere</Button>
         <Divider />
         <Button color="text">Any week</Button>
@@ -26,13 +28,18 @@ function Header() {
       <GroupWrapper>
         <Button color={"text"}>Airbnb your home</Button>
         {isAuthenticated && !isLoading && user && (
-          <Button color={"outline"} size={"xs"} gap="xs" round={"l"}>
+          <Button
+            color={"outline"}
+            size={"xs"}
+            gap="xs"
+            round={"l"}
+            onClick={() => setShowUserMenu(!showUserMenu)}
+          >
             <HumBurgerIcon />
-            <RoundIcon onClick={logout}>
-              {user?.given_name?.charAt(0)}
-            </RoundIcon>
+            <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
           </Button>
         )}
+        {showUserMenu && <UserMenu />}
         {!user && <Button onClick={() => login({})}>Login</Button>}
       </GroupWrapper>
     </HeaderWrapper>
@@ -42,11 +49,10 @@ function Header() {
 export default Header;
 
 const HeaderWrapper = styled("div", {
-  display: "grid",
-  width: "100%",
   alignItems: "center",
-  gridTemplateColumns: "repeat(3,auto)",
-  marginLeft: "2rem",
+  margin: "0rem 2rem",
+  display: "flex",
+  justifyContent: "space-between",
 });
 const RoundIcon = styled("span", {
   borderRadius: "100%",
