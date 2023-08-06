@@ -8,7 +8,7 @@ export default function UserMenu() {
       <MenuItem variant="primary">Messages</MenuItem>
       <MenuItem variant="primary">Notifications</MenuItem>
       <MenuItem variant="primary">Trips</MenuItem>
-      <MenuItem variant="primary">Wishlist</MenuItem>
+      <MenuItem variant="primary">Wishlists</MenuItem>
       <Divider />
       <MenuItem variant="seconday">Airbnb your home</MenuItem>
       <MenuItem variant="seconday">Account</MenuItem>
@@ -44,7 +44,7 @@ const Divider = styled("div", {
 const MenuItem = styled("div", {
   fontSize: "13px",
   minWidth: "12rem",
-  padding: ".8rem 1rem",
+  padding: ".6rem 1rem",
   "&:hover": {
     backgroundColor: "#f6f6f6",
   },
