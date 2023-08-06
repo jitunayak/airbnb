@@ -44,7 +44,7 @@ const HomeResultItem: React.FC<IProps> = ({ item }) => {
       </div>
     );
   };
-  
+
   const ImageSliderControl = () => {
     return (
       <>
@@ -115,18 +115,6 @@ const Title = styled("span", { fontWeight: "600", fontSize: "14px" });
 
 const Price = styled("span", { fontWeight: "600", fontSize: "13px" });
 
-const ImageWrapper = styled("div", {
-  height: "300px",
-  width: "300px",
-  display: "flex",
-  flexDirection: "column",
-});
-const CardImage = styled("img", {
-  borderRadius: "1rem",
-  position: "absolute",
-  zIndex: "-1",
-});
-
 const RoundIcon = styled("span", {
   borderRadius: "100%",
   backgroundColor: "White",
@@ -134,12 +122,30 @@ const RoundIcon = styled("span", {
   display: "flex",
   height: "min-content",
   width: "min-content",
-  opacity: ".6",
+  opacity: "0",
   scale: "0.9",
+  transition: "all 0.5s ease-in-out",
   "&:hover": {
     opacity: "1",
     scale: "1",
   },
+});
+
+const ImageWrapper = styled("div", {
+  height: "300px",
+  width: "300px",
+  display: "flex",
+  flexDirection: "column",
+  "&:hover": {
+    [`& ${RoundIcon}`]: {
+      opacity: ".8",
+    },
+  },
+});
+const CardImage = styled("img", {
+  borderRadius: "1rem",
+  position: "absolute",
+  zIndex: "-1",
 });
 
 const ImageSliderControlWrapper = styled("span", {
