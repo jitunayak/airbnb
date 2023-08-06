@@ -1,6 +1,7 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { AirBnbIcon } from "../assets/AirBnbIcon";
+import HumBurgerIcon from "../assets/HumBurgerIcon";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 function Header() {
@@ -22,10 +23,16 @@ function Header() {
         <Button color="primary">Search</Button>
       </Button>
 
-      {isAuthenticated && !isLoading && user && (
-        <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
-      )}
-      {!user && <Button onClick={() => login({})}>Login</Button>}
+      <GroupWrapper>
+        <Button color={"text"}>Airbnb your home</Button>
+        {isAuthenticated && !isLoading && user && (
+          <Button color={"outline"} size={"xs"} gap="xs" round={"l"}>
+            <HumBurgerIcon />
+            <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
+          </Button>
+        )}
+        {!user && <Button onClick={() => login({})}>Login</Button>}
+      </GroupWrapper>
     </HeaderWrapper>
   );
 }
@@ -52,4 +59,11 @@ const RoundIcon = styled("span", {
   width: "16px",
   fontSize: "10px",
   cursor: "pointer",
+});
+
+const GroupWrapper = styled("span", {
+  display: "inline-flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "1rem",
 });

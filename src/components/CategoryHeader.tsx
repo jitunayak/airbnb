@@ -110,7 +110,6 @@ export const ListContainer = styled("span", {
 export const ListWrapper = styled("span", {
   display: "flex",
   gap: "2rem",
-  //   marginTop: "2rem",
   justifyContent: "center",
   alignContent: "center",
   alignItems: "center",

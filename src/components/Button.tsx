@@ -61,6 +61,7 @@ export const Button = styled("button", {
       },
     },
     size: {
+      xs: { padding: "4px 6px" },
       s: {
         padding: "8px 10px",
       },
@@ -69,6 +70,20 @@ export const Button = styled("button", {
       },
       l: {
         padding: "12px 14px",
+      },
+    },
+    gap: {
+      xs: {
+        gap: ".6rem",
+      },
+      s: {
+        gap: "1rem",
+      },
+      m: {
+        gap: "1.2rem",
+      },
+      l: {
+        gap: "1.6rem",
       },
     },
     shadow: {
