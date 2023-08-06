@@ -22,6 +22,7 @@ const HomeResultItem: React.FC<IProps> = ({ item }) => {
 
   const imagePositionIndicatorRenderer = (index: number) => (
     <span
+      key={index}
       style={{
         color: "white",
         userSelect: "none",

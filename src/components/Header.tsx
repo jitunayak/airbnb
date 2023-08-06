@@ -5,7 +5,7 @@ import HumBurgerIcon from "../assets/HumBurgerIcon";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 function Header() {
-  const { login, user, isAuthenticated, isLoading, getPermissions } =
+  const { login, user, isAuthenticated, isLoading, getPermissions, logout } =
     useKindeAuth();
 
   console.log(user && user);
@@ -28,7 +28,9 @@ function Header() {
         {isAuthenticated && !isLoading && user && (
           <Button color={"outline"} size={"xs"} gap="xs" round={"l"}>
             <HumBurgerIcon />
-            <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
+            <RoundIcon onClick={logout}>
+              {user?.given_name?.charAt(0)}
+            </RoundIcon>
           </Button>
         )}
         {!user && <Button onClick={() => login({})}>Login</Button>}
