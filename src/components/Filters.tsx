@@ -19,6 +19,7 @@ function Filters() {
 
       <Modal
         isOpen={showModal}
+        onClose={() => setShowModal(false)}
         title="Filters"
         primaryActionTitle="Show 649 Stays"
         secondaryActionTitle="Clear All"
