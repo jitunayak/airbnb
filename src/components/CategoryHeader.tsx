@@ -113,6 +113,8 @@ export const ListWrapper = styled("span", {
   justifyContent: "center",
   alignContent: "center",
   alignItems: "center",
+  overflowX: "scroll",
+  overflow: "hidden",
 });
 export const TitleText = styled("span", {
   fontSize: "13px",
