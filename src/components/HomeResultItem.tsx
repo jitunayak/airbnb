@@ -147,6 +147,8 @@ const CardImage = styled("img", {
   borderRadius: "1rem",
   position: "absolute",
   zIndex: "-1",
+  objectFit: "cover",
+  overflow: "hidden",
 });
 
 const ImageSliderControlWrapper = styled("span", {
