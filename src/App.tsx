@@ -1,10 +1,13 @@
 // import './App.css'
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import HomeResults from "./components/HomeResults";
-import StickyHeader from "./components/StickyHeader";
+import { Router, RouterProvider } from "@tanstack/router";
+import React from "react";
 
-function App() {
+interface IProps {
+  router: Router;
+}
+const App: React.FC<IProps> = ({ router }) => {
   const queryClient = new QueryClient();
 
   return (
@@ -16,12 +19,11 @@ function App() {
         redirectUri={window.location.origin}
       >
         <QueryClientProvider client={queryClient}>
-          <StickyHeader />
-          <HomeResults />
+          <RouterProvider router={router} />
         </QueryClientProvider>
       </KindeProvider>
     </>
   );
-}
+};
 
 export default App;
