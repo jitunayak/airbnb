@@ -1,6 +1,7 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { Link } from "@tanstack/router";
+import { wishListRoute } from "../main";
 
 export default function UserMenu() {
   const { logout } = useKindeAuth();
@@ -9,8 +10,10 @@ export default function UserMenu() {
       <MenuItem variant="primary">Messages</MenuItem>
       <MenuItem variant="primary">Notifications</MenuItem>
       <MenuItem variant="primary">Trips</MenuItem>
-      <MenuItem variant="primary" to="/wishlists">
-        Wishlists
+      <MenuItem variant="primary">
+        <Link to={wishListRoute.to} style={{ display: "flex" }}>
+          Wishlists
+        </Link>
       </MenuItem>
       <Divider />
       <MenuItem variant="seconday">Airbnb your home</MenuItem>
@@ -44,7 +47,7 @@ const Divider = styled("div", {
   backgroundColor: "#eee",
   margin: ".8rem 0rem",
 });
-const MenuItem = styled(Link, {
+const MenuItem = styled("span", {
   fontSize: "13px",
   minWidth: "12rem",
   padding: ".6rem 1rem",

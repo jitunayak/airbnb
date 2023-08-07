@@ -27,7 +27,7 @@ const indexRoute = new Route({
   component: Home,
 });
 
-const wishListRoute = new Route({
+export const wishListRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "wishlists",
   component: Wishlist,
