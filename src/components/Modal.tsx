@@ -56,7 +56,13 @@ const Modal: React.FC<IProps> = ({
         <HeaderWrapper>
           <Title>{title}</Title>
           <CloseButton>
-            <Button color={"text"}>close</Button>
+            <Button
+              color={"text"}
+              style={{ fontSize: "14px" }}
+              onClick={handleClose}
+            >
+              close
+            </Button>
           </CloseButton>
         </HeaderWrapper>
         <Divider />
@@ -106,8 +112,9 @@ const ModalWrapper = styled("div", {
 const ModalContainer = styled("div", {
   position: "absolute",
   top: "40px",
-  left: "10%",
-  right: "10%",
+  //   bottom: "40px",
+  left: "15%",
+  right: "15%",
   //   bottom: "40px",
   //   border: "1px solid #ccc",
   background: "#fff",
@@ -129,12 +136,13 @@ const ActionWrapper = styled("div", {
   display: "flex",
   justifyContent: "space-between",
   flexDirection: "row",
-  padding: "1rem ",
+  padding: ".2rem ",
 });
 
 const ModalContent = styled("div", {
   padding: "2rem",
   overflowY: "scroll",
+  //   display: "flex",
   height: "30rem",
 });
 
@@ -142,17 +150,22 @@ const Divider = styled("div", {
   width: "100%",
   height: "1px",
   backgroundColor: "#eee",
-  margin: ".2rem 0rem",
+  margin: ".6rem 0rem",
 });
 
-const HeaderWrapper = styled("div", {
+const HeaderWrapper = styled("span", {
   padding: "1rem",
+  position: "flex",
+  width: "100%",
+  justifyContent: "space-between",
+  flexDirection: "row",
 });
 
 const CloseButton = styled("div", {
   position: "absolute",
-  left: 0,
+  right: 0,
   top: 0,
+  bottom: "1rem",
   fontWeight: "bold",
   padding: "1rem",
 });

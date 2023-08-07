@@ -15,15 +15,16 @@ function Filters() {
       >
         <FiltersIcon />
         <span style={{ fontWeight: "600" }}>Filters</span>
-        <Modal
-          isOpen={showModal}
-          title="Filters"
-          primaryActionTitle="Show 649 Stays"
-          secondaryActionTitle="Clear All"
-        >
-          <FilterContent />
-        </Modal>
       </Button>
+
+      <Modal
+        isOpen={showModal}
+        title="Filters"
+        primaryActionTitle="Show 649 Stays"
+        secondaryActionTitle="Clear All"
+      >
+        <FilterContent />
+      </Modal>
     </>
   );
 }
