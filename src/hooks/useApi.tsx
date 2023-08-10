@@ -8,8 +8,16 @@ const useApi = () => {
     return response.json();
   };
 
-  const fetchRooms = async (): Promise<IRoom[]> => {
-    await sleep();
+  const fetchRooms = async (
+    page: number = 1
+  ): Promise<{
+    data: IRoom[];
+    nextCursor: number;
+    prevCursor: number;
+    allPages: number;
+  }> => {
+    console.log("API fetching rooms for page:", page);
+    await sleep(100);
     return new Promise((resolve) => {
       const results: IRoom[] = [
         {
@@ -213,15 +221,20 @@ const useApi = () => {
             "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
         },
       ];
-      resolve(results);
+      resolve({
+        nextCursor: page + 1,
+        prevCursor: page - 1,
+        allPages: 20,
+        data: results.sort(() => Math.random() - 0.5),
+      });
     });
   };
 
-  const sleep = async () => {
+  const sleep = async (time = 1000) => {
     return await new Promise((resolve) =>
       setTimeout(() => {
         resolve("");
-      }, 1000)
+      }, time)
     );
   };
 
