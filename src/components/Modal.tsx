@@ -144,7 +144,7 @@ const ModalContent = styled("div", {
   padding: "2rem",
   overflowY: "scroll",
   maxHeight: "500px",
-  width: `${window.innerWidth - window.innerWidth * 0.4}px`,
+  //   width: `${window.innerWidth - window.innerWidth * 0.4}px`,
   height: `${window.innerHeight - window.innerHeight * 0.4}px`,
 });
 
