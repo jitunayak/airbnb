@@ -34,15 +34,14 @@ function HomeResults() {
       },
     });
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = useCallback(async () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
         document.documentElement.offsetHeight ||
       isLoading
     ) {
-      console.log("reached end");
       if (hasNextPage) {
-        fetchNextPage();
+        await fetchNextPage();
       }
       return;
     }
@@ -59,17 +58,18 @@ function HomeResults() {
     return <span style={{ fontSize: "30px" }}>loading...</span>;
   }
 
-  const LoadingPlaceHolder = new Array(4)
-    .fill(1)
-    .map((__, index) => <HomeResultItem key={index} item={placeholderData} />);
-
   return (
     <div>
       <ResultContainer>
         {data.pages.map((page) =>
           page.data.map((item) => <HomeResultItem item={item} key={item.id} />)
         )}
-        {hasNextPage && LoadingPlaceHolder}
+        {hasNextPage &&
+          new Array(4)
+            .fill(1)
+            .map((__, index) => (
+              <HomeResultItem key={index} item={placeholderData} />
+            ))}
       </ResultContainer>
     </div>
   );
