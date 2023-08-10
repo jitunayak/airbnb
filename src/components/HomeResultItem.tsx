@@ -4,7 +4,7 @@ import { HeartIcon } from "../assets/HeartIcon";
 import LeftArrowIcon from "../assets/LeftArrowIcon";
 import RightArrowIcon from "../assets/RightArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
-import { IRoom } from "../types/IRoom";
+import { IRoom } from "../types";
 
 interface IProps {
   item: IRoom;

@@ -6,7 +6,7 @@ export interface IRoom {
   listingUrl: string;
   amenities: string[];
   price: number;
-  currency: "INR" | "GBP" | "USD";
+  currency: "INR" | "GBP" | "USD" | string;
   thumbnail: string;
   images: string[];
   address: {
