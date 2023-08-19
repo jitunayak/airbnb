@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect } from "react";
 import useApi from "../hooks/useApi";
 import { IRoom } from "../types";
@@ -20,7 +21,13 @@ const placeholderData = {
 } as IRoom;
 
 function HomeResults() {
-  const { fetchRooms } = useApi();
+  const { fetchRooms, getWishLists } = useApi();
+  const { user } = useKindeAuth();
+
+  const wishlists = useQuery({
+    queryKey: ["wishlists"],
+    queryFn: () => getWishLists(user?.id || ""),
+  });
 
   const { data, isLoading, fetchNextPage, isSuccess, hasNextPage } =
     useInfiniteQuery({
@@ -28,7 +35,7 @@ function HomeResults() {
       queryFn: ({ pageParam = 1 }) => fetchRooms(pageParam),
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
-      staleTime: 1000 * 60 * 60,
+      //   staleTime: 1000 * 60 * 60,
       onSuccess: () => {
         console.log("fetched paged result");
       },
@@ -54,7 +61,7 @@ function HomeResults() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  if (isLoading || !data || !isSuccess) {
+  if (isLoading || !data || !isSuccess || wishlists.isLoading) {
     return <span style={{ fontSize: "30px" }}>loading...</span>;
   }
 
@@ -62,13 +69,25 @@ function HomeResults() {
     <div>
       <ResultContainer>
         {data.pages.map((page) =>
-          page.data.map((item) => <HomeResultItem item={item} key={item.id} />)
+          page.data.map((item) => (
+            <HomeResultItem
+              item={item}
+              key={item.id}
+              isWishListed={
+                !!wishlists.data?.find((wishlist) => wishlist.id === item.id)
+              }
+            />
+          ))
         )}
         {hasNextPage &&
           new Array(4)
             .fill(1)
             .map((__, index) => (
-              <HomeResultItem key={index} item={placeholderData} />
+              <HomeResultItem
+                key={index}
+                item={placeholderData}
+                isWishListed={false}
+              />
             ))}
       </ResultContainer>
     </div>

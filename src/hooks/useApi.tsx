@@ -33,40 +33,55 @@ const useApi = () => {
     });
   };
 
-  const getWishLists = async (): Promise<IRoom[]> => {
-    await sleep();
-    return new Promise((resolve) => {
-      const results: IRoom[] = [
-        {
-          id: "1",
-          rating: 4.8,
-          address: {
-            country: "India",
-            market: "Ooty",
-            street: "",
-          },
-          amenities: ["TV", "Geyser", "Wifi"],
-          currency: "INR",
-          images: [
-            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
-            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/724a57b5-3670-412c-8a9c-d363018880e3.jpeg?im_w=720",
-            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/b45cb018-12a0-42d4-8f5f-594784b75790.jpeg?im_w=720",
-          ],
-          listingUrl: "https://a0.muscache.com/",
-          name: "Wildvibes A frame Cabin ooty",
-          price: 5720,
-          propertyType: "Cabins",
-          thumbnail:
-            "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
-          summary:
-            "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay.",
-        },
-      ];
-      resolve(results);
-    });
+  const getWishLists = async (userId: string): Promise<IRoom[]> => {
+    const result = await fetch(
+      `https://airbnb.deno.dev/api/v1/wishlists/${userId}`
+    );
+    return result.json();
+  };
+  const addToWishlists = async (
+    userId: string,
+    data: IRoom
+  ): Promise<IRoom[]> => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const result = await fetch(
+      ` https://airbnb.deno.dev/api/v1/wishlists/${userId}`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: myHeaders,
+      }
+    );
+    return result.json();
   };
 
-  return { fetchHomePageResults, fetchRooms, getWishLists };
+  const removeFromWishlists = async (
+    userId: string,
+    data: IRoom[]
+  ): Promise<IRoom[]> => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const result = await fetch(
+      `https://airbnb.com/api/v1/wishlists/${userId}`,
+      {
+        method: "DELETE",
+        body: JSON.stringify(data),
+        headers: myHeaders,
+      }
+    );
+
+    return result.json();
+  };
+
+  return {
+    fetchHomePageResults,
+    fetchRooms,
+    getWishLists,
+    addToWishlists,
+    removeFromWishlists,
+  };
 };
 
 export default useApi;

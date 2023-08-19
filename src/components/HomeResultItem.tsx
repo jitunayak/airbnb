@@ -1,16 +1,41 @@
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { HeartIcon } from "../assets/HeartIcon";
 import LeftArrowIcon from "../assets/LeftArrowIcon";
 import RightArrowIcon from "../assets/RightArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
+import useApi from "../hooks/useApi";
 import { IRoom } from "../types";
 
 interface IProps {
   item: IRoom;
+  isWishListed: boolean;
 }
-const HomeResultItem: React.FC<IProps> = ({ item }) => {
+const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
   const [thumbnailIndex, setthumbnailIndex] = useState(0);
+  const { user } = useKindeAuth();
+  const { addToWishlists, removeFromWishlists } = useApi();
+
+  const queryClient = useQueryClient();
+
+  const addToWishListMutation = useMutation({
+    mutationFn: (data: IRoom) => addToWishlists(user?.id || "", data),
+    // mutationKey: "wishlists",
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [user?.id || "", "wishlists"],
+      });
+      //   queryClient.refetchQueries([user?.id || "", "wishlists"]);
+    },
+  });
+
+  const removeFromWishListMutation = useMutation({
+    mutationFn: (data: IRoom) => removeFromWishlists(user?.id || "", data),
+    // mutationKey: "wishlists",
+    onSuccess: () => {},
+  });
 
   const thumbnailIndexIncrement = () => {
     setthumbnailIndex((prev) => (prev < item.images.length ? prev + 1 : prev));
@@ -61,12 +86,22 @@ const HomeResultItem: React.FC<IProps> = ({ item }) => {
     );
   };
 
+  if (addToWishListMutation.isLoading) {
+    return <div>loading...</div>;
+  }
+
   return (
     <ItemWrapper>
       <ImageWrapper>
         <CardImage src={item.images[thumbnailIndex]} height={300} width={300} />
-        <HeartIconWrapper>
-          <HeartIcon />
+        <HeartIconWrapper
+          onClick={() =>
+            isWishListed
+              ? removeFromWishListMutation.mutateAsync(item)
+              : addToWishListMutation.mutateAsync(item)
+          }
+        >
+          <HeartIcon color={isWishListed ? "red" : "transparent"} />
         </HeartIconWrapper>
         <ImageSliderControlWrapper>
           <ImageSliderControl />
