@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
@@ -37,7 +36,7 @@ function HomeResults() {
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
       //   staleTime: 1000 * 60 * 60,
       onSuccess: () => {
-        console.log("fetched paged result");
+        // console.log("fetched paged result");
       },
     });
 

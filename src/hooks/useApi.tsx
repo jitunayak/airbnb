@@ -59,10 +59,11 @@ const useApi = () => {
 
   const removeFromWishlists = async (
     userId: string,
-    data: IRoom[]
+    data: IRoom
   ): Promise<IRoom[]> => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+
     const result = await fetch(
       `https://airbnb.com/api/v1/wishlists/${userId}`,
       {
