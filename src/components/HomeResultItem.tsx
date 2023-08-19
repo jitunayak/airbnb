@@ -22,12 +22,13 @@ const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
 
   const addToWishListMutation = useMutation({
     mutationFn: (data: IRoom) => addToWishlists(user?.id || "", data),
-    // mutationKey: "wishlists",
-    onSuccess: () => {
+    onSuccess: (newData) => {
       queryClient.invalidateQueries({
         queryKey: [user?.id || "", "wishlists"],
       });
-      //   queryClient.refetchQueries([user?.id || "", "wishlists"]);
+      queryClient.setQueryData(["wishlists"], (old) =>
+        old.length > 0 ? [...old, newData] : [newData]
+      );
     },
   });
 
@@ -85,10 +86,6 @@ const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
       </>
     );
   };
-
-  if (addToWishListMutation.isLoading) {
-    return <div>loading...</div>;
-  }
 
   return (
     <ItemWrapper>

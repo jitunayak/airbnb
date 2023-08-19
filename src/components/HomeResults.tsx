@@ -34,10 +34,6 @@ function HomeResults() {
       queryFn: ({ pageParam = 1 }) => fetchRooms(pageParam),
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
-      //   staleTime: 1000 * 60 * 60,
-      onSuccess: () => {
-        // console.log("fetched paged result");
-      },
     });
 
   const handleScroll = useCallback(async () => {

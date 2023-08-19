@@ -13,6 +13,7 @@ function Header() {
   console.log(user && user);
   console.log(user && getPermissions().permissions);
   const [showUserMenu, setShowUserMenu] = useState(false);
+
   return (
     <HeaderWrapper>
       <AirBnbIcon />
@@ -40,7 +41,9 @@ function Header() {
           </Button>
         )}
         {showUserMenu && <UserMenu />}
-        {!user && <Button onClick={() => login({})}>Login</Button>}
+        {!user && !isLoading && (
+          <Button onClick={() => login({})}>Login</Button>
+        )}
       </GroupWrapper>
     </HeaderWrapper>
   );
