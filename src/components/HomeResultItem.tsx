@@ -35,12 +35,15 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const removeFromWishListMutation = useMutation({
     mutationFn: (data: IRoom) =>
       wishlistApi.removeFromWishlists(user?.id || "", data),
-    onSuccess: (data: IRoom) => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [user?.id || "", "wishlists"],
       });
-      queryClient.setQueryData(["wishlists"], (old: IRoom[]) => {
-        return old?.length > 0 ? old.filter((item) => item.id !== data.id) : [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      queryClient.setQueryData(["wishlists"], (old: any) => {
+        return old?.length > 0
+          ? old.filter((item: IRoom) => item.id !== data.id)
+          : [];
       });
     },
   });
@@ -101,8 +104,8 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
         <HeartIconWrapper
           onClick={() =>
             isWishListed
-              ? removeFromWishListMutation.mutateAsync(item)
-              : addToWishListMutation.mutateAsync(item)
+              ? removeFromWishListMutation.mutateAsync(item as IRoom)
+              : addToWishListMutation.mutateAsync(item as IRoom)
           }
         >
           <HeartIcon color={isWishListed ? "red" : "transparent"} />
