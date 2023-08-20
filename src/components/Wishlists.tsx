@@ -5,11 +5,11 @@ import useApi from "../hooks/useApi";
 import HomeResultItem from "./HomeResultItem";
 
 function Wishlists() {
-  const { getWishLists } = useApi();
+  const { wishlistApi } = useApi();
   const { user } = useKindeAuth();
   const { data, isLoading } = useQuery({
     queryKey: ["wishlists"],
-    queryFn: () => getWishLists(user?.id ?? ""),
+    queryFn: () => wishlistApi.getWishLists(user?.id ?? ""),
   });
 
   return (

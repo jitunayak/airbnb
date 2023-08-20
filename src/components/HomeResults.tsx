@@ -20,18 +20,18 @@ const placeholderData = {
 } as IRoom;
 
 function HomeResults() {
-  const { fetchRooms, getWishLists } = useApi();
   const { user } = useKindeAuth();
+  const { roomsApi, wishlistApi } = useApi();
 
   const wishlists = useQuery({
     queryKey: ["wishlists"],
-    queryFn: () => getWishLists(user?.id || ""),
+    queryFn: () => wishlistApi.getWishLists(user?.id || ""),
   });
 
   const { data, isLoading, fetchNextPage, isSuccess, hasNextPage } =
     useInfiniteQuery({
       queryKey: ["homeResult"],
-      queryFn: ({ pageParam = 1 }) => fetchRooms(pageParam),
+      queryFn: ({ pageParam = 1 }) => roomsApi.fetchRooms(pageParam),
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
     });
