@@ -1,25 +1,26 @@
 import { styled } from "@stitches/react";
 import React, { useCallback, useEffect, useState } from "react";
+
 import { Button } from "./Button";
 
 interface IProps {
-  isOpen: boolean;
-  title?: string;
   children?: React.ReactNode;
-  primaryActionTitle?: string;
-  secondaryActionTitle?: string;
+  isOpen: boolean;
   onClose?: () => void;
   onSubmit?: () => void;
+  primaryActionTitle?: string;
+  secondaryActionTitle?: string;
+  title?: string;
 }
 
 const Modal: React.FC<IProps> = ({
+  children,
   isOpen,
   onClose,
-  title,
   onSubmit,
-  children,
   primaryActionTitle,
   secondaryActionTitle,
+  title,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -59,8 +60,8 @@ const Modal: React.FC<IProps> = ({
           <CloseButton>
             <Button
               color={"text"}
-              style={{ fontSize: "14px" }}
               onClick={handleClose}
+              style={{ fontSize: "14px" }}
             >
               close
             </Button>
@@ -75,9 +76,9 @@ const Modal: React.FC<IProps> = ({
           </Button>
           <Button
             color={"primaryDark"}
+            onClick={() => handleSubmit()}
             round={"s"}
             size="l"
-            onClick={() => handleSubmit()}
           >
             {primaryActionTitle ?? "Submit"}
           </Button>
@@ -90,84 +91,84 @@ const Modal: React.FC<IProps> = ({
 export default Modal;
 
 const ModalWrapper = styled("div", {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
   backgroundColor: "rgba(255, 255, 255, 0.75)",
+  bottom: 0,
+  left: 0,
+  position: "fixed",
+  right: 0,
+  top: 0,
   variants: {
     animate: {
-      slideUp: {
-        transform: "translate-y-full",
-        opacity: "1",
-      },
       default: {
-        transform: "translate-y-0",
         opacity: "0",
+        transform: "translate-y-0",
+      },
+      slideUp: {
+        opacity: "1",
+        transform: "translate-y-full",
       },
     },
   },
 });
 
 const ModalContainer = styled("div", {
-  position: "absolute",
-  top: "40px",
-  //   bottom: "40px",
-  left: "15%",
-  right: "15%",
-  //   bottom: "40px",
+  WebkitOverflowScrolling: "touch",
   //   border: "1px solid #ccc",
   background: "#fff",
-  overflow: "auto",
-  WebkitOverflowScrolling: "touch",
   borderRadius: ".8rem",
-  outline: "none",
-  padding: "20px",
   boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.4)",
+  //   bottom: "40px",
+  //   bottom: "40px",
+  left: "15%",
+  outline: "none",
+  overflow: "auto",
+  padding: "20px",
+  position: "absolute",
+  right: "15%",
+  top: "40px",
 });
 
 const Title = styled("span", {
   fontSize: "16px",
-  textAlign: "center",
   fontWeight: "bold",
+  textAlign: "center",
 });
 
 const ActionWrapper = styled("div", {
   display: "flex",
-  justifyContent: "space-between",
   flexDirection: "row",
+  justifyContent: "space-between",
   padding: ".2rem ",
 });
 
 const ModalContent = styled("div", {
-  padding: "2rem",
-  overflowY: "scroll",
-  maxHeight: "500px",
   //   width: `${window.innerWidth - window.innerWidth * 0.4}px`,
   height: `${window.innerHeight - window.innerHeight * 0.4}px`,
+  maxHeight: "500px",
+  overflowY: "scroll",
+  padding: "2rem",
 });
 
 const Divider = styled("div", {
-  width: "100%",
-  height: "1px",
   backgroundColor: "#eee",
+  height: "1px",
   margin: ".6rem 0rem",
+  width: "100%",
 });
 
 const HeaderWrapper = styled("span", {
+  flexDirection: "row",
+  justifyContent: "space-between",
   padding: "1rem",
   position: "flex",
   width: "100%",
-  justifyContent: "space-between",
-  flexDirection: "row",
 });
 
 const CloseButton = styled("div", {
-  position: "absolute",
-  right: 0,
-  top: 0,
   bottom: "1rem",
   fontWeight: "bold",
   padding: "1rem",
+  position: "absolute",
+  right: 0,
+  top: 0,
 });

@@ -17,9 +17,9 @@ const wishlistApi = () => {
     const result = await fetch(
       ` https://airbnb.deno.dev/api/v1/wishlists/${userId}`,
       {
-        method: "POST",
         body: JSON.stringify(data),
         headers: myHeaders,
+        method: "POST",
       },
     );
     return result.json();
@@ -35,17 +35,17 @@ const wishlistApi = () => {
     const result = await fetch(
       `https://airbnb.com/api/v1/wishlists/${userId}`,
       {
-        method: "DELETE",
         body: JSON.stringify(data),
         headers: myHeaders,
+        method: "DELETE",
       },
     );
 
     return result.json();
   };
   return {
-    getWishLists,
     addToWishlists,
+    getWishLists,
     removeFromWishlists,
   };
 };

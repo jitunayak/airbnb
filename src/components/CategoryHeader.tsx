@@ -2,42 +2,42 @@ import { styled } from "@stitches/react";
 import { useState } from "react";
 
 interface ICategory {
-  url: string;
   title: string;
+  url: string;
 }
 function CategoryHeader() {
   const categories: ICategory[] = [
     {
-      url: "https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpg",
       title: "Farms",
+      url: "https://a0.muscache.com/pictures/aaa02c2d-9f0d-4c41-878a-68c12ec6c6bd.jpg",
     },
     {
-      url: "https://a0.muscache.com/pictures/3b1eb541-46d9-4bef-abc4-c37d77e3c21b.jpg",
       title: "Amazing Views",
+      url: "https://a0.muscache.com/pictures/3b1eb541-46d9-4bef-abc4-c37d77e3c21b.jpg",
     },
     {
-      url: "https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpg",
       title: "Amazing Pools",
+      url: "https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpg",
     },
     {
-      url: "https://a0.muscache.com/pictures/89faf9ae-bbbc-4bc4-aecd-cc15bf36cbca.jpg",
       title: "Domes",
+      url: "https://a0.muscache.com/pictures/89faf9ae-bbbc-4bc4-aecd-cc15bf36cbca.jpg",
     },
     {
-      url: "https://a0.muscache.com/pictures/7630c83f-96a8-4232-9a10-0398661e2e6f.jpg",
       title: "Rooms",
-    },
-    {
       url: "https://a0.muscache.com/pictures/7630c83f-96a8-4232-9a10-0398661e2e6f.jpg",
+    },
+    {
       title: "Historical Home",
+      url: "https://a0.muscache.com/pictures/7630c83f-96a8-4232-9a10-0398661e2e6f.jpg",
     },
     {
-      url: "https://a0.muscache.com/pictures/6ad4bd95-f086-437d-97e3-14d12155ddfe.jpg",
       title: "Coutryside",
+      url: "https://a0.muscache.com/pictures/6ad4bd95-f086-437d-97e3-14d12155ddfe.jpg",
     },
     {
-      url: "https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg",
       title: "Cabins",
+      url: "https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg",
     },
   ];
 
@@ -54,11 +54,11 @@ function CategoryHeader() {
         return (
           <ListContainer onClick={() => setselectedCategory(category)}>
             <img
-              src={category.url}
               alt=""
-              width="20"
               height="20"
+              src={category.url}
               style={isSelectedItem(category) ? {} : { opacity: ".5" }}
+              width="20"
             ></img>
             <TitleText
               color={isSelectedItem(category) ? "primary" : "secondary"}
@@ -78,56 +78,55 @@ function CategoryHeader() {
 export default CategoryHeader;
 
 const Underline = styled("span", {
-  width: "100%",
-  height: "2px",
-  backgroundColor: "transparent",
   "&:hover": {
     backgroundColor: "#ccc",
   },
-
+  backgroundColor: "transparent",
+  height: "2px",
   variants: {
     color: {
-      primary: {
-        backgroundColor: "Black",
-      },
       invisible: {
         backgroundColor: "transparent",
+      },
+      primary: {
+        backgroundColor: "Black",
       },
       secondary: {
         backgroundColor: "#ccc",
       },
     },
   },
+
+  width: "100%",
 });
 export const ListContainer = styled("span", {
+  alignContent: "center",
+  alignItems: "center",
+  cursor: "pointer",
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
-  alignContent: "center",
-  cursor: "pointer",
   gap: ".4rem",
 });
 export const ListWrapper = styled("span", {
+  alignContent: "center",
+  alignItems: "center",
   display: "flex",
   gap: "2rem",
   justifyContent: "center",
-  alignContent: "center",
-  alignItems: "center",
-  overflowX: "scroll",
   overflow: "hidden",
+  overflowX: "scroll",
 });
 export const TitleText = styled("span", {
-  fontSize: "13px",
-  fontWeight: "500",
-  color: "gray",
-  whiteSpace: "nowrap",
-
   "&:hover": {
     color: "Black",
   },
+  color: "gray",
   defaultVariants: {
     color: "secondary",
   },
+  fontSize: "13px",
+
+  fontWeight: "500",
   variants: {
     color: {
       primary: {
@@ -136,4 +135,5 @@ export const TitleText = styled("span", {
       secondary: { color: "gray" },
     },
   },
+  whiteSpace: "nowrap",
 });

@@ -13,10 +13,10 @@ const useRoomsApi = () => {
   const fetchRooms = async (
     page: number = 1,
   ): Promise<{
+    allPages: number;
     data: IRoom[];
     nextCursor?: number;
     prevCursor?: number;
-    allPages: number;
   }> => {
     console.log("API fetching rooms for page:", page);
     await sleep(100);
@@ -27,10 +27,10 @@ const useRoomsApi = () => {
     }));
     return new Promise((resolve) => {
       resolve({
-        nextCursor: page === 5 ? undefined : page + 1,
-        prevCursor: page === 1 ? 1 : page - 1,
         allPages: 5,
         data,
+        nextCursor: page === 5 ? undefined : page + 1,
+        prevCursor: page === 1 ? 1 : page - 1,
       });
     });
   };

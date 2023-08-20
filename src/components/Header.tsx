@@ -1,13 +1,14 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useState } from "react";
+
 import { AirBnbIcon } from "../assets/AirBnbIcon";
 import HumBurgerIcon from "../assets/HumBurgerIcon";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
 function Header() {
-  const { login, user, isAuthenticated, isLoading, getPermissions } =
+  const { getPermissions, isAuthenticated, isLoading, login, user } =
     useKindeAuth();
 
   console.log(user && user);
@@ -31,10 +32,10 @@ function Header() {
         {isAuthenticated && !isLoading && user && (
           <Button
             color={"outline"}
-            size={"xs"}
             gap="xs"
-            round={"l"}
             onClick={() => setShowUserMenu(!showUserMenu)}
+            round={"l"}
+            size={"xs"}
           >
             <HumBurgerIcon />
             <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
@@ -53,28 +54,28 @@ export default Header;
 
 const HeaderWrapper = styled("div", {
   alignItems: "center",
-  margin: "0rem 2rem",
   display: "flex",
   justifyContent: "space-between",
+  margin: "0rem 2rem",
 });
 const RoundIcon = styled("span", {
+  alignItems: "center",
+  backgroundColor: "black",
   borderRadius: "100%",
   color: "white",
-  fontWeight: "500",
-  backgroundColor: "black",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "0.5rem",
-  display: "flex",
-  height: "16px",
-  width: "16px",
-  fontSize: "10px",
   cursor: "pointer",
+  display: "flex",
+  fontSize: "10px",
+  fontWeight: "500",
+  height: "16px",
+  justifyContent: "center",
+  padding: "0.5rem",
+  width: "16px",
 });
 
 const GroupWrapper = styled("span", {
-  display: "inline-flex",
-  justifyContent: "center",
   alignItems: "center",
+  display: "inline-flex",
   gap: "1rem",
+  justifyContent: "center",
 });

@@ -2,6 +2,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect } from "react";
+
 import useApi from "../hooks/useApi";
 import { IRoom } from "../types";
 import HomeResultItem from "./HomeResultItem";
@@ -12,11 +13,11 @@ const placeholderData = {
     market: "loading...",
     street: "loading...",
   },
-  price: 0,
   images: [
     `https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg
               `,
   ],
+  price: 0,
 } as IRoom;
 
 function HomeResults() {
@@ -24,16 +25,16 @@ function HomeResults() {
   const { roomsApi, wishlistApi } = useApi();
 
   const wishlists = useQuery({
-    queryKey: ["wishlists"],
     queryFn: () => wishlistApi.getWishLists(user?.id || ""),
+    queryKey: ["wishlists"],
   });
 
-  const { data, isLoading, fetchNextPage, isSuccess, hasNextPage } =
+  const { data, fetchNextPage, hasNextPage, isLoading, isSuccess } =
     useInfiniteQuery({
-      queryKey: ["homeResult"],
-      queryFn: ({ pageParam = 1 }) => roomsApi.fetchRooms(pageParam),
       getNextPageParam: (lastPage) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
+      queryFn: ({ pageParam = 1 }) => roomsApi.fetchRooms(pageParam),
+      queryKey: ["homeResult"],
     });
 
   const handleScroll = useCallback(async () => {
@@ -64,13 +65,13 @@ function HomeResults() {
     <div>
       <ResultContainer>
         {data.pages.map((page) =>
-          page.data.map((item) => (
+          page.data.map((item: IRoom) => (
             <HomeResultItem
-              item={item}
-              key={item.id}
               isWishListed={
                 !!wishlists.data?.find((wishlist) => wishlist.id === item.id)
               }
+              item={item}
+              key={item.id}
             />
           ))
         )}
@@ -79,9 +80,9 @@ function HomeResults() {
             .fill(1)
             .map((__, index) => (
               <HomeResultItem
-                key={index}
-                item={placeholderData}
                 isWishListed={false}
+                item={placeholderData}
+                key={index}
               />
             ))}
       </ResultContainer>
@@ -90,15 +91,15 @@ function HomeResults() {
 }
 
 const ResultContainer = styled("div", {
+  alignContent: "space-around",
   display: "flex",
-  justifyContent: "space-around",
   flexWrap: "wrap",
   gap: "1rem",
-  alignContent: "space-around",
-  zIndex: "1",
-  top: "1rem",
-  position: "absolute",
+  justifyContent: "space-around",
   marginTop: "10rem",
+  position: "absolute",
+  top: "1rem",
+  zIndex: "1",
 });
 
 export default HomeResults;

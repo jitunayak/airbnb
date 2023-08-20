@@ -6,8 +6,8 @@ const useApi = () => {
   const roomsApi = useRoomsApi();
 
   return {
-    wishlistApi,
     roomsApi,
+    wishlistApi,
   };
 };
 

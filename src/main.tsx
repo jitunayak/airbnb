@@ -2,6 +2,7 @@ import { Outlet, RootRoute, Route, Router } from "@tanstack/router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 import App from "./App.tsx";
 import Home from "./components/Home.tsx";
 import Wishlist from "./components/Wishlists.tsx";
@@ -22,15 +23,15 @@ const rootRoute = new RootRoute({
 
 // Create an index route
 const indexRoute = new Route({
+  component: Home,
   getParentRoute: () => rootRoute,
   path: "/",
-  component: Home,
 });
 
 export const wishListRoute = new Route({
+  component: Wishlist,
   getParentRoute: () => rootRoute,
   path: "wishlists",
-  component: Wishlist,
 });
 
 const routeTree = rootRoute.addChildren([indexRoute, wishListRoute]);

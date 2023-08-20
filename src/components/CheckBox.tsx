@@ -8,10 +8,10 @@ const CheckBox: React.FC<IProps> = ({ label }) => {
   return (
     <Group>
       <input
-        type="checkbox"
         checked={checkBoxValue}
         onChange={() => setcheckBoxValue(!checkBoxValue)}
-        style={{ width: "1.2rem", height: "1.2rem", color: "black" }}
+        style={{ color: "black", height: "1.2rem", width: "1.2rem" }}
+        type="checkbox"
       />
       <div style={{ color: checkBoxValue ? "black" : "gray" }}>{label}</div>
     </Group>
@@ -22,6 +22,6 @@ export default CheckBox;
 
 const Group = styled("div", {
   display: "flex",
-  gap: "1rem",
   fontSize: "14px",
+  gap: "1rem",
 });

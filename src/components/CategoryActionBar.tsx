@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+
 import CategoryHeader from "./CategoryHeader";
 import Filters from "./Filters";
 
@@ -12,12 +13,12 @@ function CategoryActionBar() {
 }
 
 const HeaderWrapper = styled("span", {
-  display: "flex",
-  alignSelf: "center",
   alignContent: "center",
-  justifyContent: "center",
   alignItems: "center",
+  alignSelf: "center",
+  display: "flex",
   gap: "1rem",
+  justifyContent: "center",
   //   margin: "0 1rem 0 1rem",
   overflow: "hidden",
 });

@@ -2,6 +2,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
+
 import { HeartIcon } from "../assets/HeartIcon";
 import LeftArrowIcon from "../assets/LeftArrowIcon";
 import RightArrowIcon from "../assets/RightArrowIcon";
@@ -10,10 +11,10 @@ import useApi from "../hooks/useApi";
 import { IRoom } from "../types";
 
 interface IProps {
-  item: IRoom;
   isWishListed: boolean;
+  item: IRoom;
 }
-const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
+const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const [thumbnailIndex, setthumbnailIndex] = useState(0);
   const { user } = useKindeAuth();
   const { addToWishlists, removeFromWishlists } = useApi();
@@ -49,13 +50,13 @@ const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
 
   const imagePositionIndicatorRenderer = (index: number) => (
     <span
-      key={index}
       style={{
         color: "white",
-        userSelect: "none",
-        opacity: thumbnailIndex === index ? "1" : ".7",
         fontSize: thumbnailIndex === index ? "50px" : "40px",
+        opacity: thumbnailIndex === index ? "1" : ".7",
+        userSelect: "none",
       }}
+      key={index}
     >
       .
     </span>
@@ -91,7 +92,7 @@ const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
   return (
     <ItemWrapper>
       <ImageWrapper>
-        <CardImage src={item.images[thumbnailIndex]} height={300} width={300} />
+        <CardImage height={300} src={item.images[thumbnailIndex]} width={300} />
         <HeartIconWrapper
           onClick={() =>
             isWishListed
@@ -119,7 +120,7 @@ const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
       </CardTitle>
       <div style={{ marginTop: "1rem" }}>
         <Price>₹{item.price.toLocaleString()}</Price>
-        <span style={{ fontWeight: "normal", fontSize: "13px" }}> night</span>
+        <span style={{ fontSize: "13px", fontWeight: "normal" }}> night</span>
       </div>
     </ItemWrapper>
   );
@@ -132,64 +133,64 @@ const CardTitle = styled("div", {
 });
 
 const RatingWrapper = styled("span", {
-  gap: ".4rem",
-  display: "flex",
-  justifyContent: "center",
   alignItems: "center",
+  display: "flex",
+  gap: ".4rem",
+  justifyContent: "center",
 });
 const ItemWrapper = styled("div", {});
 
 const HeartIconWrapper = styled("span", {
-  position: "absolute",
+  cursor: "pointer",
   paddingLeft: "260px",
   paddingTop: "10px",
-  cursor: "pointer",
+  position: "absolute",
 });
-const Title = styled("span", { fontWeight: "600", fontSize: "14px" });
+const Title = styled("span", { fontSize: "14px", fontWeight: "600" });
 
-const Price = styled("span", { fontWeight: "600", fontSize: "13px" });
+const Price = styled("span", { fontSize: "13px", fontWeight: "600" });
 
 const RoundIcon = styled("span", {
-  borderRadius: "100%",
-  backgroundColor: "White",
-  padding: "0.5rem",
-  display: "flex",
-  height: "min-content",
-  width: "min-content",
-  opacity: "0",
-  scale: "0.9",
-  transition: "all 0.5s ease-in-out",
   "&:hover": {
     opacity: "1",
     scale: "1",
   },
+  backgroundColor: "White",
+  borderRadius: "100%",
+  display: "flex",
+  height: "min-content",
+  opacity: "0",
+  padding: "0.5rem",
+  scale: "0.9",
+  transition: "all 0.5s ease-in-out",
+  width: "min-content",
 });
 
 const ImageWrapper = styled("div", {
-  height: "300px",
-  width: "300px",
-  display: "flex",
-  flexDirection: "column",
   "&:hover": {
     [`& ${RoundIcon}`]: {
       opacity: ".8",
     },
   },
+  display: "flex",
+  flexDirection: "column",
+  height: "300px",
+  width: "300px",
 });
 const CardImage = styled("img", {
   borderRadius: "1rem",
-  position: "absolute",
-  zIndex: "-1",
   objectFit: "cover",
   overflow: "hidden",
+  position: "absolute",
+  zIndex: "-1",
 });
 
 const ImageSliderControlWrapper = styled("span", {
-  display: "flex",
-  width: "90%",
-  justifyContent: "space-between",
   alignSelf: "center",
+  display: "flex",
+  justifyContent: "space-between",
   marginTop: "45%",
+  width: "90%",
 });
 
 const ImagePositionIndicator = styled("span", {

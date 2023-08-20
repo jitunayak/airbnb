@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+
 import CheckBox from "./CheckBox";
 import InputText from "./InputText";
 
@@ -47,27 +48,27 @@ function FilterContent() {
 
 const Wrapper = styled("div", {});
 const SubCard = styled("div", {
+  alignItems: "flex-start",
   display: "flex",
   flexDirection: "column",
-  alignItems: "flex-start",
   padding: "3rem 1rem",
   //   backgroundColor: "red",
 });
 
 const Divider = styled("div", {
-  width: "100%",
-  height: "1px",
   backgroundColor: "#ccc",
+  height: "1px",
+  width: "100%",
 });
 const Title = styled("span", {
-  fontWeight: "bold",
   fontSize: "22px",
+  fontWeight: "bold",
 });
 const Description = styled("span", {
-  fontWeight: "400",
-  fontSize: "14px",
-  marginTop: ".6rem",
   color: "Gray",
+  fontSize: "14px",
+  fontWeight: "400",
+  marginTop: ".6rem",
 });
 
 const Group = styled("div", {
@@ -76,10 +77,10 @@ const Group = styled("div", {
   marginTop: "2rem",
 });
 const WrapBox = styled("div", {
-  gap: "2rem",
   display: "grid",
   flexWrap: "wrap",
-  width: "60%",
+  gap: "2rem",
   marginTop: "2rem",
+  width: "60%",
 });
 export default FilterContent;

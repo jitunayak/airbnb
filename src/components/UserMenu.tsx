@@ -1,6 +1,7 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { Link } from "@tanstack/router";
+
 import { wishListRoute } from "../main";
 
 export default function UserMenu() {
@@ -11,7 +12,7 @@ export default function UserMenu() {
       <MenuItem variant="primary">Notifications</MenuItem>
       <MenuItem variant="primary">Trips</MenuItem>
       <MenuItem variant="primary">
-        <Link to={wishListRoute.to} style={{ display: "flex" }}>
+        <Link style={{ display: "flex" }} to={wishListRoute.to}>
           Wishlists
         </Link>
       </MenuItem>
@@ -20,7 +21,7 @@ export default function UserMenu() {
       <MenuItem variant="seconday">Account</MenuItem>
       <Divider />
       <MenuItem variant="seconday">Help Center</MenuItem>
-      <MenuItem variant="danger" onClick={logout}>
+      <MenuItem onClick={logout} variant="danger">
         Logout
       </MenuItem>
     </FloatWrapper>
@@ -28,47 +29,47 @@ export default function UserMenu() {
 }
 
 const FloatWrapper = styled("div", {
-  position: "absolute",
-  zIndex: 11,
   backgroundColor: "White",
   border: "1px solid #eee",
-  top: "5rem",
-  right: "2rem",
   borderRadius: ".6rem",
   boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.1);",
   cursor: "pointer",
   display: "flex",
   flexDirection: "column",
   padding: ".6rem 0rem",
+  position: "absolute",
+  right: "2rem",
+  top: "5rem",
+  zIndex: 11,
 });
 const Divider = styled("div", {
-  width: "100%",
-  height: "1px",
   backgroundColor: "#eee",
+  height: "1px",
   margin: ".8rem 0rem",
+  width: "100%",
 });
 const MenuItem = styled("span", {
-  fontSize: "13px",
-  minWidth: "12rem",
-  padding: ".6rem 1rem",
   "&:hover": {
     backgroundColor: "#f6f6f6",
   },
+  fontSize: "13px",
+  minWidth: "12rem",
+  padding: ".6rem 1rem",
   variants: {
     variant: {
+      danger: {
+        "&:hover": {
+          fontWeight: "500",
+        },
+        color: "red",
+      },
       primary: {
         color: "black",
         fontWeight: "500",
       },
       seconday: {
-        fontWeight: "400",
         color: "gray",
-      },
-      danger: {
-        color: "red",
-        "&:hover": {
-          fontWeight: "500",
-        },
+        fontWeight: "400",
       },
     },
   },

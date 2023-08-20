@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+
 import CategoryActionBar from "./CategoryActionBar";
 import Header from "./Header";
 
@@ -14,18 +15,18 @@ function StickyHeader() {
 export default StickyHeader;
 
 const StickyHeaderWrapper = styled("div", {
-  position: "fixed",
-  zIndex: "9",
   backgroundColor: "White",
-  width: "100%",
-  top: 0,
   paddingTop: "1rem",
+  position: "fixed",
+  top: 0,
+  width: "100%",
+  zIndex: "9",
 });
 
 const Line = styled("span", {
-  width: "100%",
-  height: "1px",
   backgroundColor: "#eee",
   display: "flex",
+  height: "1px",
   margin: "1rem",
+  width: "100%",
 });

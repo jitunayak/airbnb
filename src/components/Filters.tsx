@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { FiltersIcon } from "../assets/FiltersIcon";
 import { Button } from "./Button";
 import FilterContent from "./FilterContent";
@@ -9,9 +10,9 @@ function Filters() {
     <>
       <Button
         color="outline"
+        onClick={() => setShowModal(!showModal)}
         round="s"
         size="l"
-        onClick={() => setShowModal(!showModal)}
       >
         <FiltersIcon />
         <span style={{ fontWeight: "600" }}>Filters</span>
@@ -20,9 +21,9 @@ function Filters() {
       <Modal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        title="Filters"
         primaryActionTitle="Show 649 Stays"
         secondaryActionTitle="Clear All"
+        title="Filters"
       >
         <FilterContent />
       </Modal>

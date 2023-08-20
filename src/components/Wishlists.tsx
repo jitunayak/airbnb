@@ -1,6 +1,7 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useQuery } from "@tanstack/react-query";
+
 import useApi from "../hooks/useApi";
 import HomeResultItem from "./HomeResultItem";
 
@@ -8,8 +9,8 @@ function Wishlists() {
   const { wishlistApi } = useApi();
   const { user } = useKindeAuth();
   const { data, isLoading } = useQuery({
-    queryKey: ["wishlists"],
     queryFn: () => wishlistApi.getWishLists(user?.id ?? ""),
+    queryKey: ["wishlists"],
   });
 
   return (
@@ -20,7 +21,7 @@ function Wishlists() {
         <ResultContainer>
           {data?.map((item) => {
             return (
-              <HomeResultItem item={item} key={item.id} isWishListed={true} />
+              <HomeResultItem isWishListed={true} item={item} key={item.id} />
             );
           })}
         </ResultContainer>
@@ -32,18 +33,18 @@ function Wishlists() {
 export default Wishlists;
 
 const Container = styled("div", {
-  margin: "4rem",
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-start",
+  margin: "4rem",
 });
 
 const ResultContainer = styled("div", {
+  alignContent: "space-around",
   display: "flex",
-  justifyContent: "space-around",
   flexWrap: "wrap",
   gap: "1rem",
-  alignContent: "space-around",
+  justifyContent: "space-around",
   //   zIndex: "1",
   //   top: "1rem",
   //   position: "absolute",
