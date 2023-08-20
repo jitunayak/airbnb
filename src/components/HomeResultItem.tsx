@@ -26,9 +26,10 @@ const HomeResultItem: React.FC<IProps> = ({ item, isWishListed = false }) => {
       queryClient.invalidateQueries({
         queryKey: [user?.id || "", "wishlists"],
       });
-      queryClient.setQueryData(["wishlists"], (old) =>
-        old.length > 0 ? [...old, newData] : [newData]
-      );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      queryClient.setQueryData(["wishlists"], (old: any) => {
+        return old?.length > 0 ? [...old, newData] : [newData];
+      });
     },
   });
 
