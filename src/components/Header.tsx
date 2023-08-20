@@ -7,11 +7,10 @@ import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
 function Header() {
-  const { getPermissions, isAuthenticated, isLoading, login, user } =
-    useKindeAuth();
+  const { isAuthenticated, isLoading, login, user } = useKindeAuth();
 
-  console.log(user && user);
-  console.log(user && getPermissions().permissions);
+  //   console.log(user && user);
+  //   console.log(user && getPermissions().permissions);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   return (

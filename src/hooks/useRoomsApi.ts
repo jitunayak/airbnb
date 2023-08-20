@@ -18,7 +18,7 @@ const useRoomsApi = () => {
     nextCursor?: number;
     prevCursor?: number;
   }> => {
-    console.log("API fetching rooms for page:", page);
+    // console.log("API fetching rooms for page:", page);
     await sleep(100);
     const data: IRoom[] = randomizeData(mockedRooms).map((item) => ({
       ...item,

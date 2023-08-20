@@ -26,7 +26,7 @@ const Modal: React.FC<IProps> = ({
 
   useEffect(() => {
     setShowModal(isOpen);
-    console.log(window.innerHeight);
+    // console.log(window.innerHeight);
   }, [isOpen]);
 
   const handleClose = useCallback(() => {
