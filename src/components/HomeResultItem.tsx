@@ -17,12 +17,13 @@ interface IProps {
 const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const [thumbnailIndex, setthumbnailIndex] = useState(0);
   const { user } = useKindeAuth();
-  const { addToWishlists, removeFromWishlists } = useApi();
+  const { wishlistApi } = useApi();
 
   const queryClient = useQueryClient();
 
   const addToWishListMutation = useMutation({
-    mutationFn: (data: IRoom) => addToWishlists(user?.id || "", data),
+    mutationFn: (data: IRoom) =>
+      wishlistApi.addToWishlists(user?.id || "", data),
     onSuccess: (newData) => {
       queryClient.invalidateQueries({
         queryKey: [user?.id || "", "wishlists"],
@@ -35,9 +36,16 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   });
 
   const removeFromWishListMutation = useMutation({
-    mutationFn: (data: IRoom) => removeFromWishlists(user?.id || "", data),
-    // mutationKey: "wishlists",
-    onSuccess: () => {},
+    mutationFn: (data: IRoom) =>
+      wishlistApi.removeFromWishlists(user?.id || "", data),
+    onSuccess: (data: IRoom) => {
+      queryClient.invalidateQueries({
+        queryKey: [user?.id || "", "wishlists"],
+      });
+      queryClient.setQueryData(["wishlists"], (old: IRoom[]) => {
+        return old?.length > 0 ? old.filter((item) => item.id !== data.id) : [];
+      });
+    },
   });
 
   const thumbnailIndexIncrement = () => {
