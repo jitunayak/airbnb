@@ -12,7 +12,7 @@ function Root() {
   return (
     <>
       <Outlet />
-      <TanStackRouterDevtools initialIsOpen={true} />
+      <TanStackRouterDevtools initialIsOpen={false} />
     </>
   );
 }
