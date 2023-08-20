@@ -1,5 +1,5 @@
 import { IRoom } from "../types";
-import { randomizeData, sleep } from "../utils";
+import { sleep } from "../utils";
 import mockedRooms from "./mockFetchRooms.json";
 
 const useRoomsApi = () => {
@@ -20,16 +20,16 @@ const useRoomsApi = () => {
   }> => {
     // console.log("API fetching rooms for page:", page);
     await sleep(100);
-    const data: IRoom[] = randomizeData(mockedRooms).map((item) => ({
+    const data: IRoom[] = mockedRooms.map((item) => ({
       ...item,
       id: String(parseInt(item.id) + page * 10),
       images: item.images,
-    }));
+    })).sort((a, b) => a.id.localeCompare(b.id));
     return new Promise((resolve) => {
       resolve({
-        allPages: 5,
+        allPages: 20,
         data,
-        nextCursor: page === 5 ? undefined : page + 1,
+        nextCursor: page === 20 ? undefined : page + 1,
         prevCursor: page === 1 ? 1 : page - 1,
       });
     });

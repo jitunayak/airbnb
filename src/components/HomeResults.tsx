@@ -25,12 +25,14 @@ function HomeResults() {
   const { roomsApi, wishlistApi } = useApi();
 
   const wishlists = useQuery({
+    enabled: !!user?.id,
     queryFn: () => wishlistApi.getWishLists(user?.id || ""),
     queryKey: ["wishlists"],
   });
 
   const { data, fetchNextPage, hasNextPage, isLoading, isSuccess } =
     useInfiniteQuery({
+      //   enabled: true,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getNextPageParam: (lastPage: any) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
@@ -58,7 +60,7 @@ function HomeResults() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  if (isLoading || !data || !isSuccess || wishlists.isLoading) {
+  if (isLoading || !data || !isSuccess) {
     return <span style={{ fontSize: "30px" }}>loading...</span>;
   }
 
