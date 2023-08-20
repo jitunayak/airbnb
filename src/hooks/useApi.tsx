@@ -21,6 +21,7 @@ const useApi = () => {
     await sleep(100);
     const data: IRoom[] = randomizeData(mockedRooms).map((item) => ({
       ...item,
+      id: String(parseInt(item.id) + page * 10),
       images: item.images,
     }));
     return new Promise((resolve) => {
