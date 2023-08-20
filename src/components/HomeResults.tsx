@@ -31,7 +31,8 @@ function HomeResults() {
 
   const { data, fetchNextPage, hasNextPage, isLoading, isSuccess } =
     useInfiniteQuery({
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      getNextPageParam: (lastPage: any) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
       queryFn: ({ pageParam = 1 }) => roomsApi.fetchRooms(pageParam),
       queryKey: ["homeResult"],
@@ -65,7 +66,8 @@ function HomeResults() {
     <div>
       <ResultContainer>
         {data.pages.map((page) =>
-          page.data.map((item: IRoom) => (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (page as any).data.map((item: IRoom) => (
             <HomeResultItem
               isWishListed={
                 !!wishlists.data?.find((wishlist) => wishlist.id === item.id)

@@ -1,4 +1,4 @@
-export default function RightArrowIcon() {
+export const RightArrowIcon = () => {
   return (
     <svg
       style={{
@@ -18,4 +18,4 @@ export default function RightArrowIcon() {
       <path d="m12 4 11.3 11.3a1 1 0 0 1 0 1.4L12 28" fill="none"></path>
     </svg>
   );
-}
+};

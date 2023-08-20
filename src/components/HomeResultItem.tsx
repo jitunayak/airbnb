@@ -3,10 +3,7 @@ import { styled } from "@stitches/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 
-import { HeartIcon } from "../assets/HeartIcon";
-import LeftArrowIcon from "../assets/LeftArrowIcon";
-import RightArrowIcon from "../assets/RightArrowIcon";
-import { StarIcon } from "../assets/StarIcon";
+import { HeartIcon, LeftArrowIcon, RightArrowIcon, StarIcon } from "../assets";
 import useApi from "../hooks/useApi";
 import { IRoom } from "../types";
 
@@ -84,7 +81,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
 
   const ImageSliderControl = () => {
     return (
-      <>
+      <React.Fragment>
         <RoundIcon onClick={thumbnailIndexDecrement}>
           <LeftArrowIcon />
         </RoundIcon>
@@ -93,7 +90,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
             <RightArrowIcon />
           </RoundIcon>
         )}
-      </>
+      </React.Fragment>
     );
   };
 

@@ -1,4 +1,4 @@
-export default function LeftArrowIcon() {
+export const LeftArrowIcon = () => {
   return (
     <svg
       style={{
@@ -18,4 +18,4 @@ export default function LeftArrowIcon() {
       <path d="M20 28 8.7 16.7a1 1 0 0 1 0-1.4L20 4" fill="none"></path>
     </svg>
   );
-}
+};

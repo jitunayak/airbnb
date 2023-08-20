@@ -1,4 +1,4 @@
-export default function HumBurgerIcon() {
+export const HumBurgerIcon = () => {
   return (
     <svg
       style={{
@@ -20,4 +20,4 @@ export default function HumBurgerIcon() {
       </g>
     </svg>
   );
-}
+};

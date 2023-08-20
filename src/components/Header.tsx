@@ -2,8 +2,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useState } from "react";
 
-import { AirBnbIcon } from "../assets/AirBnbIcon";
-import HumBurgerIcon from "../assets/HumBurgerIcon";
+import { AirBnbIcon, HumBurgerIcon } from "../assets";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
