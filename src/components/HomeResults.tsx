@@ -32,7 +32,6 @@ function HomeResults() {
 
   const { data, fetchNextPage, hasNextPage, isLoading, isSuccess } =
     useInfiniteQuery({
-      //   enabled: true,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getNextPageParam: (lastPage: any) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,

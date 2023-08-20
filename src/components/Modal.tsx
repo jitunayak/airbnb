@@ -143,7 +143,7 @@ const ActionWrapper = styled("div", {
 
 const ModalContent = styled("div", {
   //   width: `${window.innerWidth - window.innerWidth * 0.4}px`,
-  height: `${window.innerHeight - window.innerHeight * 0.4}px`,
+  height: `${window.innerHeight - window.innerHeight * 0.2}px`,
   maxHeight: "500px",
   overflowY: "scroll",
   padding: "2rem",
