@@ -1,6 +1,7 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/router";
 import React, { useState } from "react";
 
 import { HeartIcon, LeftArrowIcon, RightArrowIcon, StarIcon } from "../assets";
@@ -15,6 +16,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const [thumbnailIndex, setthumbnailIndex] = useState(0);
   const { user } = useKindeAuth();
   const { wishlistApi } = useApi();
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -117,7 +119,13 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
           {imageSlidingIndicator(item)}
         </ImagePositionIndicator>
       </ImageWrapper>
-      <CardTitle>
+      <CardTitle
+        onClick={() =>
+          navigate({
+            to: `/rooms/${item.id}`,
+          })
+        }
+      >
         <Title>
           {item.address.market},{item.address.country}
         </Title>
@@ -135,6 +143,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
 };
 
 const CardTitle = styled("div", {
+  cursor: "pointer",
   display: "flex",
   justifyContent: "space-between",
   marginTop: ".5rem",
