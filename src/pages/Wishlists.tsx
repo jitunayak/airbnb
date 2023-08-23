@@ -2,14 +2,14 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useQuery } from "@tanstack/react-query";
 
+import HomeResultItem from "../components/HomeResultItem";
 import useApi from "../hooks/useApi";
-import HomeResultItem from "./HomeResultItem";
 
 function Wishlists() {
   const { wishlistApi } = useApi();
   const { user } = useKindeAuth();
   const { data, isLoading } = useQuery({
-    queryFn: () => wishlistApi.getWishLists(user?.id ?? ""),
+    queryFn: () => wishlistApi.getWishLists(user?.id || ""),
     queryKey: ["wishlists"],
   });
 

@@ -5,8 +5,9 @@ import ReactDOM from "react-dom/client";
 
 import App from "./App.tsx";
 import Home from "./components/Home.tsx";
-import Wishlist from "./components/Wishlists.tsx";
 import "./index.css";
+import RoomPage from "./pages/RoomPage.tsx";
+import Wishlist from "./pages/Wishlists.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 function Root() {
@@ -34,7 +35,21 @@ export const wishListRoute = new Route({
   path: "wishlists",
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, wishListRoute]);
+export const roomsRoute = new Route({
+  component: RoomPage,
+  getParentRoute: () => rootRoute,
+  path: "rooms",
+});
+export const roomRoute = new Route({
+  component: RoomPage,
+  getParentRoute: () => roomsRoute,
+  path: "$roomId",
+});
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  wishListRoute,
+  roomsRoute.addChildren([roomRoute]),
+]);
 
 // Create the router using your route tree
 const router = new Router({ routeTree });
