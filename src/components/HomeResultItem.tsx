@@ -23,14 +23,12 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const addToWishListMutation = useMutation({
     mutationFn: (data: IRoom) =>
       wishlistApi.addToWishlists(user?.id || "", data),
-    onSuccess: (newData) => {
-      queryClient.invalidateQueries({
-        queryKey: [user?.id || "", "wishlists"],
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries(["wishlists"]);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      queryClient.setQueryData(["wishlists"], (old: any) => {
-        return old?.length > 0 ? [...old, newData] : [newData];
-      });
+      //   queryClient.setQueryData(["wishlists"], (old: any) => {
+      //     return old?.length > 0 ? [...old, newData] : [newData];
+      //   });
     },
   });
 

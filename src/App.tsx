@@ -9,7 +9,13 @@ interface IProps {
   router: Router;
 }
 const App: React.FC<IProps> = ({ router }) => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnReconnect:'always'
+      },
+    },
+  });
 
   return (
     <>

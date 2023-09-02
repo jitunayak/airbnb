@@ -8,7 +8,7 @@ import useApi from "../hooks/useApi";
 function Wishlists() {
   const { wishlistApi } = useApi();
   const { user } = useKindeAuth();
-  const { data, isLoading } = useQuery({
+  const { data, isError, isLoading, isSuccess } = useQuery({
     queryFn: () => wishlistApi.getWishLists(user?.id || ""),
     queryKey: ["wishlists"],
   });
@@ -17,13 +17,15 @@ function Wishlists() {
     <Container>
       <div style={{ fontSize: "50px" }}>Wishlists</div>
       {isLoading && <div style={{ margin: "4rem" }}>loading...</div>}
+      {isError && <div style={{ margin: "4rem" }}> unable to fetch</div>}
       {!isLoading && (
         <ResultContainer>
-          {data?.map((item) => {
-            return (
-              <HomeResultItem isWishListed={true} item={item} key={item.id} />
-            );
-          })}
+          {isSuccess &&
+            data.map((item) => {
+              return (
+                <HomeResultItem isWishListed={true} item={item} key={item.id} />
+              );
+            })}
         </ResultContainer>
       )}
     </Container>

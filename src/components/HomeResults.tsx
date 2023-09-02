@@ -24,6 +24,8 @@ function HomeResults() {
   const { user } = useKindeAuth();
   const { roomsApi, wishlistApi } = useApi();
 
+  //   const queryClient = useQueryClient();
+
   const wishlists = useQuery({
     enabled: !!user?.id,
     queryFn: () => wishlistApi.getWishLists(user?.id || ""),
@@ -65,6 +67,11 @@ function HomeResults() {
 
   return (
     <div>
+      {/* <Button
+        onClick={() => queryClient.invalidateQueries([user?.id, "wishlists"])}
+      >
+        Refresh
+      </Button> */}
       <ResultContainer>
         {data.pages.map((page) =>
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
