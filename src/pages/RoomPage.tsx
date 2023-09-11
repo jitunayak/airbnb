@@ -36,7 +36,6 @@ function RoomPage() {
       </ImageContainer>
       <HostTitle>Entire home hosted by Keagan</HostTitle>
       <HostSubTitle> 16 + guests 10 bedrooms 10 beds 10 bathrooms</HostSubTitle>
-
       <BookingContainer>
         <BookingHeaderCutDownPrice>
           ₹{Number(90000).toLocaleString()}{" "}
@@ -97,7 +96,11 @@ const ImageContainer = styled("div", {
 });
 
 const PageContainer = styled("div", {
-  margin: "4rem",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  margin: "6rem",
+  maxWidth: "70rem",
 });
 
 const Title = styled("span", {
