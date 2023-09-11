@@ -25,7 +25,6 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
       wishlistApi.addToWishlists(user?.id || "", data),
     onSuccess: () => {
       queryClient.invalidateQueries(["wishlists"]);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       //   queryClient.setQueryData(["wishlists"], (old: any) => {
       //     return old?.length > 0 ? [...old, newData] : [newData];
       //   });

@@ -17,8 +17,9 @@ export const {
   },
   theme: {
     colors: {
-      primary: "blueviolet",
-      secondary: "gainsboro",
+      primary: "#FF385C",
+      textPrimary: "black",
+      textSecondary: "gray",
     },
 
     shadows: {
