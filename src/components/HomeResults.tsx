@@ -66,7 +66,7 @@ function HomeResults() {
   }
 
   return (
-    <div>
+    <>
       {/* <Button
         onClick={() => queryClient.invalidateQueries([user?.id, "wishlists"])}
       >
@@ -96,7 +96,7 @@ function HomeResults() {
               />
             ))}
       </ResultContainer>
-    </div>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ const App: React.FC<IProps> = ({ router }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnReconnect:'always'
+        refetchOnReconnect: "always",
       },
     },
   });

@@ -12,10 +12,16 @@ import Wishlist from "./pages/Wishlists.tsx";
 // eslint-disable-next-line react-refresh/only-export-components
 function Root() {
   return (
-    <>
+    <div
+      style={{
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <Outlet />
       <TanStackRouterDevtools initialIsOpen={false} />
-    </>
+    </div>
   );
 }
 const rootRoute = new RootRoute({

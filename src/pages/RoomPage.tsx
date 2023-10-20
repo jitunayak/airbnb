@@ -99,8 +99,9 @@ const PageContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  margin: "6rem",
+  margin: "2rem",
   maxWidth: "70rem",
+  width: "100%",
 });
 
 const Title = styled("span", {
