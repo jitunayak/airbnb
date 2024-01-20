@@ -1,4 +1,5 @@
-# React + TypeScript + Vite
+# Airbnb Clone
+### React + TypeScript + Vite
 ![Snpshot](https://github.com/jitunayak/airbnb/blob/main/public/Screenshot%202023-09-04%20at%2012.49.25%20AM.png)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
