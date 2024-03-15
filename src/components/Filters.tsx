@@ -13,6 +13,7 @@ function Filters() {
         onClick={() => setShowModal(!showModal)}
         round="s"
         size="l"
+        data-test-id="filter-button"
       >
         <FiltersIcon />
         <span style={{ fontWeight: "600" }}>Filters</span>

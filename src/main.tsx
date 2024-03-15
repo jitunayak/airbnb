@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import App from "./App.tsx";
-import Home from "./components/Home.tsx";
+import Home from "./pages/Home.tsx";
 import "./index.css";
 import RoomPage from "./pages/RoomPage.tsx";
 import Wishlist from "./pages/Wishlists.tsx";

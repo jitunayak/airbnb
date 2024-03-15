@@ -1,5 +1,5 @@
-import HomeResults from "./HomeResults";
-import StickyHeader from "./StickyHeader";
+import HomeResults from "../components/HomeResults";
+import StickyHeader from "../components/StickyHeader";
 
 function Home() {
   return (

@@ -62,6 +62,7 @@ const Modal: React.FC<IProps> = ({
               color={"text"}
               onClick={handleClose}
               style={{ fontSize: "14px" }}
+              data-test-id="close-filter-modal-button"
             >
               close
             </Button>

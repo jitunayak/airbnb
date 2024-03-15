@@ -16,6 +16,7 @@ export default StickyHeader;
 
 const StickyHeaderWrapper = styled("div", {
   backgroundColor: "White",
+  
   paddingTop: "1rem",
   position: "fixed",
   top: 0,
