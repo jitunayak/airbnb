@@ -2,6 +2,7 @@ import { styled } from "@stitches/react";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { Button } from "./Button";
+import { useOutsideClick } from "../hooks";
 
 interface IProps {
   children?: React.ReactNode;
@@ -23,6 +24,10 @@ const Modal: React.FC<IProps> = ({
   title,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
+  const modalRef = React.useRef<HTMLDivElement>(null);
+  useOutsideClick(modalRef, () => {
+    handleClose();
+  });
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -54,7 +59,7 @@ const Modal: React.FC<IProps> = ({
 
   return (
     <ModalWrapper animate={showModal ? "slideUp" : "default"}>
-      <ModalContainer>
+      <ModalContainer ref={modalRef}>
         <HeaderWrapper>
           <Title>{title}</Title>
           <CloseButton>
