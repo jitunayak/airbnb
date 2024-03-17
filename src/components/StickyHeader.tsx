@@ -20,6 +20,7 @@ const StickyHeaderWrapper = styled("div", {
   top: 0,
   width: "100%",
   zIndex: "9",
+  backgroundColor: "white",
 });
 
 const Line = styled("span", {
