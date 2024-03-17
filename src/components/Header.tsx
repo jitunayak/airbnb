@@ -6,16 +6,19 @@ import { AirBnbIcon, HumBurgerIcon } from "../assets";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
+import { useNavigate } from "@tanstack/react-router";
 function Header() {
   const { isAuthenticated, isLoading, login, user } = useKindeAuth();
 
   //   console.log(user && user);
   //   console.log(user && getPermissions().permissions);
   const [showUserMenu, setShowUserMenu] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <HeaderWrapper>
-      <AirBnbIcon />
+      <span onClick={() => navigate({ to: "/" })}>
+        <AirBnbIcon />
+      </span>
       <Button color="outline" shadow="1" style={{ marginLeft: "4rem" }}>
         <Button color="text">Anywhere</Button>
         <Divider />
