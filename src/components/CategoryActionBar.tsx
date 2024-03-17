@@ -19,7 +19,6 @@ const HeaderWrapper = styled("span", {
   display: "flex",
   gap: "1rem",
   justifyContent: "center",
-  //   margin: "0 1rem 0 1rem",
   overflow: "hidden",
 });
 export default CategoryActionBar;

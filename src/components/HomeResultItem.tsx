@@ -13,7 +13,7 @@ interface IProps {
   item: IRoom;
 }
 const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
-  const [thumbnailIndex, setthumbnailIndex] = useState(0);
+  const [thumbnailIndex, setThumbnailIndex] = useState(0);
   const { user } = useKindeAuth();
   const { wishlistApi } = useApi();
   const navigate = useNavigate();
@@ -48,10 +48,10 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   });
 
   const thumbnailIndexIncrement = () => {
-    setthumbnailIndex((prev) => (prev < item.images.length ? prev + 1 : prev));
+    setThumbnailIndex((prev) => (prev < item.images.length ? prev + 1 : prev));
   };
   const thumbnailIndexDecrement = () => {
-    setthumbnailIndex((prev) => (prev !== 0 ? prev - 1 : prev));
+    setThumbnailIndex((prev) => (prev !== 0 ? prev - 1 : prev));
   };
   const isLastIndex = () => thumbnailIndex === item.images.length - 1;
 
@@ -99,6 +99,16 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   return (
     <ItemWrapper>
       <ImageWrapper>
+        <CardImageTransparent
+          onClick={() =>
+            navigate({
+              to: `/rooms/$roomId`,
+              params: {
+                roomId: item.id,
+              },
+            })
+          }
+        />
         <CardImage height={300} src={item.images[thumbnailIndex]} width={300} />
         <HeartIconWrapper
           onClick={() =>
@@ -200,6 +210,15 @@ const CardImage = styled("img", {
   overflow: "hidden",
   position: "absolute",
   zIndex: "-1",
+});
+
+const CardImageTransparent = styled("div", {
+  position: "absolute",
+  zIndex: "10",
+  opacity: "1",
+  height: "300px",
+  width: "210px",
+  marginLeft: "3rem",
 });
 
 const ImageSliderControlWrapper = styled("span", {

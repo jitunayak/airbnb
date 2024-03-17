@@ -113,8 +113,7 @@ export const ListWrapper = styled("span", {
   display: "flex",
   gap: "2rem",
   justifyContent: "center",
-  overflow: "hidden",
-  overflowX: "scroll",
+  overflowX: "hidden",
 });
 export const TitleText = styled("span", {
   "&:hover": {
