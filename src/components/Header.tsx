@@ -20,7 +20,7 @@ function Header() {
   //   console.log(user && getPermissions().permissions);
   return (
     <HeaderWrapper>
-      <span onClick={() => navigate({ to: "/" })}>
+      <span onClick={() => navigate({ to: "/" })} style={{ cursor: "pointer" }}>
         <AirBnbIcon />
       </span>
       <Button color="outline" shadow="1" style={{ marginLeft: "4rem" }}>
