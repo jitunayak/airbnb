@@ -1,19 +1,23 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { AirBnbIcon, HumBurgerIcon } from "../assets";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
 import { useNavigate } from "@tanstack/react-router";
+import { useOutsideClick } from "../hooks";
+
 function Header() {
+  const navigate = useNavigate();
   const { isAuthenticated, isLoading, login, user } = useKindeAuth();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(menuRef, () => setShowUserMenu(false));
 
   //   console.log(user && user);
   //   console.log(user && getPermissions().permissions);
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const navigate = useNavigate();
   return (
     <HeaderWrapper>
       <span onClick={() => navigate({ to: "/" })}>
@@ -35,6 +39,7 @@ function Header() {
             color={"outline"}
             gap="xs"
             onClick={() => setShowUserMenu(!showUserMenu)}
+            onMouseEnter={() => setShowUserMenu(true)}
             round={"l"}
             size={"xs"}
           >
@@ -42,7 +47,7 @@ function Header() {
             <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>
           </Button>
         )}
-        {showUserMenu && <UserMenu />}
+        {showUserMenu && <UserMenu menuRef={menuRef} />}
         {!user && !isLoading && (
           <Button onClick={() => login({})}>Login</Button>
         )}

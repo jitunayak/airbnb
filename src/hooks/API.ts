@@ -8,28 +8,34 @@ export class API {
   };
 
   async delete(url: string, body: unknown): Promise<unknown> {
-    return (await fetch(`${this.BASE_URL}${url}`, {
-      body: JSON.stringify(body),
-      headers: this.jsonHeader(),
-      method: "DELETE",
-    })).json();
+    return (
+      await fetch(`${this.BASE_URL}${url}`, {
+        body: JSON.stringify(body),
+        headers: this.jsonHeader(),
+        method: "DELETE",
+      })
+    ).json();
   }
   async get(url: string): Promise<unknown> {
     return (await fetch(`${this.BASE_URL}${url}`)).json();
   }
 
   async patch(url: string, body: unknown): Promise<unknown> {
-    return (await fetch(`${this.BASE_URL}${url}`, {
-      body: JSON.stringify(body),
-      headers: this.jsonHeader(),
-      method: "PATCH",
-    })).json();
+    return (
+      await fetch(`${this.BASE_URL}${url}`, {
+        body: JSON.stringify(body),
+        headers: this.jsonHeader(),
+        method: "PATCH",
+      })
+    ).json();
   }
   async post(url: string, body: unknown): Promise<unknown> {
-    return (await fetch(`${this.BASE_URL}${url}`, {
-      body: JSON.stringify(body),
-      headers: this.jsonHeader(),
-      method: "POST",
-    })).json();
+    return (
+      await fetch(`${this.BASE_URL}${url}`, {
+        body: JSON.stringify(body),
+        headers: this.jsonHeader(),
+        method: "POST",
+      })
+    ).json();
   }
 }

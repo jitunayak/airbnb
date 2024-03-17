@@ -4,10 +4,14 @@ import { styled } from "@stitches/react";
 import { wishListRoute } from "../main";
 import { Link } from "@tanstack/react-router";
 
-export default function UserMenu() {
+export default function UserMenu({
+  menuRef,
+}: {
+  menuRef: React.RefObject<HTMLDivElement>;
+}) {
   const { logout } = useKindeAuth();
   return (
-    <FloatWrapper>
+    <FloatWrapper ref={menuRef}>
       <MenuItem variant="primary">Messages</MenuItem>
       <MenuItem variant="primary">Notifications</MenuItem>
       <MenuItem variant="primary">Trips</MenuItem>
@@ -17,10 +21,10 @@ export default function UserMenu() {
         </Link>
       </MenuItem>
       <Divider />
-      <MenuItem variant="seconday">Airbnb your home</MenuItem>
-      <MenuItem variant="seconday">Account</MenuItem>
+      <MenuItem variant="secondary">Airbnb your home</MenuItem>
+      <MenuItem variant="secondary">Account</MenuItem>
       <Divider />
-      <MenuItem variant="seconday">Help Center</MenuItem>
+      <MenuItem variant="secondary">Help Center</MenuItem>
       <MenuItem onClick={logout} variant="danger">
         Logout
       </MenuItem>
@@ -67,7 +71,7 @@ const MenuItem = styled("span", {
         color: "black",
         fontWeight: "500",
       },
-      seconday: {
+      secondary: {
         color: "gray",
         fontWeight: "400",
       },
