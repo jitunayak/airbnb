@@ -40,6 +40,39 @@ export const {
       marginBottom: value,
       marginTop: value,
     }),
+    mt: (value: Stitches.PropertyValue<"margin">) => ({
+      marginTop: value,
+    }),
+    mb: (value: Stitches.PropertyValue<"margin">) => ({
+      marginBottom: value,
+    }),
+    ml: (value: Stitches.PropertyValue<"margin">) => ({
+      marginLeft: value,
+    }),
+    mr: (value: Stitches.PropertyValue<"margin">) => ({
+      marginRight: value,
+    }),
+
+    px: (value: Stitches.PropertyValue<"padding">) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    py: (value: Stitches.PropertyValue<"padding">) => ({
+      paddingBottom: value,
+      paddingTop: value,
+    }),
+    pt: (value: Stitches.PropertyValue<"padding">) => ({
+      paddingTop: value,
+    }),
+    pb: (value: Stitches.PropertyValue<"padding">) => ({
+      paddingBottom: value,
+    }),
+    pl: (value: Stitches.PropertyValue<"padding">) => ({
+      paddingLeft: value,
+    }),
+    pr: (value: Stitches.PropertyValue<"padding">) => ({
+      paddingRight: value,
+    }),
 
     shadow: () => ({}),
   },
