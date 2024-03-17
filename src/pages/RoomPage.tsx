@@ -201,8 +201,9 @@ const ImageHover = styled("img", {
 });
 
 const HostTitle = styled("div", {
-  fontSize: "1.2rem",
+  fontSize: "1.4rem",
   fontWeight: "500",
+  mt: "1.2rem",
 });
 
 const HostSubTitle = styled("div", {
