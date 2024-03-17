@@ -1,4 +1,4 @@
-import { Outlet, RootRoute, Route, Router } from "@tanstack/router";
+import { Outlet, RootRoute, Route, Router } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -61,7 +61,7 @@ const routeTree = rootRoute.addChildren([
 const router = new Router({ routeTree });
 
 // Register your router for maximum type safety
-declare module "@tanstack/router" {
+declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }

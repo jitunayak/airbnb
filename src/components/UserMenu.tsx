@@ -1,8 +1,8 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
-import { Link } from "@tanstack/router";
 
 import { wishListRoute } from "../main";
+import { Link } from "@tanstack/react-router";
 
 export default function UserMenu() {
   const { logout } = useKindeAuth();
