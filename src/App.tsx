@@ -15,7 +15,6 @@ const App: React.FC<IProps> = ({ router }) => {
       },
     },
   });
-
   return (
     <>
       <KindeProvider

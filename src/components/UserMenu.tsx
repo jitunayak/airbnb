@@ -42,8 +42,8 @@ const FloatWrapper = styled("div", {
   flexDirection: "column",
   padding: ".6rem 0rem",
   position: "absolute",
-  right: "2rem",
-  top: "5rem",
+  right: ".5rem",
+  top: "3rem",
   zIndex: 11,
 });
 const Divider = styled("div", {

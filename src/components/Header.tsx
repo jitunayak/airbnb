@@ -84,4 +84,5 @@ const GroupWrapper = styled("span", {
   display: "inline-flex",
   gap: "1rem",
   justifyContent: "center",
+  position:'relative'
 });
