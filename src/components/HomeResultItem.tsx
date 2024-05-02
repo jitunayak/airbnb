@@ -54,6 +54,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
     setThumbnailIndex((prev) => (prev !== 0 ? prev - 1 : prev));
   };
   const isLastIndex = () => thumbnailIndex === item.images.length - 1;
+  const isFirstIndex = () => thumbnailIndex === 0;
 
   const imagePositionIndicatorRenderer = (index: number) => (
     <span
@@ -84,9 +85,12 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const ImageSliderControl = () => {
     return (
       <React.Fragment>
-        <RoundIcon onClick={thumbnailIndexDecrement}>
-          <LeftArrowIcon />
-        </RoundIcon>
+        {
+          isFirstIndex() ? <span></span> :
+            <RoundIcon onClick={thumbnailIndexDecrement}>
+              <LeftArrowIcon />
+            </RoundIcon>
+        }
         {!isLastIndex() && (
           <RoundIcon onClick={thumbnailIndexIncrement}>
             <RightArrowIcon />
