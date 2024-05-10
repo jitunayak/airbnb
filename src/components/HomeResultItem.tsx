@@ -1,12 +1,12 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import { styled } from "@stitches/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
-import React, { useState } from "react";
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
+import { styled } from '@stitches/react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
+import React, { useState } from 'react';
 
-import { HeartIcon, LeftArrowIcon, RightArrowIcon, StarIcon } from "../assets";
-import useApi from "../hooks/useApi";
-import { IRoom } from "../types";
+import { HeartIcon, LeftArrowIcon, RightArrowIcon, StarIcon } from '../assets';
+import useApi from '../hooks/useApi';
+import { IRoom } from '../types';
 
 interface IProps {
   isWishListed: boolean;
@@ -22,9 +22,9 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
 
   const addToWishListMutation = useMutation({
     mutationFn: (data: IRoom) =>
-      wishlistApi.addToWishlists(user?.id || "", data),
+      wishlistApi.addToWishlists(user?.id || '', data),
     onSuccess: () => {
-      queryClient.invalidateQueries(["wishlists"]);
+      queryClient.invalidateQueries(['wishlists']);
       //   queryClient.setQueryData(["wishlists"], (old: any) => {
       //     return old?.length > 0 ? [...old, newData] : [newData];
       //   });
@@ -33,13 +33,13 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
 
   const removeFromWishListMutation = useMutation({
     mutationFn: (data: IRoom) =>
-      wishlistApi.removeFromWishlists(user?.id || "", data),
+      wishlistApi.removeFromWishlists(user?.id || '', data),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [user?.id || "", "wishlists"],
+        queryKey: [user?.id || '', 'wishlists'],
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      queryClient.setQueryData(["wishlists"], (old: any) => {
+      queryClient.setQueryData(['wishlists'], (old: any) => {
         return old?.length > 0
           ? old.filter((item: IRoom) => item.id !== data.id)
           : [];
@@ -59,10 +59,10 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const imagePositionIndicatorRenderer = (index: number) => (
     <span
       style={{
-        color: "white",
-        fontSize: thumbnailIndex === index ? "50px" : "40px",
-        opacity: thumbnailIndex === index ? "1" : ".7",
-        userSelect: "none",
+        color: 'white',
+        fontSize: thumbnailIndex === index ? '50px' : '40px',
+        opacity: thumbnailIndex === index ? '1' : '.7',
+        userSelect: 'none',
       }}
       key={index}
     >
@@ -85,12 +85,13 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   const ImageSliderControl = () => {
     return (
       <React.Fragment>
-        {
-          isFirstIndex() ? <span></span> :
-            <RoundIcon onClick={thumbnailIndexDecrement}>
-              <LeftArrowIcon />
-            </RoundIcon>
-        }
+        {isFirstIndex() ? (
+          <span></span>
+        ) : (
+          <RoundIcon onClick={thumbnailIndexDecrement}>
+            <LeftArrowIcon />
+          </RoundIcon>
+        )}
         {!isLastIndex() && (
           <RoundIcon onClick={thumbnailIndexIncrement}>
             <RightArrowIcon />
@@ -121,7 +122,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
               : addToWishListMutation.mutateAsync(item as IRoom)
           }
         >
-          <HeartIcon color={isWishListed ? "red" : "transparent"} />
+          <HeartIcon color={isWishListed ? 'red' : 'transparent'} />
         </HeartIconWrapper>
         <ImageSliderControlWrapper>
           <ImageSliderControl />
@@ -145,97 +146,103 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
         </Title>
         <RatingWrapper>
           <StarIcon />
-          <span style={{ fontSize: "13px" }}>{item.rating}</span>
+          <span style={{ fontSize: '13px' }}>{item.rating}</span>
         </RatingWrapper>
       </CardTitle>
-      <div style={{ marginTop: "1rem" }}>
+      <div style={{ marginTop: '1rem' }}>
         <Price>₹{item.price.toLocaleString()}</Price>
-        <span style={{ fontSize: "13px", fontWeight: "normal" }}> night</span>
+        <span style={{ fontSize: '13px', fontWeight: 'normal' }}> night</span>
       </div>
     </ItemWrapper>
   );
 };
 
-const CardTitle = styled("div", {
-  cursor: "pointer",
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: ".5rem",
+const CardTitle = styled('div', {
+  cursor: 'pointer',
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginTop: '.5rem',
 });
 
-const RatingWrapper = styled("span", {
-  alignItems: "center",
-  display: "flex",
-  gap: ".4rem",
-  justifyContent: "center",
+const RatingWrapper = styled('span', {
+  alignItems: 'center',
+  display: 'flex',
+  gap: '.4rem',
+  justifyContent: 'center',
 });
-const ItemWrapper = styled("div", {});
+const ItemWrapper = styled('div', {});
 
-const HeartIconWrapper = styled("span", {
-  cursor: "pointer",
-  paddingLeft: "260px",
-  paddingTop: "10px",
-  position: "absolute",
+const HeartIconWrapper = styled('span', {
+  cursor: 'pointer',
+  paddingLeft: '260px',
+  paddingTop: '10px',
+  position: 'absolute',
 });
-const Title = styled("span", { fontSize: "14px", fontWeight: "600" });
+const Title = styled('span', { fontSize: '14px', fontWeight: '600' });
 
-const Price = styled("span", { fontSize: "13px", fontWeight: "600" });
+const Price = styled('span', { fontSize: '13px', fontWeight: '600' });
 
-const RoundIcon = styled("span", {
-  "&:hover": {
-    opacity: "1",
-    scale: "1",
+const RoundIcon = styled('span', {
+  '&:hover': {
+    opacity: '1',
+    scale: '1',
   },
-  backgroundColor: "White",
-  borderRadius: "100%",
-  display: "flex",
-  height: "min-content",
-  opacity: "0",
-  padding: "0.5rem",
-  scale: "0.9",
-  transition: "all 0.5s ease-in-out",
-  width: "min-content",
+  backgroundColor: 'White',
+  borderRadius: '100%',
+  display: 'flex',
+  height: 'min-content',
+  opacity: '0',
+  padding: '0.5rem',
+  scale: '0.9',
+  transition: 'all 0.5s ease-in-out',
+  userSelect: 'none',
+  width: 'min-content',
 });
 
-const ImageWrapper = styled("div", {
-  "&:hover": {
+const ImageWrapper = styled('div', {
+  '&:hover': {
     [`& ${RoundIcon}`]: {
-      opacity: ".8",
+      opacity: '.8',
     },
   },
-  display: "flex",
-  flexDirection: "column",
-  height: "300px",
-  width: "300px",
+  display: 'flex',
+  flexDirection: 'column',
+  height: '300px',
+  userSelect: 'none',
+  width: '300px',
 });
-const CardImage = styled("img", {
-  borderRadius: "1rem",
-  objectFit: "cover",
-  overflow: "hidden",
-  position: "absolute",
-  zIndex: "-1",
-});
-
-const CardImageTransparent = styled("div", {
-  height: "300px",
-  marginLeft: "3rem",
-  opacity: "1",
-  position: "absolute",
-  width: "210px",
-  zIndex: "10",
+const CardImage = styled('img', {
+  borderRadius: '1rem',
+  objectFit: 'cover',
+  overflow: 'hidden',
+  position: 'absolute',
+  userSelect: 'none',
+  zIndex: '-1',
 });
 
-const ImageSliderControlWrapper = styled("span", {
-  alignSelf: "center",
-  display: "flex",
-  justifyContent: "space-between",
-  marginTop: "45%",
-  width: "90%",
+const CardImageTransparent = styled('div', {
+  height: '300px',
+  marginLeft: '3rem',
+  opacity: '1',
+  position: 'absolute',
+  userSelect: 'none',
+  width: '210px',
+  zIndex: '10',
 });
 
-const ImagePositionIndicator = styled("span", {
-  display: "flex",
-  justifyContent: "center",
-  marginTop: "25%",
+const ImageSliderControlWrapper = styled('span', {
+  alignSelf: 'center',
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginTop: '45%',
+  userSelect: 'none',
+  width: '90%',
+});
+
+const ImagePositionIndicator = styled('span', {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '25%',
+  userSelect: 'none',
 });
 export default HomeResultItem;
