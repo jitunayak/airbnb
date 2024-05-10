@@ -1,13 +1,13 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
+import { useNavigate } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 
 import { AirBnbIcon, HumBurgerIcon } from "../assets";
+import { useOutsideClick } from "../hooks";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
-import { useNavigate } from "@tanstack/react-router";
-import { useOutsideClick } from "../hooks";
 
 function Header() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ function Header() {
         <Button color={"text"}>Airbnb your home</Button>
         {isAuthenticated && !isLoading && user && (
           <Button
-            color={"outlin"}
+            color={"outline"}
             gap="xs"
             onClick={() => setShowUserMenu(!showUserMenu)}
             onMouseEnter={() => setShowUserMenu(true)}
@@ -84,5 +84,5 @@ const GroupWrapper = styled("span", {
   display: "inline-flex",
   gap: "1rem",
   justifyContent: "center",
-  position:'relative'
+  position: 'relative'
 });
