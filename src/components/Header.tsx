@@ -1,6 +1,7 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useNavigate } from "@tanstack/react-router";
+import { Search } from "lucide-react"
 import { useRef, useState } from "react";
 
 import { AirBnbIcon, HumBurgerIcon } from "../assets";
@@ -8,7 +9,6 @@ import { useOutsideClick } from "../hooks";
 import { Button } from "./Button";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
-
 function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading, login, user } = useKindeAuth();
@@ -29,7 +29,7 @@ function Header() {
         <Button color="text">Any week</Button>
         <Divider />
         <Button color="textSecondary">Add guest</Button>
-        <Button color="primary">Search</Button>
+        <Button color="primary"  >Search <Search size={14} strokeWidth={2.6} /></Button>
       </Button>
 
       <GroupWrapper>
