@@ -1,3 +1,4 @@
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { useState } from "react";
 
 import { Column, Row } from "../components/Common";
@@ -9,6 +10,8 @@ import mockRooms from "./../hooks/mockFetchRooms.json";
 function RoomPage() {
   //   const { roomId } = useParams();
   const room = mockRooms[0] as IRoom;
+
+  const { user } = useKindeAuth();
 
   const [guestDetails, setGuestDetails] = useState({
     adults: 1,
@@ -54,21 +57,21 @@ function RoomPage() {
             src={
               "https://a0.muscache.com/im/pictures/miso/Hosting-53163431/original/b795749c-0d45-48b9-b458-120dbfba9794.jpeg?im_w=960"
             }
-            height={540}
+            height={440}
             style={{ borderRadius: "1rem 0rem 0rem 1rem" }}
             width={540}
           />
           <ImageCollage>
-            <ImageHover height={265} src={room.images[1]} width={260} />
+            <ImageHover height={210} src={room.images[1]} width={260} />
             <ImageHover
-              height={265}
+              height={210}
               src={room.images[2]}
               style={{ borderRadius: "0rem 1rem 0rem 0rem" }}
               width={260}
             />
-            <ImageHover height={265} src={room.images[2]} width={260} />
+            <ImageHover height={220} src={room.images[2]} width={260} />
             <ImageHover
-              height={265}
+              height={220}
               src={room.images[0]}
               style={{ borderRadius: "0rem 0rem 1rem 0rem" }}
               width={260}
@@ -79,7 +82,7 @@ function RoomPage() {
         <Row>
 
           <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem', paddingRight: '2rem' }}>
-            <HostTitle>Entire home hosted by Keagan</HostTitle>
+            <HostTitle>Entire home hosted by {user?.given_name}</HostTitle>
             <HostSubTitle>
               {" "}
               16 + guests 10 bedrooms 10 beds 10 bathrooms
@@ -87,9 +90,9 @@ function RoomPage() {
             <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
             <Column>
               <Row style={{ columnGap: '1rem' }}>
-                <img height={50} src="https://avatars.githubusercontent.com/u/35754866?v=4" style={{ borderRadius: '50%' }} width={50} />
+                <img height={50} src={user?.picture as string} style={{ borderRadius: '50%' }} width={50} />
                 <Column>
-                  <span style={{ fontSize: '16px', fontWeight: '500' }} >Hosted by {'Jitu Nayak'}</span>
+                  <span style={{ fontSize: '16px', fontWeight: '500' }} >Hosted by {user?.given_name} {user?.family_name}</span>
                   <span style={{ color: 'gray', fontSize: '15px', fontWeight: '400' }}>2 months hosting</span>
                 </Column>
               </Row>
@@ -153,7 +156,7 @@ function RoomPage() {
               }}
             />
             <GuestRow>
-              <span style={{ fontWeight: "500" }}>Total before taxes</span>
+              <span style={{ fontWeight: "500", width: "100%" }}>Total before taxes</span>
               <span style={{ fontWeight: "500" }}>₹{Number(72000).toLocaleString()}</span>
             </GuestRow>
           </BookingContainer>
@@ -217,9 +220,10 @@ const ImageCollage = styled("div", {
 });
 
 const ImageContainer = styled("div", {
+  alignItems: "center",
   display: "inline-flex",
   gap: ".5rem",
-  marginTop: "2rem",
+  marginTop: "1rem",
 });
 
 const PageContainer = styled("div", {
@@ -291,12 +295,12 @@ const GuestsContainer = styled("div", {
   gap: "1rem",
   justifyContent: "space-between",
   my: "1rem",
+  width: '20rem'
 });
 
 const GuestRow = styled("div", {
   alignItems: "center",
   display: "flex",
-  gap: "12rem",
   justifyContent: "space-between",
   width: "100%",
 });
