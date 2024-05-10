@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Column, Row } from "../components/Common";
 import { Divider } from "../components/Divider";
 import Header from "../components/Header";
 import { styled } from "../stitches.config";
@@ -74,69 +75,91 @@ function RoomPage() {
             />
           </ImageCollage>
         </ImageContainer>
-        <HostTitle>Entire home hosted by Keagan</HostTitle>
-        <HostSubTitle>
-          {" "}
-          16 + guests 10 bedrooms 10 beds 10 bathrooms
-        </HostSubTitle>
-        <BookingContainer>
-          <BookingHeaderCutDownPrice>
-            ₹{Number(90000).toLocaleString()}{" "}
-          </BookingHeaderCutDownPrice>
-          <BookingHeaderPrice>
-            ₹{Number(72000).toLocaleString()}
-          </BookingHeaderPrice>
-          <span> night</span>
 
-          <GuestsContainer>
-            <GuestRow>
-              <span>
-                <GuestCategory>Adults</GuestCategory>
-                <GuestDescription>Age 13+</GuestDescription>
-              </span>
-              <CounterContainer>
-                <CircularIcon onClick={removeAdultGuest}>-</CircularIcon>
-                <div style={{ textAlign: "center", userSelect: 'none', width: "2rem" }}>
-                  {guestDetails.adults}
-                </div>
-                <CircularIcon onClick={addAdultGuest}>+</CircularIcon>
-              </CounterContainer>
-            </GuestRow>
-            <GuestRow>
-              <span>
-                <GuestCategory>Children</GuestCategory>
-                <GuestDescription>Ages 2-12</GuestDescription>
-              </span>
-              <CounterContainer>
-                <CircularIcon onClick={removeChildrenGuest}>-</CircularIcon>
-                <div style={{ textAlign: "center", width: "2rem" }}>
-                  {guestDetails.children}
-                </div>
-                <CircularIcon onClick={addChildrenGuest}>+</CircularIcon>
-              </CounterContainer>
-            </GuestRow>
-          </GuestsContainer>
+        <Row>
 
-          <ReserveButton>Reserve</ReserveButton>
-          <ReservationMessage>You won't be charged yet</ReservationMessage>
-          <GuestRow>
-            <span style={{ fontWeight: "300", }}>Service fee</span>
-            <span style={{ fontWeight: "300" }}>₹{Number(12999).toLocaleString()}</span>
-          </GuestRow>
-          <Divider
-            style={{
-              borderColor: "$textSecondary",
-              height: "1px",
-              marginBottom: "1.6rem",
-              marginTop: "1.2rem",
-              width: "100%",
-            }}
-          />
-          <GuestRow>
-            <span style={{ fontWeight: "500" }}>Total before taxes</span>
-            <span style={{ fontWeight: "500" }}>₹{Number(72000).toLocaleString()}</span>
-          </GuestRow>
-        </BookingContainer>
+          <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem', paddingRight: '2rem' }}>
+            <HostTitle>Entire home hosted by Keagan</HostTitle>
+            <HostSubTitle>
+              {" "}
+              16 + guests 10 bedrooms 10 beds 10 bathrooms
+            </HostSubTitle>
+            <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
+            <Column>
+              <Row style={{ columnGap: '1rem' }}>
+                <img height={50} src="https://avatars.githubusercontent.com/u/35754866?v=4" style={{ borderRadius: '50%' }} width={50} />
+                <Column>
+                  <span style={{ fontSize: '16px', fontWeight: '500' }} >Hosted by {'Jitu Nayak'}</span>
+                  <span style={{ color: 'gray', fontSize: '15px', fontWeight: '400' }}>2 months hosting</span>
+                </Column>
+              </Row>
+            </Column>
+            <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
+            <div style={{ color: 'gray', fontSize: '15px', fontWeight: '400', paddingRight: "2rem" }} >Set on the North Western coast of Sicily, close to Castellammare del Golfo, this breathtaking villa enjoys mountain and sea views from its bright, eclectic interior. After your morning tea in the garden, sit for an alfresco breakfast while gazing out over the countryside. In the afternoon, keep cool in the pool or head to a nearby beach in Scopello, where you’ll also find great restaurants.
+              Copyright © Luxury Retreats. All rights reserved.</div>
+            <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
+          </div>
+          <BookingContainer>
+            <BookingHeaderCutDownPrice>
+              ₹{Number(90000).toLocaleString()}{" "}
+            </BookingHeaderCutDownPrice>
+            <BookingHeaderPrice>
+              ₹{Number(72000).toLocaleString()}
+            </BookingHeaderPrice>
+            <span> night</span>
+
+            <GuestsContainer>
+              <GuestRow>
+                <span>
+                  <GuestCategory>Adults</GuestCategory>
+                  <GuestDescription>Age 13+</GuestDescription>
+                </span>
+                <CounterContainer>
+                  <CircularIcon onClick={removeAdultGuest}>-</CircularIcon>
+                  <div style={{ textAlign: "center", userSelect: 'none', width: "2rem" }}>
+                    {guestDetails.adults}
+                  </div>
+                  <CircularIcon onClick={addAdultGuest}>+</CircularIcon>
+                </CounterContainer>
+              </GuestRow>
+              <GuestRow>
+                <span>
+                  <GuestCategory>Children</GuestCategory>
+                  <GuestDescription>Ages 2-12</GuestDescription>
+                </span>
+                <CounterContainer>
+                  <CircularIcon onClick={removeChildrenGuest}>-</CircularIcon>
+                  <div style={{ textAlign: "center", width: "2rem" }}>
+                    {guestDetails.children}
+                  </div>
+                  <CircularIcon onClick={addChildrenGuest}>+</CircularIcon>
+                </CounterContainer>
+              </GuestRow>
+            </GuestsContainer>
+
+            <ReserveButton>Reserve</ReserveButton>
+            <ReservationMessage>You won't be charged yet</ReservationMessage>
+            <GuestRow>
+              <span style={{ fontWeight: "300", }}>Service fee</span>
+              <span style={{ fontWeight: "300" }}>₹{Number(12999).toLocaleString()}</span>
+            </GuestRow>
+            <Divider
+              style={{
+                borderColor: "$textSecondary",
+                height: "1px",
+                marginBottom: "1.6rem",
+                marginTop: "1.2rem",
+                width: "100%",
+              }}
+            />
+            <GuestRow>
+              <span style={{ fontWeight: "500" }}>Total before taxes</span>
+              <span style={{ fontWeight: "500" }}>₹{Number(72000).toLocaleString()}</span>
+            </GuestRow>
+          </BookingContainer>
+
+        </Row>
+
       </PageContainer>
     </Container>
   );
@@ -222,7 +245,6 @@ const ImageHover = styled("img", {
   "&:hover": {
     filter: "brightness(80%) saturate(120%)",
   },
-  objectFit: "cover",
 });
 
 const HostTitle = styled("div", {
