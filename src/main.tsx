@@ -1,11 +1,11 @@
 import { Outlet, RootRoute, Route, Router } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+// import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
 import App from "./App.tsx";
-import Home from "./pages/Home.tsx";
 import "./index.css";
+import Home from "./pages/Home.tsx";
 import RoomPage from "./pages/RoomPage.tsx";
 import Wishlist from "./pages/Wishlists.tsx";
 
@@ -20,7 +20,7 @@ function Root() {
       }}
     >
       <Outlet />
-      <TanStackRouterDevtools initialIsOpen={false} />
+      {/* <TanStackRouterDevtools initialIsOpen={false} /> */}
     </div>
   );
 }

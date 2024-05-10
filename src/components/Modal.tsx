@@ -1,8 +1,8 @@
 import { styled } from "@stitches/react";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Button } from "./Button";
 import { useOutsideClick } from "../hooks";
+import { Button } from "./Button";
 
 interface IProps {
   children?: React.ReactNode;
@@ -65,9 +65,9 @@ const Modal: React.FC<IProps> = ({
           <CloseButton>
             <Button
               color={"text"}
+              data-test-id="close-filter-modal-button"
               onClick={handleClose}
               style={{ fontSize: "14px" }}
-              data-test-id="close-filter-modal-button"
             >
               close
             </Button>
