@@ -36,7 +36,7 @@ function Header() {
         <Button color={"text"}>Airbnb your home</Button>
         {isAuthenticated && !isLoading && user && (
           <Button
-            color={"outline"}
+            color={"outlin"}
             gap="xs"
             onClick={() => setShowUserMenu(!showUserMenu)}
             onMouseEnter={() => setShowUserMenu(true)}

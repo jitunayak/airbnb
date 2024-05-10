@@ -106,10 +106,10 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
         <CardImageTransparent
           onClick={() =>
             navigate({
-              to: `/rooms/$roomId`,
               params: {
                 roomId: item.id,
               },
+              to: `/rooms/$roomId`,
             })
           }
         />
@@ -133,10 +133,10 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
       <CardTitle
         onClick={() =>
           navigate({
-            to: `/rooms/$roomId`,
             params: {
               roomId: item.id,
             },
+            to: `/rooms/$roomId`,
           })
         }
       >
@@ -217,12 +217,12 @@ const CardImage = styled("img", {
 });
 
 const CardImageTransparent = styled("div", {
-  position: "absolute",
-  zIndex: "10",
-  opacity: "1",
   height: "300px",
-  width: "210px",
   marginLeft: "3rem",
+  opacity: "1",
+  position: "absolute",
+  width: "210px",
+  zIndex: "10",
 });
 
 const ImageSliderControlWrapper = styled("span", {

@@ -1,8 +1,9 @@
 import { useState } from "react";
+
+import Header from "../components/Header";
 import { styled } from "../stitches.config";
 import { IRoom } from "../types";
 import mockRooms from "./../hooks/mockFetchRooms.json";
-import Header from "../components/Header";
 function RoomPage() {
   //   const { roomId } = useParams();
   const room = mockRooms[0] as IRoom;
@@ -48,10 +49,10 @@ function RoomPage() {
         <SubTitle>Parra, Goa, India</SubTitle>
         <ImageContainer>
           <ImageHover
-            height={540}
             src={
               "https://a0.muscache.com/im/pictures/miso/Hosting-53163431/original/b795749c-0d45-48b9-b458-120dbfba9794.jpeg?im_w=960"
             }
+            height={540}
             style={{ borderRadius: "1rem 0rem 0rem 1rem" }}
             width={540}
           />
@@ -94,7 +95,7 @@ function RoomPage() {
               </span>
               <CounterContainer>
                 <CircularIcon onClick={removeAdultGuest}>-</CircularIcon>
-                <div style={{ width: "2rem", textAlign: "center" }}>
+                <div style={{ textAlign: "center", userSelect: 'none', width: "2rem" }}>
                   {guestDetails.adults}
                 </div>
                 <CircularIcon onClick={addAdultGuest}>+</CircularIcon>
@@ -107,7 +108,7 @@ function RoomPage() {
               </span>
               <CounterContainer>
                 <CircularIcon onClick={removeChildrenGuest}>-</CircularIcon>
-                <div style={{ width: "2rem", textAlign: "center" }}>
+                <div style={{ textAlign: "center", width: "2rem" }}>
                   {guestDetails.children}
                 </div>
                 <CircularIcon onClick={addChildrenGuest}>+</CircularIcon>
@@ -133,14 +134,14 @@ const ReservationMessage = styled("div", {
   textAlign: "center",
 });
 const ReserveButton = styled("button", {
-  backgroundColor: "$primary",
-  color: "white",
-  my: "0.2rem",
-  width: "100%",
-  height: "3rem",
   "&:hover": {
     opacity: "0.9",
   },
+  backgroundColor: "$primary",
+  color: "white",
+  height: "3rem",
+  my: "0.2rem",
+  width: "100%",
 });
 
 const BookingContainer = styled("div", {
@@ -194,10 +195,10 @@ const SubTitle = styled("div", {
 });
 
 const ImageHover = styled("img", {
-  objectFit: "cover",
   "&:hover": {
     filter: "brightness(80%) saturate(120%)",
   },
+  objectFit: "cover",
 });
 
 const HostTitle = styled("div", {
@@ -211,46 +212,47 @@ const HostSubTitle = styled("div", {
 });
 
 const CircularIcon = styled("span", {
-  borderRadius: "100%",
-  display: "flex",
-  padding: "0.5rem",
-  height: "1rem",
-  width: "1rem",
-  borderColor: "$textSecondary",
-  color: "$textSecondary",
-  borderStyle: "solid",
-  borderWidth: "1.6px",
-  cursor: "pointer",
-  justifyContent: "center",
-  alignItems: "center",
-  fontSize: "x-large",
-
   "&:hover": {
     borderColor: "$textPrimary",
     color: "$textPrimary",
   },
+  alignItems: "center",
+  borderColor: "$textSecondary",
+  borderRadius: "100%",
+  borderStyle: "solid",
+  borderWidth: "1.6px",
+  color: "$textSecondary",
+  cursor: "pointer",
+  display: "flex",
+  fontSize: "x-large",
+  height: "1rem",
+  justifyContent: "center",
+  padding: "0.5rem",
+  userSelect: 'none',
+
+  width: "1rem",
 });
 
 const CounterContainer = styled("div", {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
   alignItems: "center",
+  display: "grid",
   gap: ".1rem",
+  gridTemplateColumns: "repeat(3, 1fr)",
 });
 
 const GuestsContainer = styled("div", {
   display: "flex",
-  gap: "1rem",
   flexDirection: "column",
+  gap: "1rem",
   justifyContent: "space-between",
   my: "1rem",
 });
 
 const GuestRow = styled("div", {
+  alignItems: "center",
   display: "flex",
   gap: "16rem",
   justifyContent: "space-between",
-  alignItems: "center",
   width: "100%",
 });
 

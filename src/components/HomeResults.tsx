@@ -44,7 +44,7 @@ function HomeResults() {
   const handleScroll = useCallback(async () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
+      document.documentElement.offsetHeight ||
       isLoading
     ) {
       if (hasNextPage) {
@@ -101,15 +101,23 @@ function HomeResults() {
 }
 
 const ResultContainer = styled("div", {
-  alignContent: "space-around",
-  display: "flex",
-  flexWrap: "wrap",
+  "@media (min-width: 425px)": {
+    gridTemplateColumns: "repeat(2, 1fr)",
+  },
+  "@media (min-width: 768px)": {
+    gridTemplateColumns: "repeat(3, 1fr)",
+  },
+  "@media (min-width: 1024px)": {
+    gridTemplateColumns: "repeat(4, 1fr)",
+  },
+  alignContent: "space-between",
+  display: "grid",
   gap: "1rem",
-  justifyContent: "space-around",
   marginTop: "10rem",
   position: "absolute",
   top: "1rem",
   zIndex: "1",
 });
+
 
 export default HomeResults;
