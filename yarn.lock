@@ -182,9 +182,9 @@
   dependencies:
     jwt-decode "^4.0.0"
 
-"@kinde-oss/kinde-auth-react@^3.0.18":
+"@kinde-oss/kinde-auth-react@^3.0.28":
   version "3.0.28"
-  resolved "https://registry.npmjs.org/@kinde-oss/kinde-auth-react/-/kinde-auth-react-3.0.28.tgz"
+  resolved "https://registry.yarnpkg.com/@kinde-oss/kinde-auth-react/-/kinde-auth-react-3.0.28.tgz#42b172ee5904e239bc15bd64eb88b8ffc50c8cf1"
   integrity sha512-74cdoPIjiKMIictHbxtOHrn8tToyuT4/H8VPa0ITouPHCZGzLm46AfVv5wmEr9IygwSqAqW0ppGwTZK8/EFwYw==
   dependencies:
     "@kinde-oss/kinde-auth-pkce-js" "^3.0.32"

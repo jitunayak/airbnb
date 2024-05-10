@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Divider } from "../components/Divider";
 import Header from "../components/Header";
 import { styled } from "../stitches.config";
 import { IRoom } from "../types";
@@ -118,6 +119,23 @@ function RoomPage() {
 
           <ReserveButton>Reserve</ReserveButton>
           <ReservationMessage>You won't be charged yet</ReservationMessage>
+          <GuestRow>
+            <span style={{ fontWeight: "300", }}>Service fee</span>
+            <span style={{ fontWeight: "300" }}>₹{Number(12999).toLocaleString()}</span>
+          </GuestRow>
+          <Divider
+            style={{
+              borderColor: "$textSecondary",
+              height: "1px",
+              marginBottom: "1.6rem",
+              marginTop: "1.2rem",
+              width: "100%",
+            }}
+          />
+          <GuestRow>
+            <span style={{ fontWeight: "500" }}>Total before taxes</span>
+            <span style={{ fontWeight: "500" }}>₹{Number(72000).toLocaleString()}</span>
+          </GuestRow>
         </BookingContainer>
       </PageContainer>
     </Container>
@@ -129,25 +147,31 @@ const Container = styled("div", {
 });
 
 const ReservationMessage = styled("div", {
+  // color: "$textSecondary",
   fontSize: "small",
   my: ".6rem",
   textAlign: "center",
+
 });
 const ReserveButton = styled("button", {
   "&:hover": {
     opacity: "0.9",
+
   },
   backgroundColor: "$primary",
+  backgroundImage: "linear-gradient(346deg, hsl(346,91%,51%) 0%, hsl(340,81%,58%) 100%)",
   color: "white",
   height: "3rem",
   my: "0.2rem",
+  transition: "boxShadow 0.2s",
   width: "100%",
+
 });
 
 const BookingContainer = styled("div", {
-  border: "1px solid #ccc",
-  borderRadius: "1rem",
-  boxShadow: "$l",
+  border: "1px solid #eee",
+  borderRadius: ".6rem",
+  boxShadow: "$m",
   marginTop: "2rem",
   padding: "2rem",
   width: "fit-content",
@@ -225,12 +249,11 @@ const CircularIcon = styled("span", {
   cursor: "pointer",
   display: "flex",
   fontSize: "x-large",
-  height: "1rem",
+  height: ".8rem",
   justifyContent: "center",
   padding: "0.5rem",
   userSelect: 'none',
-
-  width: "1rem",
+  width: ".8rem",
 });
 
 const CounterContainer = styled("div", {
@@ -251,16 +274,18 @@ const GuestsContainer = styled("div", {
 const GuestRow = styled("div", {
   alignItems: "center",
   display: "flex",
-  gap: "16rem",
+  gap: "12rem",
   justifyContent: "space-between",
   width: "100%",
 });
 
 const GuestCategory = styled("div", {
-  fontSize: "1.1rem",
+  fontSize: "16px",
   fontWeight: "500",
 });
 const GuestDescription = styled("div", {
   color: "$textSecondary",
+  fontSize: "14px",
+  fontWeight: "400",
 });
 export default RoomPage;
