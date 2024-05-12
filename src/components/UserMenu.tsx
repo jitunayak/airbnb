@@ -1,8 +1,8 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
+import { Link } from "@tanstack/react-router";
 
 import { wishListRoute } from "../main";
-import { Link } from "@tanstack/react-router";
 
 export default function UserMenu({
   menuRef,
@@ -33,7 +33,9 @@ export default function UserMenu({
 }
 
 const FloatWrapper = styled("div", {
-  backgroundColor: "White",
+  // backgroundColor: "White",
+  backdropFilter: "blur(40px)",
+  backgroundColor: "rgba(255, 255, 255, 0.75)",
   border: "1px solid #eee",
   borderRadius: ".6rem",
   boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.1);",
