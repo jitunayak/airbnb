@@ -20,8 +20,10 @@ export const Footer = () => {
 
 const StickyFooter = styled('footer', {
     alignItems: 'center',
-    backgroundColor: 'white',
-    borderTop: '1px solid #eee',
+    // backgroundColor: 'white',
+    backdropFilter: 'blur(40px)',
+    backgroundColor: 'rgba(255, 255, 255, 0.45)',
+    // borderTop: '1px solid #eee',
     bottom: 0,
     boxShadow: '0 -4px 10px -4px rgba(0,0,0,0.1)',
     display: 'flex',
