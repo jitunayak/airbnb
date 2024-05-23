@@ -1,7 +1,7 @@
 import { ChevronDown, Globe } from 'lucide-react'
 
 import { styled } from "../stitches.config";
-import { Row } from './Common';
+import { Blurred, Row } from './Common';
 export const Footer = () => {
     return (
         <StickyFooter>
@@ -18,11 +18,11 @@ export const Footer = () => {
     );
 }
 
-const StickyFooter = styled('footer', {
+const StickyFooter = styled(Blurred, {
     alignItems: 'center',
     // backgroundColor: 'white',
-    backdropFilter: 'blur(40px)',
-    backgroundColor: 'rgba(255, 255, 255, 0.45)',
+    // backdropFilter: 'blur(40px)',
+    // backgroundColor: 'rgba(255, 255, 255, 0.45)',
     // borderTop: '1px solid #eee',
     bottom: 0,
     boxShadow: '0 -4px 10px -4px rgba(0,0,0,0.1)',

@@ -110,7 +110,6 @@ function RoomPage() {
               ₹{Number(72000).toLocaleString()}
             </BookingHeaderPrice>
             <span> night</span>
-
             <GuestsContainer>
               <GuestRow>
                 <span>
@@ -139,7 +138,6 @@ function RoomPage() {
                 </CounterContainer>
               </GuestRow>
             </GuestsContainer>
-
             <ReserveButton>Reserve</ReserveButton>
             <ReservationMessage>You won't be charged yet</ReservationMessage>
             <GuestRow>
@@ -160,7 +158,6 @@ function RoomPage() {
               <span style={{ fontWeight: "500" }}>₹{Number(72000).toLocaleString()}</span>
             </GuestRow>
           </BookingContainer>
-
         </Row>
 
       </PageContainer>
@@ -289,13 +286,12 @@ const CounterContainer = styled("div", {
   gridTemplateColumns: "repeat(3, 1fr)",
 });
 
-const GuestsContainer = styled("div", {
+const GuestsContainer = styled('div', {
   display: "flex",
   flexDirection: "column",
   gap: "1rem",
-  justifyContent: "space-between",
-  my: "1rem",
-  width: '20rem'
+  justifyContent: "space-between", my: "1rem",
+  width: '20rem',
 });
 
 const GuestRow = styled("div", {

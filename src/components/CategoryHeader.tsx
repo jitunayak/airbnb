@@ -52,7 +52,7 @@ function CategoryHeader() {
     <ListWrapper>
       {categories.map((category) => {
         return (
-          <ListContainer onClick={() => setselectedCategory(category)}>
+          <ListContainer key={category.title} onClick={() => setselectedCategory(category)}>
             <img
               alt=""
               height="20"
