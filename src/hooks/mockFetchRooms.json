@@ -16,7 +16,11 @@
     ],
     "listingUrl": "https://a0.muscache.com/",
     "name": "Wildvibes A frame Cabin ooty",
-    "price": 5720,
+    "price": {
+      "discountedPrice": 5720,
+      "originalPrice": 7000,
+      "serviceCharge": 640
+    },
     "propertyType": "Cabins",
     "thumbnail": "https://a0.muscache.com/im/pictures/miso/Hosting-669134847280018335/original/f33d1f29-3003-4545-aa92-8adfa592b4f8.jpeg?im_w=720",
     "summary": "The A-frame cabin offers an escape from metropolitan living. The triangle-shaped homes were popular in US starting in the 50s turns out there structures are coming back to picture and this time they’re here to stay."
@@ -31,7 +35,11 @@
     },
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
-    "price": 14311,
+    "price": {
+      "discountedPrice": 7200,
+      "originalPrice": 9200,
+      "serviceCharge": 2340
+    },
     "images": [
       "https://a0.muscache.com/im/pictures/d3b2b902-6143-46e1-90fc-f6eee6f66e42.jpg?im_w=720",
       "https://a0.muscache.com/im/pictures/32368483/311c7115_original.jpg?im_w=720",

@@ -5,12 +5,16 @@ export interface IRoom {
     street: string;
   };
   amenities: string[];
-  currency: "GBP" | "INR" | "USD" | string;
+  currency: 'GBP' | 'INR' | 'USD' | string;
   id: string;
   images: string[];
   listingUrl: string;
   name: string;
-  price: number;
+  price: {
+    discountedPrice: number;
+    originalPrice: number;
+    serviceCharge: number;
+  };
   propertyType: string;
   rating: number;
   summary?: string;

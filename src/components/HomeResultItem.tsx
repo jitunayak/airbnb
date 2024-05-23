@@ -150,7 +150,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
         </RatingWrapper>
       </CardTitle>
       <div style={{ marginTop: '1rem' }}>
-        <Price>₹{item.price.toLocaleString()}</Price>
+        <Price>₹{(item.price.discountedPrice ?? item.price).toLocaleString()}</Price>
         <span style={{ fontSize: '13px', fontWeight: 'normal' }}> night</span>
       </div>
     </ItemWrapper>

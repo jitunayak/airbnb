@@ -1,4 +1,5 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
 import { Column, Row } from "../components/Common";
@@ -12,6 +13,8 @@ function RoomPage() {
   const room = mockRooms[0] as IRoom;
 
   const { user } = useKindeAuth();
+
+  const [showGuestDetails, setShowGuestDetails] = useState(false);
 
   const [guestDetails, setGuestDetails] = useState({
     adults: 1,
@@ -38,7 +41,7 @@ function RoomPage() {
     }));
   };
   const removeAdultGuest = () => {
-    if (guestDetails.adults === 0) return;
+    if (guestDetails.adults === 0 || guestDetails.adults === 1) return;
     setGuestDetails((prev) => ({
       ...prev,
       adults: prev.adults - 1,
@@ -57,21 +60,21 @@ function RoomPage() {
             src={
               "https://a0.muscache.com/im/pictures/miso/Hosting-53163431/original/b795749c-0d45-48b9-b458-120dbfba9794.jpeg?im_w=960"
             }
-            height={440}
+            height={480}
             style={{ borderRadius: "1rem 0rem 0rem 1rem" }}
             width={540}
           />
           <ImageCollage>
-            <ImageHover height={210} src={room.images[1]} width={260} />
+            <ImageHover height={235} src={room.images[1]} width={260} />
             <ImageHover
-              height={210}
+              height={235}
               src={room.images[2]}
               style={{ borderRadius: "0rem 1rem 0rem 0rem" }}
               width={260}
             />
-            <ImageHover height={220} src={room.images[2]} width={260} />
+            <ImageHover height={235} src={room.images[2]} width={260} />
             <ImageHover
-              height={220}
+              height={235}
               src={room.images[0]}
               style={{ borderRadius: "0rem 0rem 1rem 0rem" }}
               width={260}
@@ -104,45 +107,87 @@ function RoomPage() {
           </div>
           <BookingContainer>
             <BookingHeaderCutDownPrice>
-              ₹{Number(90000).toLocaleString()}{" "}
+              ₹{Number(room.price.originalPrice).toLocaleString()}{" "}
             </BookingHeaderCutDownPrice>
             <BookingHeaderPrice>
-              ₹{Number(72000).toLocaleString()}
+              ₹{Number(room.price.discountedPrice).toLocaleString()}
             </BookingHeaderPrice>
             <span> night</span>
-            <GuestsContainer>
-              <GuestRow>
-                <span>
-                  <GuestCategory>Adults</GuestCategory>
-                  <GuestDescription>Age 13+</GuestDescription>
-                </span>
-                <CounterContainer>
-                  <CircularIcon onClick={removeAdultGuest}>-</CircularIcon>
-                  <div style={{ textAlign: "center", userSelect: 'none', width: "2rem" }}>
-                    {guestDetails.adults}
+
+            <div style={{
+              border: "1.4px solid #ccc",
+              borderRadius: ".6rem", display: "flex", flexDirection: "column",
+              marginBottom: "1rem", marginTop: "1rem", userSelect: "none",
+              width: "22rem"
+            }}>
+              <Row style={{ gridTemplateColumns: "1fr 1fr 1fr", justifyContent: "space-between", paddingLeft: "1rem", paddingRight: "1rem" }}>
+                <div style={{ paddingTop: ".6rem", width: "40%" }}>
+                  <div style={{ fontSize: "12px", fontWeight: "600", paddingLeft: ".2rem" }}>CHECK IN</div>
+                  <input defaultValue={new Date().toISOString().split('T')[0]} style={{ border: "none", color: "gray", fontSize: "14px", fontWeight: "400" }} type="date" />
+                </div>
+                <div style={{ backgroundColor: 'lightgray', height: '60px', width: '1.4px' }} />
+                <div style={{ paddingTop: ".6rem", width: "40%" }}>
+                  <div style={{ fontSize: "12px", fontWeight: "600", paddingLeft: ".2rem" }}>CHECK OUT</div>
+                  <input defaultValue={new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]} style={{ border: "none", color: "gray", fontSize: "14px", fontWeight: "400" }} type="date" />
+                </div>
+                <div style={{ backgroundColor: 'lightgray', height: '1.4px' }} />
+
+              </Row>
+              <div style={{ backgroundColor: 'lightgray', height: '1.4px' }} />
+              <div style={{ paddingBottom: ".6rem", paddingLeft: "1rem", paddingTop: ".6rem", userSelect: 'none' }}>
+                <Row style={{ justifyContent: "space-between", paddingRight: "1rem", userSelect: 'none' }}>
+                  <div>
+                    <div style={{ fontSize: "12px", fontWeight: "600", paddingLeft: ".2rem" }}>GUESTS</div>
+                    <div style={{ color: "gray", fontSize: "14px", fontWeight: "400", paddingLeft: ".2rem" }}>{guestDetails.adults + guestDetails.children} guests</div>
                   </div>
-                  <CircularIcon onClick={addAdultGuest}>+</CircularIcon>
-                </CounterContainer>
-              </GuestRow>
-              <GuestRow>
-                <span>
-                  <GuestCategory>Children</GuestCategory>
-                  <GuestDescription>Ages 2-12</GuestDescription>
-                </span>
-                <CounterContainer>
-                  <CircularIcon onClick={removeChildrenGuest}>-</CircularIcon>
-                  <div style={{ textAlign: "center", width: "2rem" }}>
-                    {guestDetails.children}
-                  </div>
-                  <CircularIcon onClick={addChildrenGuest}>+</CircularIcon>
-                </CounterContainer>
-              </GuestRow>
-            </GuestsContainer>
+                  {
+                    showGuestDetails ?
+                      <ChevronUp color="gray" height={20} onClick={() => setShowGuestDetails(!showGuestDetails)} strokeWidth={2.2}
+                        style={{ cursor: "pointer", marginTop: ".6rem", userSelect: 'none' }} width={20} />
+                      : <ChevronDown color="gray" height={20} onClick={() => setShowGuestDetails(!showGuestDetails)} strokeWidth={2.2}
+                        style={{ cursor: "pointer", marginTop: ".6rem", userSelect: 'none' }} width={20} />
+                  }
+                </Row>
+
+              </div>
+              {
+                showGuestDetails &&
+                <GuestsContainer>
+                  <GuestRow>
+                    <span>
+                      <GuestCategory>Adults</GuestCategory>
+                      <GuestDescription>Age 13+</GuestDescription>
+                    </span>
+                    <CounterContainer>
+                      <CircularIcon onClick={removeAdultGuest}>-</CircularIcon>
+                      <div style={{ textAlign: "center", userSelect: 'none', width: "2rem" }}>
+                        {guestDetails.adults}
+                      </div>
+                      <CircularIcon onClick={addAdultGuest}>+</CircularIcon>
+                    </CounterContainer>
+                  </GuestRow>
+                  <GuestRow>
+                    <span>
+                      <GuestCategory>Children</GuestCategory>
+                      <GuestDescription>Ages 2-12</GuestDescription>
+                    </span>
+                    <CounterContainer>
+                      <CircularIcon onClick={removeChildrenGuest}>-</CircularIcon>
+                      <div style={{ textAlign: "center", width: "2rem" }}>
+                        {guestDetails.children}
+                      </div>
+                      <CircularIcon onClick={addChildrenGuest}>+</CircularIcon>
+                    </CounterContainer>
+                  </GuestRow>
+                </GuestsContainer>
+              }
+            </div>
+
             <ReserveButton>Reserve</ReserveButton>
             <ReservationMessage>You won't be charged yet</ReservationMessage>
             <GuestRow>
               <span style={{ fontWeight: "300", }}>Service fee</span>
-              <span style={{ fontWeight: "300" }}>₹{Number(12999).toLocaleString()}</span>
+              <span style={{ fontWeight: "300" }}>₹{Number(room.price.serviceCharge).toLocaleString()}</span>
             </GuestRow>
             <Divider
               style={{
@@ -155,13 +200,19 @@ function RoomPage() {
             />
             <GuestRow>
               <span style={{ fontWeight: "500", width: "100%" }}>Total before taxes</span>
-              <span style={{ fontWeight: "500" }}>₹{Number(72000).toLocaleString()}</span>
+              <span style={{ fontWeight: "500" }}>
+                {`₹${(
+                  room.price.discountedPrice * guestDetails.adults +
+                  (room.price.discountedPrice / 2) * guestDetails.children +
+                  room.price.serviceCharge
+                ).toLocaleString()}`}
+              </span>
             </GuestRow>
           </BookingContainer>
         </Row>
 
-      </PageContainer>
-    </Container>
+      </PageContainer >
+    </Container >
   );
 }
 
@@ -264,14 +315,14 @@ const CircularIcon = styled("span", {
     color: "$textPrimary",
   },
   alignItems: "center",
-  borderColor: "$textSecondary",
+  borderColor: "#ccc",
   borderRadius: "100%",
   borderStyle: "solid",
   borderWidth: "1.6px",
   color: "$textSecondary",
   cursor: "pointer",
   display: "flex",
-  fontSize: "x-large",
+  fontSize: "large",
   height: ".8rem",
   justifyContent: "center",
   padding: "0.5rem",
@@ -291,7 +342,9 @@ const GuestsContainer = styled('div', {
   flexDirection: "column",
   gap: "1rem",
   justifyContent: "space-between", my: "1rem",
-  width: '20rem',
+  paddingLeft: "1.6rem",
+  paddingRight: "1.6rem",
+  width: '20rem'
 });
 
 const GuestRow = styled("div", {
@@ -302,7 +355,7 @@ const GuestRow = styled("div", {
 });
 
 const GuestCategory = styled("div", {
-  fontSize: "16px",
+  fontSize: "14px",
   fontWeight: "500",
 });
 const GuestDescription = styled("div", {
