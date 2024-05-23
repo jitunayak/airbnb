@@ -16,6 +16,12 @@ export const Button = styled("button", {
   justifyItems: "center",
   variants: {
     color: {
+      lightText: {
+        "&:hover": {
+          backgroundColor: "#eee",
+        },
+        backgroundColor: "transparent",
+      },
       outline: {
         "&:hover": {
           boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.09);",

@@ -33,15 +33,15 @@ function Header() {
       </Button>
 
       <GroupWrapper>
-        <Button color={"text"}>Airbnb your home</Button>
+        <Button color={"lightText"}>Airbnb your home</Button>
         {isAuthenticated && !isLoading && user && (
           <Button
             color={"outline"}
-            gap="xs"
+            gap="s"
             onClick={() => setShowUserMenu(!showUserMenu)}
             onMouseEnter={() => setShowUserMenu(true)}
             round={"l"}
-            size={"xs"}
+            size={"s"}
           >
             <HumBurgerIcon />
             <RoundIcon>{user?.given_name?.charAt(0)}</RoundIcon>

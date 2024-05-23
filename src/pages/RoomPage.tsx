@@ -62,7 +62,7 @@ function RoomPage() {
             }
             height={480}
             style={{ borderRadius: "1rem 0rem 0rem 1rem" }}
-            width={540}
+            width={580}
           />
           <ImageCollage>
             <ImageHover height={235} src={room.images[1]} width={260} />
