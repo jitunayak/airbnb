@@ -10,6 +10,7 @@ export const Column = styled("div", {
     flexDirection: "column",
     justifyContent: "flex-center",
     width: "100%",
+
 })
 
 export const Blurred = styled("div", {
