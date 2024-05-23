@@ -17,7 +17,11 @@ const placeholderData = {
     `https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg
               `,
   ],
-  price: 0,
+  price: {
+    discountedPrice: 0,
+    originalPrice: 0,
+    serviceCharge: 0
+  },
 } as IRoom;
 
 function HomeResults() {
