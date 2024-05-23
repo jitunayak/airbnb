@@ -41,12 +41,13 @@ function Header() {
         {showLocationOtions &&
           <div style={{
             backgroundColor: "white",
+            border: "1px solid #eee",
             borderRadius: "5px", left: "0", position: "absolute", top: "3.5rem", zIndex: "1"
           }}>
             {
               locations.map((location) => (
                 <Row style={{ alignItems: "center", cursor: "pointer", justifyContent: "flex-start", paddingLeft: "1rem" }}>
-                  <MapPin size={14} strokeWidth={2.6} />
+                  <MapPin size={15} strokeWidth={2.6} />
                   <Button
                     color="text"
                     key={location}

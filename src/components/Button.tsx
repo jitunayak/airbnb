@@ -27,7 +27,7 @@ export const Button = styled("button", {
           boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.09);",
         },
         backgroundColor: "White",
-        border: "1px solid #eee",
+        border: ".6px solid #ccc",
       },
       primary: {
         "&:hover": {
