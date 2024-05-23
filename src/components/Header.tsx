@@ -1,20 +1,27 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useNavigate } from "@tanstack/react-router";
-import { Search } from "lucide-react"
+import { MapPin, Search } from "lucide-react"
 import { useRef, useState } from "react";
 
 import { AirBnbIcon, HumBurgerIcon } from "../assets";
 import { useOutsideClick } from "../hooks";
 import { Button } from "./Button";
+import { Row } from "./Common";
 import { Divider } from "./Divider";
 import UserMenu from "./UserMenu";
+
+const locations = ["Banglore", "London", "Paris", "New York", "San Francisco", "Tokyo"];
+
 function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading, login, user } = useKindeAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(menuRef, () => setShowUserMenu(false));
+
+  const [selectLocation, setSelectLocation] = useState<typeof locations[number]>("");
+  const [showLocationOtions, setShowLocationOtions] = useState(false);
 
   //   console.log(user && user);
   //   console.log(user && getPermissions().permissions);
@@ -23,8 +30,36 @@ function Header() {
       <span onClick={() => navigate({ to: "/" })} style={{ cursor: "pointer" }}>
         <AirBnbIcon />
       </span>
-      <Button color="outline" shadow="1" style={{ marginLeft: "4rem" }}>
-        <Button color="text">Anywhere</Button>
+      <Button color="outline" shadow="1" style={{ marginLeft: "4rem", position: "relative" }}>
+        <Button
+          color="text"
+          onClick={() => setShowLocationOtions(!showLocationOtions)}
+          style={{ cursor: "pointer", fontWeight: selectLocation ? "bold" : "normal" }}
+        >
+          {selectLocation || "Anywhere"}
+        </Button>
+        {showLocationOtions &&
+          <div style={{
+            backgroundColor: "white",
+            borderRadius: "5px", left: "0", position: "absolute", top: "3.5rem", zIndex: "1"
+          }}>
+            {
+              locations.map((location) => (
+                <Row style={{ alignItems: "center", cursor: "pointer", justifyContent: "flex-start", paddingLeft: "1rem" }}>
+                  <MapPin size={14} strokeWidth={2.6} />
+                  <Button
+                    color="text"
+                    key={location}
+
+                    onClick={() => { setSelectLocation(location); setShowLocationOtions(false) }}
+                  >
+                    {location}
+                  </Button>
+                </Row>
+              ))
+            }
+          </div>
+        }
         <Divider />
         <Button color="text">Any week</Button>
         <Divider />
