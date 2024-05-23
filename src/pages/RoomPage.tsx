@@ -1,5 +1,6 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import moment from "moment";
 import { useState } from "react";
 
 import { Column, Row } from "../components/Common";
@@ -15,6 +16,10 @@ function RoomPage() {
   const { user } = useKindeAuth();
 
   const [showGuestDetails, setShowGuestDetails] = useState(false);
+  const [reserveDates, setReserveDates] = useState({
+    checkIn: new Date().toISOString().split('T')[0],
+    checkOut: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0],
+  });
 
   const [guestDetails, setGuestDetails] = useState({
     adults: 1,
@@ -120,16 +125,28 @@ function RoomPage() {
               marginBottom: "1rem", marginTop: "1rem", userSelect: "none",
               width: "22rem"
             }}>
+              {/* Check in and check out */}
               <Row style={{ gridTemplateColumns: "1fr 1fr 1fr", justifyContent: "space-between", paddingLeft: "1rem", paddingRight: "1rem" }}>
                 <div style={{ paddingTop: ".6rem", width: "40%" }}>
                   <div style={{ fontSize: "12px", fontWeight: "600", paddingLeft: ".2rem" }}>CHECK IN</div>
-                  <input defaultValue={new Date().toISOString().split('T')[0]} style={{ border: "none", color: "gray", fontSize: "14px", fontWeight: "400" }} type="date" />
+                  <input
+                    defaultValue={reserveDates.checkIn}
+                    min={reserveDates.checkIn}
+                    onChange={(e) => setReserveDates({ ...reserveDates, checkIn: e.target.value })}
+                    style={{ border: "none", color: "gray", fontSize: "14px", fontWeight: "400" }}
+                    type="date"
+                  />
                 </div>
                 <div style={{ backgroundColor: 'lightgray', height: '60px', width: '1.4px' }} />
                 <div style={{ paddingTop: ".6rem", width: "40%" }}>
                   <div style={{ fontSize: "12px", fontWeight: "600", paddingLeft: ".2rem" }}>CHECK OUT</div>
-                  <input defaultValue={new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]} style={{ border: "none", color: "gray", fontSize: "14px", fontWeight: "400" }} type="date" />
+                  <input
+                    defaultValue={reserveDates.checkOut}
+                    min={reserveDates.checkOut}
+                    onChange={(e) => setReserveDates({ ...reserveDates, checkOut: e.target.value })}
+                    style={{ border: "none", color: "gray", fontSize: "14px", fontWeight: "400" }} type="date" />
                 </div>
+
                 <div style={{ backgroundColor: 'lightgray', height: '1.4px' }} />
 
               </Row>
@@ -185,8 +202,25 @@ function RoomPage() {
 
             <ReserveButton>Reserve</ReserveButton>
             <ReservationMessage>You won't be charged yet</ReservationMessage>
+
+            {/* total price based on number of days */}
             <GuestRow>
-              <span style={{ fontWeight: "300", }}>Service fee</span>
+              <span style={{ fontWeight: "300", textDecoration: "underline" }}>₹{room.price.discountedPrice} x
+                {moment(reserveDates.checkOut).diff(moment(reserveDates.checkIn), 'days')} nights </span>
+              <span style={{ fontWeight: "300" }}>₹{Number(room.price.discountedPrice * (moment(reserveDates.checkOut).diff(moment(reserveDates.checkIn), 'days'))).toLocaleString()}</span>
+            </GuestRow>
+
+            {/* cleaning fee */}
+            <GuestRow>
+              <span style={{ fontWeight: "300", textDecoration: "underline" }}>Cleaning Fee</span>
+              <span style={{ fontWeight: "300" }}>
+                ₹500
+              </span>
+            </GuestRow>
+
+            {/* service fee */}
+            <GuestRow>
+              <span style={{ fontWeight: "300", textDecoration: "underline" }}>Service fee</span>
               <span style={{ fontWeight: "300" }}>₹{Number(room.price.serviceCharge).toLocaleString()}</span>
             </GuestRow>
             <Divider
@@ -202,8 +236,7 @@ function RoomPage() {
               <span style={{ fontWeight: "500", width: "100%" }}>Total before taxes</span>
               <span style={{ fontWeight: "500" }}>
                 {`₹${(
-                  room.price.discountedPrice * guestDetails.adults +
-                  (room.price.discountedPrice / 2) * guestDetails.children +
+                  room.price.discountedPrice * moment(reserveDates.checkOut).diff(moment(reserveDates.checkIn), 'days') +
                   room.price.serviceCharge
                 ).toLocaleString()}`}
               </span>
@@ -351,6 +384,7 @@ const GuestRow = styled("div", {
   alignItems: "center",
   display: "flex",
   justifyContent: "space-between",
+  pt: ".6rem",
   width: "100%",
 });
 
