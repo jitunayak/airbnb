@@ -8,14 +8,12 @@ import { IRoom } from "../types";
 import HomeResultItem from "./HomeResultItem";
 
 const placeholderData = {
-  address: {
-    country: "N/A",
-    market: "loading...",
-    street: "loading...",
-  },
+  address: "",
   images: [
-    `https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg
-              `,
+    {
+      id: "1",
+      url: `https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg`,
+    }
   ],
   price: {
     discountedPrice: 0,

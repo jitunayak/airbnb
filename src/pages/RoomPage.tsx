@@ -1,4 +1,6 @@
 import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "@tanstack/react-router";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import moment from "moment";
 import { useState } from "react";
@@ -8,10 +10,14 @@ import { Divider } from "../components/Divider";
 import Header from "../components/Header";
 import { styled } from "../stitches.config";
 import { IRoom } from "../types";
-import mockRooms from "./../hooks/mockFetchRooms.json";
+// import mockRooms from "./../hooks/mockFetchRooms.json";
+
 function RoomPage() {
-  //   const { roomId } = useParams();
-  const room = mockRooms[0] as IRoom;
+  const { roomId } = useParams({ from: "/rooms/$roomId" });
+
+  const { data: room, isError, isLoading } = useQuery(["room", roomId],
+    () => fetch(`https://airbnb-api-jn.vercel.app/api/v1/rooms/${roomId}`)
+      .then((res) => res.json() as Promise<IRoom>),);
 
   const { user } = useKindeAuth();
 
@@ -53,34 +59,37 @@ function RoomPage() {
     }));
   };
 
+  if (isLoading || !room) return <div>Loading</div>
+
+  if (isError) return <div>Something went wrong!</div>
+
   return (
     <Container>
       <Header />
       <PageContainer>
         {/* RoomPage {roomId} */}
-        <Title>10BHK Villa De Boqueachi Arrady</Title>
-        <SubTitle>Parra, Goa, India</SubTitle>
+        <Title>{room?.name}</Title>
+        <SubTitle>{room?.address}</SubTitle>
         <ImageContainer>
           <ImageHover
             src={
-              "https://a0.muscache.com/im/pictures/miso/Hosting-53163431/original/b795749c-0d45-48b9-b458-120dbfba9794.jpeg?im_w=960"
-            }
+              room.images[3]?.url}
             height={480}
             style={{ borderRadius: "1rem 0rem 0rem 1rem" }}
             width={580}
           />
           <ImageCollage>
-            <ImageHover height={235} src={room.images[1]} width={260} />
+            <ImageHover height={235} src={room.images[1]?.url} width={260} />
             <ImageHover
               height={235}
-              src={room.images[2]}
+              src={room.images[2]?.url}
               style={{ borderRadius: "0rem 1rem 0rem 0rem" }}
               width={260}
             />
-            <ImageHover height={235} src={room.images[2]} width={260} />
+            <ImageHover height={235} src={room.images[2]?.url} width={260} />
             <ImageHover
               height={235}
-              src={room.images[0]}
+              src={room.images[0]?.url}
               style={{ borderRadius: "0rem 0rem 1rem 0rem" }}
               width={260}
             />
@@ -90,7 +99,7 @@ function RoomPage() {
         <Row>
 
           <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem', paddingRight: '2rem' }}>
-            <HostTitle>Entire home hosted by {user?.given_name}</HostTitle>
+            <HostTitle>Entire home hosted by {room?.user?.name}</HostTitle>
             <HostSubTitle>
               {" "}
               16 + guests 10 bedrooms 10 beds 10 bathrooms
@@ -100,14 +109,14 @@ function RoomPage() {
               <Row style={{ columnGap: '1rem' }}>
                 <img height={50} src={user?.picture as string} style={{ borderRadius: '50%' }} width={50} />
                 <Column>
-                  <span style={{ fontSize: '16px', fontWeight: '500' }} >Hosted by {user?.given_name} {user?.family_name}</span>
+                  <span style={{ fontSize: '16px', fontWeight: '500' }} >Hosted by {room.user.name} </span>
                   <span style={{ color: 'gray', fontSize: '15px', fontWeight: '400' }}>2 months hosting</span>
                 </Column>
               </Row>
             </Column>
             <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
-            <div style={{ color: 'gray', fontSize: '15px', fontWeight: '400', paddingRight: "2rem" }} >Set on the North Western coast of Sicily, close to Castellammare del Golfo, this breathtaking villa enjoys mountain and sea views from its bright, eclectic interior. After your morning tea in the garden, sit for an alfresco breakfast while gazing out over the countryside. In the afternoon, keep cool in the pool or head to a nearby beach in Scopello, where you’ll also find great restaurants.
-              Copyright © Luxury Retreats. All rights reserved.</div>
+            <div style={{ color: 'gray', fontSize: '15px', fontWeight: '400', paddingRight: "2rem" }} >
+              {room.description}.</div>
             <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
           </div>
           <BookingContainer>

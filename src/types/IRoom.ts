@@ -1,13 +1,10 @@
 export interface IRoom {
-  address: {
-    country: string;
-    market: string;
-    street: string;
-  };
+  address: string;
   amenities: string[];
   currency: 'GBP' | 'INR' | 'USD' | string;
+  description: string;
   id: string;
-  images: string[];
+  images: { id: string; url: string }[];
   listingUrl: string;
   name: string;
   price: {
@@ -19,4 +16,10 @@ export interface IRoom {
   rating: number;
   summary?: string;
   thumbnail: string;
+  user: {
+    email: string;
+    id: string;
+    name: string;
+    picture: string;
+  };
 }
