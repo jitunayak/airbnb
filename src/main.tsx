@@ -66,6 +66,7 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
+export type IRouter = typeof router;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -1,6 +1,5 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "@tanstack/react-router";
+// import { useParams } from "@tanstack/react-router";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import moment from "moment";
 import { useState } from "react";
@@ -8,18 +7,16 @@ import { useState } from "react";
 import { Column, Row } from "../components/Common";
 import { Divider } from "../components/Divider";
 import Header from "../components/Header";
+import useApi from "../hooks/useApi";
 import { styled } from "../stitches.config";
-import { IRoom } from "../types";
-// import mockRooms from "./../hooks/mockFetchRooms.json";
 
 function RoomPage() {
-  const { roomId } = useParams({ from: "/rooms/$roomId" });
+  // const { roomId } = useParams({ from: "/rooms/$roomId" });
+  const roomId = "12345";
+  const { roomsApi } = useApi();
 
   const { data: room, isError, isLoading } = useQuery(["room", roomId],
-    () => fetch(`https://airbnb-api-jn.vercel.app/api/v1/rooms/${roomId}`)
-      .then((res) => res.json() as Promise<IRoom>),);
-
-  const { user } = useKindeAuth();
+    () => roomsApi.getRoomById(roomId),);
 
   const [showGuestDetails, setShowGuestDetails] = useState(false);
   const [reserveDates, setReserveDates] = useState({
@@ -59,7 +56,9 @@ function RoomPage() {
     }));
   };
 
-  if (isLoading || !room) return <div>Loading</div>
+  if (!roomId) return <div>Room not found</div>
+
+  if (isLoading) return <div>Loading</div>
 
   if (isError) return <div>Something went wrong!</div>
 
@@ -107,7 +106,7 @@ function RoomPage() {
             <div style={{ backgroundColor: 'lightgray', height: '1px', marginBottom: '2rem', marginTop: '2rem' }} />
             <Column>
               <Row style={{ columnGap: '1rem' }}>
-                <img height={50} src={user?.picture as string} style={{ borderRadius: '50%' }} width={50} />
+                <img height={50} src={room.user?.picture as string} style={{ borderRadius: '50%' }} width={50} />
                 <Column>
                   <span style={{ fontSize: '16px', fontWeight: '500' }} >Hosted by {room.user.name} </span>
                   <span style={{ color: 'gray', fontSize: '15px', fontWeight: '400' }}>2 months hosting</span>

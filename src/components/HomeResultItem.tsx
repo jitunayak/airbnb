@@ -114,7 +114,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
             })
           }
         />
-        <CardImage height={300} src={item.images[thumbnailIndex]} width={300} />
+        <CardImage height={300} src={item.images[thumbnailIndex].url} width={300} />
         <HeartIconWrapper
           onClick={() =>
             isWishListed
@@ -142,7 +142,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
         }
       >
         <Title>
-          {item.address.market},{item.address.country}
+          {item.address}
         </Title>
         <RatingWrapper>
           <StarIcon />

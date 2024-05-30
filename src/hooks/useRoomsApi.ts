@@ -1,6 +1,11 @@
+// import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
+
 import { IRoom } from '../types';
 import { sleep } from '../utils';
 import mockedRooms from './mockFetchRooms.json';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+console.log(BASE_URL);
 
 const useRoomsApi = () => {
   const fetchHomePageResults = async () => {
@@ -26,7 +31,7 @@ const useRoomsApi = () => {
         id: String(parseInt(item.id) + page * 10),
         images: item.images,
       }))
-      .sort((a, b) => a.id.localeCompare(b.id)) as IRoom[];
+      .sort((a, b) => a.id.localeCompare(b.id)) as unknown as IRoom[];
     return new Promise((resolve) => {
       resolve({
         allPages: 20,
@@ -37,9 +42,22 @@ const useRoomsApi = () => {
     });
   };
 
+  const getRoomById = async (roomId: string) => {
+    return fetch(`${BASE_URL}/api/v1/rooms/${roomId}`).then(
+      (res) => res.json() as Promise<IRoom>
+    );
+  };
+
+  const sendBookingEmail = async () => {
+    return fetch(`${BASE_URL}/api/v1/emails?action=bookingConfirmation`).then(
+      (res) => res.json()
+    );
+  };
   return {
     fetchHomePageResults,
     fetchRooms,
+    getRoomById,
+    sendBookingEmail,
   };
 };
 

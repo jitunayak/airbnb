@@ -1,11 +1,13 @@
 import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Router, RouterProvider } from "@tanstack/react-router";
+import { RouterProvider } from "@tanstack/react-router";
 import React from "react";
 
+import { IRouter } from "./main";
+
 interface IProps {
-  router: Router;
+  router: IRouter;
 }
 const App: React.FC<IProps> = ({ router }) => {
   const queryClient = new QueryClient({
@@ -15,6 +17,17 @@ const App: React.FC<IProps> = ({ router }) => {
       },
     },
   });
+
+  // const KindeAuth = useKindeAuth();
+
+  // useEffect(() => {
+  //   KindeAuth.getToken().then((token) => {
+  //     if (token) {
+  //       localStorage.setItem('access_token', token);
+  //     }
+  //   });
+  // }, [KindeAuth]);
+
   return (
     <>
       <KindeProvider
