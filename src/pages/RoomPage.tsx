@@ -71,7 +71,7 @@ function RoomPage() {
         <ImageContainer>
           <ImageHover
             src={
-              room.images[3]?.url}
+              room.images[0]?.url}
             height={480}
             style={{ borderRadius: "1rem 0rem 0rem 1rem" }}
             width={580}
@@ -84,7 +84,7 @@ function RoomPage() {
               style={{ borderRadius: "0rem 1rem 0rem 0rem" }}
               width={260}
             />
-            <ImageHover height={235} src={room.images[2]?.url} width={260} />
+            <ImageHover height={235} src={room.images[3]?.url} width={260} />
             <ImageHover
               height={235}
               src={room.images[0]?.url}
