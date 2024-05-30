@@ -2,11 +2,7 @@
   {
     "id": "1",
     "rating": 4.8,
-    "address": {
-      "country": "India",
-      "market": "Ooty",
-      "street": ""
-    },
+    "address": "India, Ooty",
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
     "images": [
@@ -54,11 +50,7 @@
   {
     "id": "3",
     "rating": 4.9,
-    "address": {
-      "country": "India",
-      "market": "Igatpuri",
-      "street": ""
-    },
+    "address": "India, Ooty",
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
     "images": [
@@ -76,11 +68,7 @@
   {
     "id": "4",
     "rating": 4.9,
-    "address": {
-      "country": "India",
-      "market": "Kainakary South",
-      "street": ""
-    },
+    "address": "Kainakary South, India",
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
     "images": [
@@ -99,11 +87,7 @@
   {
     "id": "7",
     "rating": 4.8,
-    "address": {
-      "country": "India",
-      "market": "Ooty",
-      "street": ""
-    },
+    "address": "India, Ooty",
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
     "images": [
@@ -121,11 +105,7 @@
   {
     "id": "8",
     "rating": 4.9,
-    "address": {
-      "country": "India",
-      "market": "Kainakary South",
-      "street": ""
-    },
+    "address": "Kainakary South, India",
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
     "images": [
@@ -144,11 +124,7 @@
   {
     "id": "5",
     "rating": 5,
-    "address": {
-      "country": "Sri Lanka",
-      "market": "Hemmathagama",
-      "street": "Sabaragamuwa Province"
-    },
+    "address": "Sri Lanka, Colombo",
     "amenities": ["TV", "Geyser", "Wifi"],
     "currency": "INR",
     "price": 14311,

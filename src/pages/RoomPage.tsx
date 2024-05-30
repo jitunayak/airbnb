@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-// import { useParams } from "@tanstack/react-router";
+import { useParams } from "@tanstack/react-router";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import moment from "moment";
 import { useState } from "react";
@@ -11,8 +11,7 @@ import useApi from "../hooks/useApi";
 import { styled } from "../stitches.config";
 
 function RoomPage() {
-  // const { roomId } = useParams({ from: "/rooms/$roomId" });
-  const roomId = "12345";
+  const { roomId } = useParams({ from: "/rooms/$roomId" });
   const { roomsApi } = useApi();
 
   const { data: room, isError, isLoading } = useQuery(["room", roomId],
