@@ -4,12 +4,13 @@ import { useEffect } from "react";
 import { Footer } from "../components/Footer";
 import HomeResults from "../components/HomeResults";
 import StickyHeader from "../components/StickyHeader";
+import { getLocalStorage } from "../utils/LocalStorage";
 
 function Home() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    const redirectUri = localStorage.getItem('redirectTo');
+    const redirectUri = getLocalStorage('redirectTo')
     console.log(redirectUri)
     if (redirectUri) {
       navigate({ to: redirectUri });

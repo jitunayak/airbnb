@@ -6,7 +6,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import Home from "./pages/Home.tsx";
-import RoomPage from "./pages/RoomPage.tsx";
+import RoomPage from "./pages/Room/index.tsx";
 import Wishlist from "./pages/Wishlists.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
