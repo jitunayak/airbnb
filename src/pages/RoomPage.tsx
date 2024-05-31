@@ -1,6 +1,6 @@
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useParams } from '@tanstack/react-router';
+import { useLocation, useParams } from '@tanstack/react-router';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import moment from 'moment';
 import { useState } from 'react';
@@ -14,6 +14,7 @@ import { styled } from '../stitches.config';
 function RoomPage() {
   const { roomsApi } = useApi();
   const { isAuthenticated, login } = useKindeAuth();
+  const { pathname } = useLocation();
   const { roomId } = useParams({ from: '/rooms/$roomId' });
   const {
     data: room,
@@ -67,10 +68,12 @@ function RoomPage() {
 
   const handleReserve = async () => {
     if (!reserveDates.checkIn || !reserveDates.checkOut) return;
-
+    console.log(pathname)
     if (!isAuthenticated) {
+      localStorage.setItem('redirectTo', pathname);
       login();
     }
+
     // sendBookingConfirmation.mutateAsync({
     //   checkInDate: reserveDates.checkIn,
     //   checkOutDate: reserveDates.checkOut,
