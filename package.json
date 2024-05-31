@@ -13,8 +13,8 @@
   "dependencies": {
     "@kinde-oss/kinde-auth-react": "^3.0.28",
     "@stitches/react": "^1.2.8",
-    "@tanstack/react-query": "^4.32.6",
-    "@tanstack/react-query-devtools": "^4.33.0",
+    "@tanstack/react-query": "^5.40.0",
+    "@tanstack/react-query-devtools": "^5.40.0",
     "@tanstack/react-router": "^1.20.1",
     "lucide-react": "^0.378.0",
     "moment": "^2.30.1",

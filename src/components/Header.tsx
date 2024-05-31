@@ -2,7 +2,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { styled } from "@stitches/react";
 import { useNavigate } from "@tanstack/react-router";
 import { MapPin, Search } from "lucide-react"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AirBnbIcon, HumBurgerIcon } from "../assets";
 import { useOutsideClick } from "../hooks";
@@ -15,7 +15,7 @@ const locations = ["Banglore", "London", "Paris", "New York", "San Francisco", "
 
 function Header() {
   const navigate = useNavigate();
-  const { isAuthenticated, isLoading, login, user } = useKindeAuth();
+  const { getToken, isAuthenticated, isLoading, login, user } = useKindeAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(menuRef, () => setShowUserMenu(false));
@@ -25,6 +25,18 @@ function Header() {
 
   //   console.log(user && user);
   //   console.log(user && getPermissions().permissions);
+
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    getToken().then((token) => {
+      if (token) {
+        localStorage.setItem('access_token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+    });
+  }, [getToken, isAuthenticated]);
+
   return (
     <HeaderWrapper>
       <span onClick={() => navigate({ to: "/" })} style={{ cursor: "pointer" }}>
@@ -51,7 +63,6 @@ function Header() {
                   <Button
                     color="text"
                     key={location}
-
                     onClick={() => { setSelectLocation(location); setShowLocationOtions(false) }}
                   >
                     {location}

@@ -1,6 +1,6 @@
 // import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 
-import { IRoom } from '../types';
+import { IBookingConfirmationPayload, IRoom } from '../types';
 import { sleep } from '../utils';
 // import mockedRooms from './mockFetchRooms.json';
 
@@ -48,10 +48,21 @@ const useRoomsApi = () => {
     );
   };
 
-  const sendBookingEmail = async () => {
-    return fetch(`${BASE_URL}/api/v1/emails?action=bookingConfirmation`).then(
-      (res) => res.json()
-    );
+  const sendBookingEmail = async (
+    payload: Pick<IBookingConfirmationPayload, 'checkInDate' | 'checkOutDate'>
+  ) => {
+    return fetch(`${BASE_URL}/api/v1/emails?action=bookingConfirmation`, {
+      body: JSON.stringify({
+        ...payload,
+        email: JSON.parse(localStorage.getItem('user') || '')?.email,
+        name: JSON.parse(localStorage.getItem('user') || '')?.given_name,
+      } satisfies IBookingConfirmationPayload),
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    }).then((res) => res.json());
   };
   return {
     fetchRooms,

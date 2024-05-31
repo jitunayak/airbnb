@@ -23,3 +23,10 @@ export interface IRoom {
     picture: string;
   };
 }
+
+export interface IBookingConfirmationPayload {
+  checkInDate: string;
+  checkOutDate: string;
+  email: string;
+  name: string;
+}
