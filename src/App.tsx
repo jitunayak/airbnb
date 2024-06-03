@@ -1,10 +1,9 @@
-import { KindeProvider } from "@kinde-oss/kinde-auth-react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { RouterProvider } from "@tanstack/react-router";
-import React from "react";
+import { KindeProvider } from '@kinde-oss/kinde-auth-react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from '@tanstack/react-router';
+import React from 'react';
 
-import { IRouter } from "./main";
+import { IRouter } from './main';
 
 interface IProps {
   router: IRouter;
@@ -13,12 +12,10 @@ const App: React.FC<IProps> = ({ router }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnReconnect: "always",
+        refetchOnReconnect: 'always',
       },
     },
   });
-
-
 
   return (
     <>
@@ -30,7 +27,7 @@ const App: React.FC<IProps> = ({ router }) => {
       >
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false}  /> */}
         </QueryClientProvider>
       </KindeProvider>
     </>

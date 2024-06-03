@@ -24,7 +24,7 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
     mutationFn: (data: IRoom) =>
       wishlistApi.addToWishlists(user?.id || '', data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['wishlists']);
+      queryClient.invalidateQueries({ queryKey: ['wishlists'] });
       //   queryClient.setQueryData(["wishlists"], (old: any) => {
       //     return old?.length > 0 ? [...old, newData] : [newData];
       //   });
@@ -114,7 +114,11 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
             })
           }
         />
-        <CardImage height={300} src={item.images[thumbnailIndex].url} width={300} />
+        <CardImage
+          height={300}
+          src={item.images[thumbnailIndex].url}
+          width={300}
+        />
         <HeartIconWrapper
           onClick={() =>
             isWishListed
@@ -141,16 +145,16 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
           })
         }
       >
-        <Title>
-          {item.address}
-        </Title>
+        <Title>{item.address}</Title>
         <RatingWrapper>
           <StarIcon />
           <span style={{ fontSize: '13px' }}>{item.rating}</span>
         </RatingWrapper>
       </CardTitle>
       <div style={{ marginTop: '1rem' }}>
-        <Price>₹{(item.price.discountedPrice ?? item.price).toLocaleString()}</Price>
+        <Price>
+          ₹{(item.price.discountedPrice ?? item.price).toLocaleString()}
+        </Price>
         <span style={{ fontSize: '13px', fontWeight: 'normal' }}> night</span>
       </div>
     </ItemWrapper>

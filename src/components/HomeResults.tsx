@@ -1,24 +1,24 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import { styled } from "@stitches/react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { useCallback, useEffect } from "react";
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
+import { styled } from '@stitches/react';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useCallback, useEffect } from 'react';
 
-import useApi from "../hooks/useApi";
-import { IRoom } from "../types";
-import HomeResultItem from "./HomeResultItem";
+import useApi from '../hooks/useApi';
+import { IRoom } from '../types';
+import HomeResultItem from './HomeResultItem';
 
 const placeholderData = {
-  address: "",
+  address: '',
   images: [
     {
-      id: "1",
+      id: '1',
       url: `https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg`,
-    }
+    },
   ],
   price: {
     discountedPrice: 0,
     originalPrice: 0,
-    serviceCharge: 0
+    serviceCharge: 0,
   },
 } as IRoom;
 
@@ -30,8 +30,8 @@ function HomeResults() {
 
   const wishlists = useQuery({
     enabled: !!user?.id,
-    queryFn: () => wishlistApi.getWishLists(user?.id || ""),
-    queryKey: ["wishlists"],
+    queryFn: () => wishlistApi.getWishLists(user?.id || ''),
+    queryKey: ['wishlists'],
   });
 
   const { data, fetchNextPage, hasNextPage, isLoading, isSuccess } =
@@ -39,14 +39,15 @@ function HomeResults() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getNextPageParam: (lastPage: any) => lastPage.nextCursor,
       getPreviousPageParam: (firstPage) => firstPage.prevCursor,
+      initialPageParam: 1,
       queryFn: ({ pageParam = 1 }) => roomsApi.fetchRooms(pageParam),
-      queryKey: ["homeResult"],
+      queryKey: ['homeResult'],
     });
 
   const handleScroll = useCallback(async () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight ||
+        document.documentElement.offsetHeight ||
       isLoading
     ) {
       if (hasNextPage) {
@@ -58,13 +59,13 @@ function HomeResults() {
   }, [fetchNextPage, hasNextPage, isLoading]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   if (isLoading || !data || !isSuccess) {
-    return <span style={{ fontSize: "30px" }}>loading...</span>;
+    return <span style={{ fontSize: '30px' }}>loading...</span>;
   }
 
   return (
@@ -102,24 +103,23 @@ function HomeResults() {
   );
 }
 
-const ResultContainer = styled("div", {
-  "@media (min-width: 425px)": {
-    gridTemplateColumns: "repeat(2, 1fr)",
+const ResultContainer = styled('div', {
+  '@media (min-width: 425px)': {
+    gridTemplateColumns: 'repeat(2, 1fr)',
   },
-  "@media (min-width: 768px)": {
-    gridTemplateColumns: "repeat(3, 1fr)",
+  '@media (min-width: 768px)': {
+    gridTemplateColumns: 'repeat(3, 1fr)',
   },
-  "@media (min-width: 1024px)": {
-    gridTemplateColumns: "repeat(4, 1fr)",
+  '@media (min-width: 1024px)': {
+    gridTemplateColumns: 'repeat(4, 1fr)',
   },
-  alignContent: "space-between",
-  display: "grid",
-  gap: "1rem",
-  marginTop: "10rem",
-  position: "absolute",
-  top: "1rem",
-  zIndex: "1",
+  alignContent: 'space-between',
+  display: 'grid',
+  gap: '1rem',
+  marginTop: '10rem',
+  position: 'absolute',
+  top: '1rem',
+  zIndex: '1',
 });
-
 
 export default HomeResults;
