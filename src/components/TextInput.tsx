@@ -100,8 +100,8 @@ const Input = styled('input', {
   backgroundColor: 'transparent',
   border: 'none',
   borderRadius: '4px',
-  fontSize: '16px',
+  fontSize: '20px',
   outline: 'none',
-  pt: '1rem',
+  pt: '.6rem',
   width: '100%',
 });

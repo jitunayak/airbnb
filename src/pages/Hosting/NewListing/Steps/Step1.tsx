@@ -17,9 +17,9 @@ const OnboardingFormStep1: React.FC = () => {
   const form = useForm({
     defaultValues: {
       address: '',
-      amenities: [],
+      amenities: [] as string[],
       description: '',
-      images: [''],
+      images: [] as string[],
       name: '',
       price: '',
       propertyType: 'House',
@@ -31,11 +31,12 @@ const OnboardingFormStep1: React.FC = () => {
         price: value.price.replace(/,/g, ''),
         userId: 'fada82b0-3101-42d3-9b7b-0b7b386a4c78',
       });
+
+      console.log(value);
     },
     validatorAdapter: zodValidator,
   });
 
-  console.log(addRoomQuery);
   return (
     <form
       onSubmit={(e) => {
@@ -49,11 +50,13 @@ const OnboardingFormStep1: React.FC = () => {
         <Container>
           <Column>
             <div>
-              {/* <h4>Step 1</h4> */}
               <h1>Tell us more about your place</h1>
             </div>
 
             <Column style={{ gap: '1rem' }}>
+              <label htmlFor="title">
+                Title of your listing ( 5 - 100 characters )
+              </label>
               <TextInput
                 validator={z
                   .string()
@@ -62,8 +65,8 @@ const OnboardingFormStep1: React.FC = () => {
                 form={form}
                 label="Title"
                 name="name"
-                placeholder="Title of your listing ( 5 - 100 characters )"
               />
+              <label>what makes it unique and what you love about it</label>
               <TextInput
                 validator={z
                   .string()
@@ -71,8 +74,8 @@ const OnboardingFormStep1: React.FC = () => {
                 form={form}
                 label="Description"
                 name="description"
-                placeholder="Tell more about your place, what makes it unique and what you love about it"
               />
+              <label>short summary of your place, 100 characters max</label>
               <TextInput
                 validator={z
                   .string()
@@ -81,54 +84,62 @@ const OnboardingFormStep1: React.FC = () => {
                 form={form}
                 label="Short summary"
                 name="summary"
-                placeholder="short summary of your place, 100 characters max"
               />
             </Column>
           </Column>
 
-          <h1 style={{ marginTop: '5rem' }}>Awesome pictures </h1>
+          <SubHeading>Awesome pictures </SubHeading>
           <Column style={{ gap: '0.6rem' }}>
             <TextInput
               form={form}
               name="images[0]"
               placeholder="https://example.com/images/1.jpg"
-              validator={z.string()}
+              validator={z.string().url()}
             />
             <TextInput
               form={form}
               name="images[1]"
               placeholder="https://example.com/images/2.jpg"
-              validator={z.string()}
+              validator={z.string().url()}
             />
             <TextInput
               form={form}
               name="images[2]"
               placeholder="https://example.com/images/3.jpg"
-              validator={z.string()}
+              validator={z.string().url()}
             />
             <TextInput
               form={form}
               name="images[3]"
               placeholder="https://example.com/images/4.jpg"
-              validator={z.string()}
+              validator={z.string().url()}
             />
           </Column>
 
-          <h1 style={{ marginTop: '5rem' }}>Let's set pricing</h1>
+          <SubHeading>Now set pricing</SubHeading>
           <Column>
-            <label htmlFor="name">Price per night</label>
+            <label htmlFor="name" style={{ color: 'grey', fontSize: '20px' }}>
+              Price per night
+            </label>
             <Row>
-              <p style={{ fontSize: '32px', fontWeight: '600' }}>₹</p>
+              <p style={{ fontSize: '62px', fontWeight: '600' }}>₹</p>
               <form.Field
                 children={(field) => (
                   <>
                     <PriceInput
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^[0-9,]+$/.test(value)) {
+                          field.handleChange(value);
+                        } else {
+                          field.handleChange('');
+                        }
+                      }}
                       value={Number(
                         field.state.value.replace(/,/g, '')
                       ).toLocaleString()}
                       name={field.name}
                       onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
                       placeholder="2000"
                       prefix="₹"
                       type="string"
@@ -144,21 +155,26 @@ const OnboardingFormStep1: React.FC = () => {
                 name="price"
               />
             </Row>
+            <p>* exclusive of platform charges</p>
           </Column>
 
-          <h2>Where is your place?</h2>
-          <Column>
+          <SubHeading>Where is your place?</SubHeading>
+          <Column style={{ marginBottom: '5rem' }}>
             <TextInput
               validator={z
                 .string()
                 .min(5, 'Address is too short ( min 5 characters )')}
               form={form}
               name="address"
-              placeholder='"Ooty, India" '
+              placeholder="Ooty, India"
             />
           </Column>
 
-          <Amenities />
+          <Amenities
+            onSubmit={(amenities: string[]) =>
+              form.setFieldValue('amenities', amenities)
+            }
+          />
         </Container>
 
         {<p>{addRoomQuery.error?.message}</p>}
@@ -191,15 +207,27 @@ const Container = styled('div', {
   width: '100%',
 });
 
+const SubHeading = styled('p', {
+  fontSize: '42px',
+  fontWeight: '600',
+  marginBottom: '1rem',
+  marginTop: '5rem',
+});
+
 const PriceInput = styled('input', {
-  // '&:focus': {
-  //   border: '2px solid black',
-  // },
-  // border: '1px solid #ccc',
+  '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+    '-webkit-appearance': 'none',
+    appearance: 'none',
+    margin: 0,
+  },
+  '&:focus': {
+    color: 'black',
+  },
   border: 'none',
   borderRadius: '4px',
-  fontSize: '32px',
-  fontWeight: '600',
+  cursor: 'text',
+  fontSize: '8rem',
+  fontWeight: '900',
   outline: 'none',
   padding: '.6rem',
   width: '100%',

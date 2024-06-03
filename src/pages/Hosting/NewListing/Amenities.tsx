@@ -8,7 +8,7 @@ import {
   Waves,
   WifiIcon,
 } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { styled } from '../../../stitches.config';
 
@@ -42,7 +42,9 @@ const Card: React.FC<{
   );
 };
 
-const Amenities: React.FC = () => {
+const Amenities: React.FC<{
+  onSubmit: (selectedAmenities: string[]) => void;
+}> = ({ onSubmit }) => {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
 
   const handleClick = (title: string) => {
@@ -54,6 +56,10 @@ const Amenities: React.FC = () => {
       setSelectedAmenities([...selectedAmenities, title]);
     }
   };
+
+  useEffect(() => {
+    onSubmit(selectedAmenities);
+  }, [onSubmit, selectedAmenities]);
 
   return (
     <div>
@@ -120,11 +126,11 @@ const CardContainer = styled('div', {
   flexDirection: 'column',
   height: '8rem',
   padding: '1rem',
-  transition: 'all 0.2s ease-in-out',
+  transition: 'all .2s ease-in-out',
   variants: {
     isSelected: {
       true: {
-        backgroundColor: '#fafafa',
+        backgroundColor: '#f1f1f1',
         border: '2px solid black',
       },
     },
