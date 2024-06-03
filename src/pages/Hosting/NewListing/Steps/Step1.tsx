@@ -1,39 +1,51 @@
 import { useForm } from '@tanstack/react-form';
+import { useMutation } from '@tanstack/react-query';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
 
 import { Column, Row } from '../../../../components/Common';
 import TextInput from '../../../../components/TextInput';
+import useApi from '../../../../hooks/useApi';
 import { styled } from '../../../../stitches.config';
+import Amenities from '../Amenities';
 
 const OnboardingFormStep1: React.FC = () => {
+  const { roomsApi } = useApi();
+
+  const addRoomQuery = useMutation({ mutationFn: roomsApi.addRoom });
+
   const form = useForm({
     defaultValues: {
       address: '',
+      amenities: [],
       description: '',
       images: [''],
       name: '',
       price: '',
+      propertyType: 'House',
       summary: '',
-      type: '',
     },
-    onSubmit: async ({ value }) => {
-      // Do something with form data
-      console.log(value);
-      alert('submitted');
+    onSubmit: ({ value }) => {
+      addRoomQuery.mutate({
+        ...value,
+        price: value.price.replace(/,/g, ''),
+        userId: 'fada82b0-3101-42d3-9b7b-0b7b386a4c78',
+      });
     },
     validatorAdapter: zodValidator,
   });
 
+  console.log(addRoomQuery);
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          form.handleSubmit();
-        }}
-      >
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+      style={{ width: '100%' }}
+    >
+      <div style={{ width: '100%' }}>
         <Container>
           <Column>
             <div>
@@ -45,12 +57,12 @@ const OnboardingFormStep1: React.FC = () => {
               <TextInput
                 validator={z
                   .string()
-                  .max(32, 'Title is too long ( max 32 characters )')
+                  .max(100, 'Title is too long ( max 100 characters )')
                   .min(5, 'Title is too short ( min 5 characters )')}
                 form={form}
                 label="Title"
                 name="name"
-                placeholder="Title of your listing ( 5 - 32 characters )"
+                placeholder="Title of your listing ( 5 - 100 characters )"
               />
               <TextInput
                 validator={z
@@ -145,13 +157,27 @@ const OnboardingFormStep1: React.FC = () => {
               placeholder='"Ooty, India" '
             />
           </Column>
+
+          <Amenities />
         </Container>
-      </form>
-      <BottomWrapper>
-        <BackButton type="reset">Cancel</BackButton>
-        <NextButton type="submit">Save & Exit</NextButton>
-      </BottomWrapper>
-    </>
+
+        {<p>{addRoomQuery.error?.message}</p>}
+        <BottomWrapper>
+          <BackButton type="reset">Cancel</BackButton>
+          <NextButton
+            disabled={addRoomQuery.isPending || addRoomQuery.isSuccess}
+            isError={addRoomQuery.isError}
+            isPending={addRoomQuery.isPending}
+            isSuccess={addRoomQuery.isSuccess}
+            type="submit"
+          >
+            {addRoomQuery.isPending ? 'Saving...' : ''}
+            {addRoomQuery.isError ? 'Retry' : ''}
+            {addRoomQuery.isSuccess ? 'Saved' : 'Save'}
+          </NextButton>
+        </BottomWrapper>
+      </div>
+    </form>
   );
 };
 
@@ -188,6 +214,29 @@ const NextButton = styled('button', {
   fontSize: '16px',
   px: '1.8rem',
   py: '.8rem',
+  variants: {
+    isError: {
+      true: {
+        backgroundColor: 'red',
+        border: '1px solid red',
+      },
+    },
+    isPending: {
+      true: {
+        backgroundColor: 'blue',
+        border: '1px solid blue',
+      },
+    },
+    isSuccess: {
+      true: {
+        '&:hover': {
+          opacity: '1',
+        },
+        backgroundColor: 'green',
+        border: '1px solid green',
+      },
+    },
+  },
 });
 
 const BackButton = styled('button', {
@@ -211,5 +260,5 @@ const BottomWrapper = styled('div', {
   marginRight: '1rem',
   padding: '1rem',
   position: 'fixed',
-  width: '100%',
+  width: '62%',
 });

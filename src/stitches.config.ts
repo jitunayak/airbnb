@@ -16,6 +16,12 @@ export const {
     bp1: '(min-width: 480px)',
   },
   theme: {
+    br: {
+      l: '16px',
+      m: '8px',
+      s: '4px',
+    },
+
     colors: {
       primary: '#FF385C',
       textPrimary: 'black',
@@ -32,6 +38,7 @@ export const {
     bc: (value: Stitches.PropertyValue<'backgroundColor'>) => ({
       backgroundColor: value,
     }),
+
     mb: (value: Stitches.PropertyValue<'margin'>) => ({
       marginBottom: value,
     }),
@@ -48,11 +55,11 @@ export const {
       marginLeft: value,
       marginRight: value,
     }),
+
     my: (value: Stitches.PropertyValue<'margin'>) => ({
       marginBottom: value,
       marginTop: value,
     }),
-
     pb: (value: Stitches.PropertyValue<'padding'>) => ({
       paddingBottom: value,
     }),
@@ -69,6 +76,7 @@ export const {
       paddingLeft: value,
       paddingRight: value,
     }),
+
     py: (value: Stitches.PropertyValue<'padding'>) => ({
       paddingBottom: value,
       paddingTop: value,

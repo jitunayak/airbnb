@@ -1,5 +1,6 @@
 import { KindeProvider } from '@kinde-oss/kinde-auth-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
 import React from 'react';
 
@@ -27,7 +28,7 @@ const App: React.FC<IProps> = ({ router }) => {
       >
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-          {/* <ReactQueryDevtools initialIsOpen={false}  /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </KindeProvider>
     </>
