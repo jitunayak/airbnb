@@ -1,10 +1,10 @@
+import { useApi } from '@/hooks';
+import { IRoom } from '@/types';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { styled } from '@stitches/react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect } from 'react';
 
-import useApi from '../hooks/useApi';
-import { IRoom } from '../types';
 import HomeResultItem from './HomeResultItem';
 
 const placeholderData = {

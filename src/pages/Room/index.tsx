@@ -1,10 +1,10 @@
+import { Column, Row } from '@/components';
+import { useApi } from '@/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 
-import { Column, Row } from '../../components/Common';
-import Header from '../../components/Header';
-import useApi from '../../hooks/useApi';
 import { styled } from '../../stitches.config';
+import Header from '../Hosting/Header';
 import Reserve from './Reserve';
 
 function RoomPage() {

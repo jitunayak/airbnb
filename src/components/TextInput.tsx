@@ -25,7 +25,7 @@ interface IProps {
   validator: z.ZodString;
 }
 
-const TextInput: React.FC<IProps> = ({
+export const TextInput: React.FC<IProps> = ({
   form,
   label,
   name,
@@ -72,8 +72,6 @@ const TextInput: React.FC<IProps> = ({
     </Column>
   );
 };
-
-export default TextInput;
 
 const InputWrapper = styled('div', {
   borderRadius: '6px',

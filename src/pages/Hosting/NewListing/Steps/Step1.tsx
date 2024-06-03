@@ -1,13 +1,12 @@
+import { Column, Row, TextInput } from '@/components';
+import { useApi } from '@/hooks';
+import { styled } from '@stitches/react';
 import { useForm } from '@tanstack/react-form';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
 
-import { Column, Row } from '../../../../components/Common';
-import TextInput from '../../../../components/TextInput';
-import useApi from '../../../../hooks/useApi';
-import { styled } from '../../../../stitches.config';
 import Amenities from '../Amenities';
 
 const OnboardingFormStep1: React.FC = () => {

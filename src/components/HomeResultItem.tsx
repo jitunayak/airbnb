@@ -1,12 +1,12 @@
+import { LeftArrowIcon, RightArrowIcon } from '@/assets';
+import { useApi } from '@/hooks';
+import { IRoom } from '@/types';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { styled } from '@stitches/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
+import { HeartIcon, StarIcon } from 'lucide-react';
 import React, { useState } from 'react';
-
-import { HeartIcon, LeftArrowIcon, RightArrowIcon, StarIcon } from '../assets';
-import useApi from '../hooks/useApi';
-import { IRoom } from '../types';
 
 interface IProps {
   isWishListed: boolean;

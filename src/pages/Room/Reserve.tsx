@@ -1,3 +1,6 @@
+import { Divider, Row } from '@/components';
+import { useApi } from '@/hooks';
+import { IRoom } from '@/types';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useMutation } from '@tanstack/react-query';
 import { useLocation } from '@tanstack/react-router';
@@ -5,11 +8,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import moment from 'moment';
 import React, { useState } from 'react';
 
-import { Row } from '../../components/Common';
-import { Divider } from '../../components/Divider';
-import useApi from '../../hooks/useApi';
 import { styled } from '../../stitches.config';
-import { IRoom } from '../../types';
 
 type IProps = {
   room: IRoom;

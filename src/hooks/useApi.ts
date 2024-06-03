@@ -1,7 +1,7 @@
-import useRoomsApi from "./useRoomsApi";
-import { default as useWishlistApi } from "./useWishlistApi";
+import useRoomsApi from './useRoomsApi';
+import { default as useWishlistApi } from './useWishlistApi';
 
-const useApi = () => {
+export const useApi = () => {
   const wishlistApi = useWishlistApi();
   const roomsApi = useRoomsApi();
 
@@ -10,5 +10,3 @@ const useApi = () => {
     wishlistApi,
   };
 };
-
-export default useApi;
