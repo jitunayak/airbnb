@@ -1,5 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
 
@@ -11,6 +12,7 @@ import Amenities from '../Amenities';
 
 const OnboardingFormStep1: React.FC = () => {
   const { roomsApi } = useApi();
+  const navigate = useNavigate();
 
   const addRoomQuery = useMutation({ mutationFn: roomsApi.addRoom });
 
@@ -179,7 +181,12 @@ const OnboardingFormStep1: React.FC = () => {
 
         {<p>{addRoomQuery.error?.message}</p>}
         <BottomWrapper>
-          <BackButton type="reset">Cancel</BackButton>
+          <BackButton
+            onClick={() => navigate({ to: '/hosting' })}
+            type="button"
+          >
+            Cancel
+          </BackButton>
           <NextButton
             disabled={addRoomQuery.isPending || addRoomQuery.isSuccess}
             isError={addRoomQuery.isError}

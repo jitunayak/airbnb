@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
 
+import { AirBnbIcon } from '../../assets';
 import { styled } from '../../stitches.config';
 
 const HostingHeader: React.FC = () => {
@@ -7,6 +8,9 @@ const HostingHeader: React.FC = () => {
 
   return (
     <Container>
+      <span onClick={() => navigate({ to: '/' })} style={{ cursor: 'pointer' }}>
+        <AirBnbIcon />
+      </span>
       <HeaderWrapper>
         <WelcomeMsg>Welcome, Jitu!</WelcomeMsg>
         <OutlineButton onClick={() => navigate({ to: '/listing' })}>
@@ -24,6 +28,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
+  padding: '2rem',
   width: '100vh',
 });
 
