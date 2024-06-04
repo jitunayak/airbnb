@@ -1,6 +1,6 @@
 import { Column, Row, TextInput } from '@/components';
 import { useApi } from '@/hooks';
-import { styled } from '@stitches/react';
+import { styled } from '@/stitches.config';
 import { useForm } from '@tanstack/react-form';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';

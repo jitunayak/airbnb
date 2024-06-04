@@ -1,3 +1,4 @@
+import { styled } from '@/stitches.config';
 import {
   AirVent,
   CookingPot,
@@ -9,8 +10,6 @@ import {
   WifiIcon,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-
-import { styled } from '../../../stitches.config';
 
 const defaultIconProperties = {
   size: 28,
@@ -63,7 +62,7 @@ const Amenities: React.FC<{
 
   return (
     <div>
-      <h1>Amenities</h1>
+      <Header>Amenities</Header>
 
       <CardWrapper>
         <Card
@@ -114,24 +113,30 @@ const Amenities: React.FC<{
 
 export default Amenities;
 
+const Header = styled('p', {
+  fontSize: '$h1',
+  fontWeight: 'bold',
+  marginBottom: '$5',
+});
+
 const CardContainer = styled('div', {
   '&:hover': {
-    border: '2px solid black',
+    border2: 'black',
   },
-  border: '1px solid #ccc',
-  borderRadius: '10px',
+  border1: '$gray300',
+  borderRadius: '$m',
   boxSizing: 'border-box',
   cursor: 'pointer',
   display: 'flex',
   flexDirection: 'column',
   height: '8rem',
-  padding: '1rem',
+  padding: '$3',
   transition: 'all .2s ease-in-out',
   variants: {
     isSelected: {
       true: {
-        backgroundColor: '#f1f1f1',
-        border: '2px solid black',
+        backgroundColor: '$gray100',
+        border2: 'black',
       },
     },
   },
@@ -140,7 +145,7 @@ const CardContainer = styled('div', {
 
 const CardWrapper = styled('div', {
   display: 'grid',
-  gap: '1rem',
+  gap: '$3',
   gridTemplateColumns: 'repeat(3, 1fr)',
   justifyContent: 'space-between',
   width: 'max-content',
