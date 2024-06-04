@@ -298,11 +298,11 @@ const Reserve: React.FC<IProps> = ({ room }) => {
             ? 'Reserving...'
             : `Book ${moment(reserveDates.checkOut).diff(
                 moment(reserveDates.checkIn),
-                'days'
+                'days',
               )}  ${
                 moment(reserveDates.checkOut).diff(
                   moment(reserveDates.checkIn),
-                  'days'
+                  'days',
                 ) > 1
                   ? 'nights'
                   : 'night'
@@ -317,7 +317,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
           ₹{room.price.discountedPrice} x
           {moment(reserveDates.checkOut).diff(
             moment(reserveDates.checkIn),
-            'days'
+            'days',
           )}{' '}
           nights{' '}
         </span>
@@ -327,8 +327,8 @@ const Reserve: React.FC<IProps> = ({ room }) => {
             room.price.discountedPrice *
               moment(reserveDates.checkOut).diff(
                 moment(reserveDates.checkIn),
-                'days'
-              )
+                'days',
+              ),
           ).toLocaleString()}
         </span>
       </GuestRow>
@@ -368,7 +368,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
             room.price.discountedPrice *
               moment(reserveDates.checkOut).diff(
                 moment(reserveDates.checkIn),
-                'days'
+                'days',
               ) +
             room.price.serviceCharge
           ).toLocaleString()}`}
@@ -404,6 +404,7 @@ const BookingContainer = styled('div', {
   border: '1px solid #eee',
   borderRadius: '.6rem',
   boxShadow: '$m',
+  height: 'fit-content',
   marginTop: '2rem',
   padding: '2rem',
   width: 'fit-content',
