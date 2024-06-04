@@ -49,7 +49,7 @@ const Amenities: React.FC<{
   const handleClick = (title: string) => {
     if (selectedAmenities.includes(title)) {
       setSelectedAmenities(
-        selectedAmenities.filter((amenity) => amenity !== title)
+        selectedAmenities.filter((amenity) => amenity !== title),
       );
     } else {
       setSelectedAmenities([...selectedAmenities, title]);
@@ -103,10 +103,12 @@ const Amenities: React.FC<{
         />
       </CardWrapper>
 
-      <p>
-        Selected Amenities:
-        <p style={{ fontWeight: '500' }}>{selectedAmenities.join(', ')}</p>
-      </p>
+      <AmenitiesContainer>
+        {selectedAmenities.length > 0 && 'Selected Amenities: '}
+        <span style={{ fontWeight: '500' }}>
+          {selectedAmenities.join(', ') || 'No Amenities Selected'}
+        </span>
+      </AmenitiesContainer>
     </div>
   );
 };
@@ -129,8 +131,9 @@ const CardContainer = styled('div', {
   cursor: 'pointer',
   display: 'flex',
   flexDirection: 'column',
-  height: '8rem',
-  padding: '$3',
+  height: '7rem',
+  pt: '$3',
+  px: '$3',
   transition: 'all .2s ease-in-out',
   variants: {
     isSelected: {
@@ -149,4 +152,9 @@ const CardWrapper = styled('div', {
   gridTemplateColumns: 'repeat(3, 1fr)',
   justifyContent: 'space-between',
   width: 'max-content',
+});
+
+const AmenitiesContainer = styled('div', {
+  mb: '$5',
+  mt: '$5',
 });

@@ -14,13 +14,13 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as RoomsRoomIdImport } from './routes/rooms/$roomId'
 
 // Create Virtual Routes
 
 const WishlistsLazyImport = createFileRoute('/wishlists')()
 const RoomsIndexLazyImport = createFileRoute('/rooms/')()
 const HostingIndexLazyImport = createFileRoute('/hosting/')()
-const RoomsRoomIdLazyImport = createFileRoute('/rooms/$roomId')()
 const HostingListingIndexLazyImport = createFileRoute('/hosting/listing/')()
 
 // Create/Update Routes
@@ -45,10 +45,10 @@ const HostingIndexLazyRoute = HostingIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/hosting/index.lazy').then((d) => d.Route))
 
-const RoomsRoomIdLazyRoute = RoomsRoomIdLazyImport.update({
+const RoomsRoomIdRoute = RoomsRoomIdImport.update({
   path: '/rooms/$roomId',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/rooms/$roomId.lazy').then((d) => d.Route))
+} as any)
 
 const HostingListingIndexLazyRoute = HostingListingIndexLazyImport.update({
   path: '/hosting/listing/',
@@ -79,7 +79,7 @@ declare module '@tanstack/react-router' {
       id: '/rooms/$roomId'
       path: '/rooms/$roomId'
       fullPath: '/rooms/$roomId'
-      preLoaderRoute: typeof RoomsRoomIdLazyImport
+      preLoaderRoute: typeof RoomsRoomIdImport
       parentRoute: typeof rootRoute
     }
     '/hosting/': {
@@ -111,7 +111,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
   WishlistsLazyRoute,
-  RoomsRoomIdLazyRoute,
+  RoomsRoomIdRoute,
   HostingIndexLazyRoute,
   RoomsIndexLazyRoute,
   HostingListingIndexLazyRoute,
@@ -140,7 +140,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "wishlists.lazy.tsx"
     },
     "/rooms/$roomId": {
-      "filePath": "rooms/$roomId.lazy.tsx"
+      "filePath": "rooms/$roomId.tsx"
     },
     "/hosting/": {
       "filePath": "hosting/index.lazy.tsx"
