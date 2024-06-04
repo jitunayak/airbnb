@@ -1,6 +1,7 @@
 import { Divider, Row } from '@/components';
 import { useApi } from '@/hooks';
 import { IRoom } from '@/types';
+import { setLocalStorage } from '@/utils/LocalStorage';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useMutation } from '@tanstack/react-query';
 import { useLocation } from '@tanstack/react-router';
@@ -67,7 +68,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
     if (!reserveDates.checkIn || !reserveDates.checkOut) return;
     console.log(pathname);
     if (!isAuthenticated) {
-      localStorage.setItem('redirectTo', pathname);
+      setLocalStorage('redirect_to', pathname);
       login();
     }
 

@@ -19,7 +19,6 @@ import { Route as RoomsRoomIdImport } from './routes/rooms/$roomId'
 // Create Virtual Routes
 
 const WishlistsLazyImport = createFileRoute('/wishlists')()
-const RoomsIndexLazyImport = createFileRoute('/rooms/')()
 const HostingIndexLazyImport = createFileRoute('/hosting/')()
 const HostingListingIndexLazyImport = createFileRoute('/hosting/listing/')()
 
@@ -34,11 +33,6 @@ const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
-
-const RoomsIndexLazyRoute = RoomsIndexLazyImport.update({
-  path: '/rooms/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/rooms/index.lazy').then((d) => d.Route))
 
 const HostingIndexLazyRoute = HostingIndexLazyImport.update({
   path: '/hosting/',
@@ -89,13 +83,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HostingIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/rooms/': {
-      id: '/rooms/'
-      path: '/rooms'
-      fullPath: '/rooms'
-      preLoaderRoute: typeof RoomsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/hosting/listing/': {
       id: '/hosting/listing/'
       path: '/hosting/listing'
@@ -113,7 +100,6 @@ export const routeTree = rootRoute.addChildren({
   WishlistsLazyRoute,
   RoomsRoomIdRoute,
   HostingIndexLazyRoute,
-  RoomsIndexLazyRoute,
   HostingListingIndexLazyRoute,
 })
 
@@ -129,7 +115,6 @@ export const routeTree = rootRoute.addChildren({
         "/wishlists",
         "/rooms/$roomId",
         "/hosting/",
-        "/rooms/",
         "/hosting/listing/"
       ]
     },
@@ -144,9 +129,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/hosting/": {
       "filePath": "hosting/index.lazy.tsx"
-    },
-    "/rooms/": {
-      "filePath": "rooms/index.lazy.tsx"
     },
     "/hosting/listing/": {
       "filePath": "hosting/listing/index.lazy.tsx"
