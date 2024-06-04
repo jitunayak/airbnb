@@ -1,8 +1,6 @@
-import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
-import { styled } from "@stitches/react";
-import { Link } from "@tanstack/react-router";
-
-import { wishListRoute } from "../main";
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
+import { styled } from '@stitches/react';
+import { Link } from '@tanstack/react-router';
 
 export default function UserMenu({
   menuRef,
@@ -16,7 +14,7 @@ export default function UserMenu({
       <MenuItem variant="primary">Notifications</MenuItem>
       <MenuItem variant="primary">Trips</MenuItem>
       <MenuItem variant="primary">
-        <Link style={{ display: "flex" }} to={wishListRoute.to}>
+        <Link style={{ display: 'flex' }} to="/wishlists">
           Wishlists
         </Link>
       </MenuItem>
@@ -32,50 +30,50 @@ export default function UserMenu({
   );
 }
 
-const FloatWrapper = styled("div", {
+const FloatWrapper = styled('div', {
   // backgroundColor: "White",
-  backdropFilter: "blur(40px)",
-  backgroundColor: "rgba(255, 255, 255, 0.75)",
-  border: "1px solid #eee",
-  borderRadius: ".6rem",
-  boxShadow: "-1px 4px 10px 3px rgba(0,0,0,0.1);",
-  cursor: "pointer",
-  display: "flex",
-  flexDirection: "column",
-  padding: ".6rem 0rem",
-  position: "absolute",
-  right: ".5rem",
-  top: "3rem",
+  backdropFilter: 'blur(40px)',
+  backgroundColor: 'rgba(255, 255, 255, 0.75)',
+  border: '1px solid #eee',
+  borderRadius: '.6rem',
+  boxShadow: '-1px 4px 10px 3px rgba(0,0,0,0.1);',
+  cursor: 'pointer',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '.6rem 0rem',
+  position: 'absolute',
+  right: '.5rem',
+  top: '3rem',
   zIndex: 11,
 });
-const Divider = styled("div", {
-  backgroundColor: "#eee",
-  height: "1px",
-  margin: ".8rem 0rem",
-  width: "100%",
+const Divider = styled('div', {
+  backgroundColor: '#eee',
+  height: '1px',
+  margin: '.8rem 0rem',
+  width: '100%',
 });
-const MenuItem = styled("span", {
-  "&:hover": {
-    backgroundColor: "#f6f6f6",
+const MenuItem = styled('span', {
+  '&:hover': {
+    backgroundColor: '#f6f6f6',
   },
-  fontSize: "13px",
-  minWidth: "12rem",
-  padding: ".6rem 1rem",
+  fontSize: '13px',
+  minWidth: '12rem',
+  padding: '.6rem 1rem',
   variants: {
     variant: {
       danger: {
-        "&:hover": {
-          fontWeight: "500",
+        '&:hover': {
+          fontWeight: '500',
         },
-        color: "red",
+        color: 'red',
       },
       primary: {
-        color: "black",
-        fontWeight: "500",
+        color: 'black',
+        fontWeight: '500',
       },
       secondary: {
-        color: "gray",
-        fontWeight: "400",
+        color: 'gray',
+        fontWeight: '400',
       },
     },
   },

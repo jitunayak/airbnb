@@ -1,5 +1,5 @@
+import { styled } from '@/stitches.config';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
-import { styled } from '@stitches/react';
 import { useNavigate } from '@tanstack/react-router';
 import { MapPin, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';

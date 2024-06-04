@@ -19,19 +19,17 @@ const App: React.FC<IProps> = ({ router }) => {
   });
 
   return (
-    <>
-      <KindeProvider
-        clientId="9f31d731d86b41d4b38dd4988cb9eb42"
-        domain="https://airbnb.kinde.com"
-        logoutUri={window.location.origin}
-        redirectUri={window.location.origin}
-      >
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </KindeProvider>
-    </>
+    <KindeProvider
+      clientId="9f31d731d86b41d4b38dd4988cb9eb42"
+      domain="https://airbnb.kinde.com"
+      logoutUri={window.location.origin}
+      redirectUri={window.location.origin}
+    >
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </KindeProvider>
   );
 };
 

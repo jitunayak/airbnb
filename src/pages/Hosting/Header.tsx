@@ -13,7 +13,7 @@ const HostingHeader: React.FC = () => {
       </span>
       <HeaderWrapper>
         <WelcomeMsg>Welcome, Jitu!</WelcomeMsg>
-        <OutlineButton onClick={() => navigate({ to: '/listing' })}>
+        <OutlineButton onClick={() => navigate({ to: '/hosting/listing' })}>
           Add your listing
         </OutlineButton>
       </HeaderWrapper>
