@@ -9,7 +9,7 @@ export const setLocalStorage = (key: LocalStorageKeys, value: unknown) => {
 };
 
 export function getLocalStorage<K extends LocalStorageKeys>(
-  storageKey: K
+  storageKey: K,
 ): ILocalStorage[K] | null {
   const value = localStorage.getItem(storageKey);
   if (!value) {

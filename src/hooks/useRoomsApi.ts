@@ -9,14 +9,14 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const client = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: 'Bearer ' + getLocalStorage('accessToken'),
+    Authorization: 'Bearer ' + getLocalStorage('access_token'),
     'Content-Type': 'application/json',
   },
 });
 
 const useRoomsApi = () => {
   const fetchRooms = async (
-    page: number = 1
+    page: number = 1,
   ): Promise<{
     allPages: number;
     data: IRoom[];
@@ -49,7 +49,7 @@ const useRoomsApi = () => {
   };
 
   const sendBookingEmail = async (
-    payload: Pick<IBookingConfirmationPayload, 'checkInDate' | 'checkOutDate'>
+    payload: Pick<IBookingConfirmationPayload, 'checkInDate' | 'checkOutDate'>,
   ) => {
     return client.post(`/api/v1/emails?action=bookingConfirmation`, {
       ...payload,

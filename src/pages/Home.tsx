@@ -10,10 +10,10 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const redirectUri = getLocalStorage('redirectTo');
+    const redirectUri = getLocalStorage('redirect_to');
     if (redirectUri) {
       navigate({ to: redirectUri });
-      localStorage.removeItem('redirectTo');
+      localStorage.removeItem('redirect_to');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

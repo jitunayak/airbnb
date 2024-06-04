@@ -1,7 +1,7 @@
 export type ILocalStorage = {
-  [key in LocalStorageKeys]: key extends 'accessToken'
+  [key in LocalStorageKeys]: key extends 'access_token'
     ? string
-    : key extends 'redirectTo'
+    : key extends 'redirect_to'
       ? string
       : key extends 'user'
         ? {
@@ -14,4 +14,4 @@ export type ILocalStorage = {
         : string;
 };
 
-export type LocalStorageKeys = 'accessToken' | 'redirectTo' | 'user';
+export type LocalStorageKeys = 'access_token' | 'redirect_to' | 'user';
