@@ -9,8 +9,8 @@ const randomizeData = <T>(data: T[]): T[] => {
 const sleep = async (time = 1000) => {
   return await new Promise((resolve) =>
     setTimeout(() => {
-      resolve("");
-    }, time)
+      resolve('');
+    }, time),
   );
 };
 

@@ -1,24 +1,19 @@
 import { Column, Row } from '@/components';
 import Header from '@/components/Header';
-import { useApi } from '@/hooks';
 import { styled } from '@/stitches.config';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 
 import Reserve from './Reserve';
+import { roomByQueryOptions } from './roomQueryOptions';
 
 function RoomPage() {
-  const { roomsApi } = useApi();
-
   const { roomId } = useParams({ from: '/rooms/$roomId' });
   const {
     data: room,
     isError,
     isLoading,
-  } = useQuery({
-    queryFn: () => roomsApi.getRoomById(roomId),
-    queryKey: ['room', roomId],
-  });
+  } = useSuspenseQuery(roomByQueryOptions(roomId));
 
   if (!roomId) return <div>Room not found</div>;
 

@@ -4,7 +4,7 @@ import { IRoom } from '@/types';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { styled } from '@stitches/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { HeartIcon, StarIcon } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -136,18 +136,14 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
         </ImagePositionIndicator>
       </ImageWrapper>
       <CardTitle
-        onClick={() =>
-          navigate({
-            params: {
-              roomId: item.id,
-            },
-            to: `/rooms/$roomId`,
-          })
-        }
+        params={{
+          roomId: item.id,
+        }}
+        to="/rooms/$roomId"
       >
         <Title>{item.address}</Title>
         <RatingWrapper>
-          <StarIcon />
+          <StarIcon size={16} />
           <span style={{ fontSize: '13px' }}>{item.rating}</span>
         </RatingWrapper>
       </CardTitle>
@@ -161,11 +157,17 @@ const HomeResultItem: React.FC<IProps> = ({ isWishListed = false, item }) => {
   );
 };
 
-const CardTitle = styled('div', {
+const CardTitle = styled(Link, {
+  '&:hover': {
+    color: 'black',
+  },
+  color: 'black',
   cursor: 'pointer',
   display: 'flex',
   justifyContent: 'space-between',
   marginTop: '.5rem',
+  textDecoration: 'none',
+  userSelect: 'none',
 });
 
 const RatingWrapper = styled('span', {
