@@ -5,4 +5,8 @@ declare module 'react-shimmer-effects' {
   ): JSX.Element;
   export function ShimmerTitle(props: ShimmerTitleProps): JSX.Element;
   // Add other function declarations here
+
+  export function ShimmerSimpleGallery(
+    props: ShimmerSimpleGalleryProps,
+  ): JSX.Element;
 }

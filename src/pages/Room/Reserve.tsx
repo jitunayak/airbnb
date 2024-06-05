@@ -65,15 +65,18 @@ const Reserve: React.FC<IProps> = ({ room }) => {
   const handleReserve = async () => {
     if (!reserveDates.checkIn || !reserveDates.checkOut) return;
     console.log(pathname);
+
     if (!isAuthenticated) {
       setLocalStorage('redirect_to', pathname);
       login();
     }
 
-    sendBookingConfirmation.mutateAsync({
-      checkInDate: reserveDates.checkIn,
-      checkOutDate: reserveDates.checkOut,
-    });
+    if (isAuthenticated) {
+      sendBookingConfirmation.mutateAsync({
+        checkInDate: reserveDates.checkIn,
+        checkOutDate: reserveDates.checkOut,
+      });
+    }
   };
 
   return (

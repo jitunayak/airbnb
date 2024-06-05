@@ -4,6 +4,7 @@ import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { styled } from '@stitches/react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect } from 'react';
+import { ShimmerSimpleGallery } from 'react-shimmer-effects';
 
 import HomeResultItem from './HomeResultItem';
 
@@ -65,7 +66,11 @@ function HomeResults() {
   }, [isLoading]);
 
   if (isLoading || !data || !isSuccess) {
-    return <span style={{ fontSize: '30px' }}>loading...</span>;
+    return (
+      <div style={{ width: '80rem' }}>
+        <ShimmerSimpleGallery caption card imageHeight={300} />
+      </div>
+    );
   }
 
   return (
@@ -86,7 +91,7 @@ function HomeResults() {
               item={item}
               key={item.id}
             />
-          ))
+          )),
         )}
         {hasNextPage &&
           new Array(4)
