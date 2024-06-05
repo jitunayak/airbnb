@@ -1,23 +1,43 @@
 import { Column, Row } from '@/components';
 import Header from '@/components/Header';
 import { styled } from '@/stitches.config';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
+import { ShimmerFeaturedGallery, ShimmerTitle } from 'react-shimmer-effects';
 
 import Reserve from './Reserve';
 import { roomByQueryOptions } from './roomQueryOptions';
 
 function RoomPage() {
   const { roomId } = useParams({ from: '/rooms/$roomId' });
+  // const {
+  //   data: room,
+  //   isError,
+  //   isLoading,
+  // } = useSuspenseQuery(roomByQueryOptions(roomId));
+
   const {
     data: room,
     isError,
     isLoading,
-  } = useSuspenseQuery(roomByQueryOptions(roomId));
+  } = useQuery(roomByQueryOptions(roomId));
 
   if (!roomId) return <div>Room not found</div>;
 
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading)
+    return (
+      <ShimmerLoaderWrapper>
+        <ShimmerTitle gap={10} line={2} variant="primary" />
+        <ShimmerFeaturedGallery
+          card
+          col={2}
+          frameHeight={'60rem'}
+          frameWidth={'60rem'}
+          row={2}
+        />
+        <ShimmerTitle gap={10} line={2} variant="primary" />
+      </ShimmerLoaderWrapper>
+    );
 
   if (isError || !room) return <div>Something went wrong!</div>;
 
@@ -183,4 +203,12 @@ const HostSubTitle = styled('div', {
   color: '$textSecondary',
 });
 
+const ShimmerLoaderWrapper = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2rem',
+  justifyContent: 'center',
+  marginTop: '2rem',
+  width: '70rem',
+});
 export default RoomPage;

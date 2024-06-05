@@ -1,1 +1,1 @@
-export * from "./IRoom";
+export * from './IRoom';

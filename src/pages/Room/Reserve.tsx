@@ -26,9 +26,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
   const [showGuestDetails, setShowGuestDetails] = useState(false);
   const [reserveDates, setReserveDates] = useState({
     checkIn: new Date().toISOString().split('T')[0],
-    checkOut: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-      .toISOString()
-      .split('T')[0],
+    checkOut: moment().add(1, 'days').toISOString().split('T')[0],
   });
 
   const [guestDetails, setGuestDetails] = useState({
