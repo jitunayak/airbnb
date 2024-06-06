@@ -19,8 +19,13 @@ import { Route as RoomsRoomIdImport } from './routes/rooms/$roomId'
 // Create Virtual Routes
 
 const WishlistsLazyImport = createFileRoute('/wishlists')()
+const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const HostingIndexLazyImport = createFileRoute('/hosting/')()
+const ProfileBookingsIndexLazyImport = createFileRoute('/profile/bookings/')()
 const HostingListingIndexLazyImport = createFileRoute('/hosting/listing/')()
+const ProfileBookingsBookingIdLazyImport = createFileRoute(
+  '/profile/bookings/$bookingId',
+)()
 
 // Create/Update Routes
 
@@ -34,6 +39,11 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
+  path: '/profile/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+
 const HostingIndexLazyRoute = HostingIndexLazyImport.update({
   path: '/hosting/',
   getParentRoute: () => rootRoute,
@@ -44,12 +54,27 @@ const RoomsRoomIdRoute = RoomsRoomIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProfileBookingsIndexLazyRoute = ProfileBookingsIndexLazyImport.update({
+  path: '/profile/bookings/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/profile/bookings/index.lazy').then((d) => d.Route),
+)
+
 const HostingListingIndexLazyRoute = HostingListingIndexLazyImport.update({
   path: '/hosting/listing/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/hosting/listing/index.lazy').then((d) => d.Route),
 )
+
+const ProfileBookingsBookingIdLazyRoute =
+  ProfileBookingsBookingIdLazyImport.update({
+    path: '/profile/bookings/$bookingId',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/profile/bookings/$bookingId.lazy').then((d) => d.Route),
+  )
 
 // Populate the FileRoutesByPath interface
 
@@ -83,11 +108,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HostingIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/bookings/$bookingId': {
+      id: '/profile/bookings/$bookingId'
+      path: '/profile/bookings/$bookingId'
+      fullPath: '/profile/bookings/$bookingId'
+      preLoaderRoute: typeof ProfileBookingsBookingIdLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/hosting/listing/': {
       id: '/hosting/listing/'
       path: '/hosting/listing'
       fullPath: '/hosting/listing'
       preLoaderRoute: typeof HostingListingIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/bookings/': {
+      id: '/profile/bookings/'
+      path: '/profile/bookings'
+      fullPath: '/profile/bookings'
+      preLoaderRoute: typeof ProfileBookingsIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -100,7 +146,10 @@ export const routeTree = rootRoute.addChildren({
   WishlistsLazyRoute,
   RoomsRoomIdRoute,
   HostingIndexLazyRoute,
+  ProfileIndexLazyRoute,
+  ProfileBookingsBookingIdLazyRoute,
   HostingListingIndexLazyRoute,
+  ProfileBookingsIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -115,7 +164,10 @@ export const routeTree = rootRoute.addChildren({
         "/wishlists",
         "/rooms/$roomId",
         "/hosting/",
-        "/hosting/listing/"
+        "/profile/",
+        "/profile/bookings/$bookingId",
+        "/hosting/listing/",
+        "/profile/bookings/"
       ]
     },
     "/": {
@@ -130,8 +182,17 @@ export const routeTree = rootRoute.addChildren({
     "/hosting/": {
       "filePath": "hosting/index.lazy.tsx"
     },
+    "/profile/": {
+      "filePath": "profile/index.lazy.tsx"
+    },
+    "/profile/bookings/$bookingId": {
+      "filePath": "profile/bookings/$bookingId.lazy.tsx"
+    },
     "/hosting/listing/": {
       "filePath": "hosting/listing/index.lazy.tsx"
+    },
+    "/profile/bookings/": {
+      "filePath": "profile/bookings/index.lazy.tsx"
     }
   }
 }

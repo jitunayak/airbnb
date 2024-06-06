@@ -12,7 +12,12 @@ export default function UserMenu({
     <FloatWrapper ref={menuRef}>
       <MenuItem variant="primary">Messages</MenuItem>
       <MenuItem variant="primary">Notifications</MenuItem>
-      <MenuItem variant="primary">Trips</MenuItem>
+      <MenuItem variant="primary">
+        <Link style={{ color: 'black' }} to="/profile/bookings">
+          Bookings
+        </Link>
+      </MenuItem>
+      {/* <MenuItem variant="primary">'Trips</MenuItem> */}
       <MenuItem variant="primary">
         <Link style={{ display: 'flex' }} to="/wishlists">
           Wishlists
