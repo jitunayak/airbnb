@@ -1,6 +1,8 @@
 import { KindeProvider } from '@kinde-oss/kinde-auth-react';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { persistQueryClient } from '@tanstack/react-query-persist-client';
 import { RouterProvider } from '@tanstack/react-router';
 import React from 'react';
 
@@ -13,9 +15,19 @@ const App: React.FC<IProps> = ({ router }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
+        gcTime: 1000 * 60 * 60 * 24, // 24 hours
         refetchOnReconnect: 'always',
       },
     },
+  });
+
+  const localStoragePersister = createSyncStoragePersister({
+    storage: window.localStorage,
+  });
+
+  persistQueryClient({
+    persister: localStoragePersister,
+    queryClient,
   });
 
   return (

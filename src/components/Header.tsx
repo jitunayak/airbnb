@@ -1,4 +1,5 @@
 import { styled } from '@/stitches.config';
+import { setLocalStorage } from '@/utils/LocalStorage';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useNavigate } from '@tanstack/react-router';
 import { MapPin, Search } from 'lucide-react';
@@ -31,15 +32,18 @@ function Header() {
     useState<(typeof locations)[number]>('');
   const [showLocationOtions, setShowLocationOtions] = useState(false);
 
-  //   console.log(user && user);
   //   console.log(user && getPermissions().permissions);
 
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('user');
+      return;
+    }
     getToken().then((token) => {
       if (token) {
-        localStorage.setItem('access_token', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        setLocalStorage('access_token', token);
+        setLocalStorage('user', user);
       }
     });
   }, [getToken, isAuthenticated, user]);
