@@ -1,3 +1,4 @@
+import { getLocalStorage } from '@/utils/LocalStorage';
 import { useNavigate } from '@tanstack/react-router';
 
 import { AirBnbIcon } from '../../assets';
@@ -6,13 +7,15 @@ import { styled } from '../../stitches.config';
 const HostingHeader: React.FC = () => {
   const navigate = useNavigate();
 
+  const user = getLocalStorage('user');
+
   return (
     <Container>
       <span onClick={() => navigate({ to: '/' })} style={{ cursor: 'pointer' }}>
         <AirBnbIcon />
       </span>
       <HeaderWrapper>
-        <WelcomeMsg>Welcome, Jitu!</WelcomeMsg>
+        <WelcomeMsg>Welcome, {user?.given_name}!</WelcomeMsg>
         <OutlineButton onClick={() => navigate({ to: '/hosting/listing' })}>
           Add your listing
         </OutlineButton>
