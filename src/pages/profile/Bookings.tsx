@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Column, Row } from '@/components';
+import { Column, Divider, Row } from '@/components';
 import { styled } from '@/stitches.config';
 import client from '@/utils/AxiosClient';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
+import { Map } from 'lucide-react';
 import moment from 'moment';
 import React from 'react';
 
@@ -38,11 +40,28 @@ const Bookings: React.FC = () => {
         {bookings?.map((booking: any) => (
           <Card key={booking.id}>
             <Column style={{ paddingLeft: '1rem', paddingTop: '.6rem' }}>
-              <Title>{booking.room.name}</Title>
-              <p>{booking.room.summary}</p>
+              <div>
+                <Title>{booking.room.name}</Title>
+                <Sumamry>{booking.room.summary}</Sumamry>
+              </div>
+              <Divider
+                color={'secondary'}
+                orientation={'horizontal'}
+                style={{ marginBottom: '.6rem', marginTop: '.6rem' }}
+              />
               <Row style={{ gap: '1rem' }}>
-                <div style={{ marginTop: '.2rem' }}>
-                  <div style={{}}>
+                <div
+                  style={{
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    marginTop: '.2rem',
+                    padding: '1rem',
+                  }}
+                >
+                  <div>
                     <div style={{ fontSize: '1.4rem' }}>
                       {moment(booking.checkIn).format('D')}-
                       {moment(booking.checkOut).format('D')}
@@ -59,14 +78,63 @@ const Bookings: React.FC = () => {
                     {booking.room.address}
                   </div> */}
                 </div>
-                <div>
-                  <Price>${booking.price}</Price>
-                  <Status>{booking.status}</Status>
-                </div>
+                <Divider color={'secondary'} orientation={'vertical'} />
+                <Column>
+                  <div
+                    style={{
+                      alignItems: 'flex-start',
+                      display: 'flex',
+                      marginTop: '1rem',
+                    }}
+                  >
+                    <Price>
+                      {booking.currency} {booking.price}
+                    </Price>
+                    <Status>
+                      {Math.abs(
+                        moment(booking.checkIn).diff(moment(), 'days'),
+                      ) < 0
+                        ? 'Expired'
+                        : booking.status}
+                    </Status>
+                  </div>
+                  <Row
+                    style={{
+                      alignItems: 'center',
+                      display: 'inline-flex',
+                      gap: '.6rem',
+                      marginTop: '1rem',
+                    }}
+                  >
+                    <Map size={16} />
+                    <Link
+                      style={{ fontWeight: '400', textDecoration: 'none' }}
+                      to={'/booking/' + booking.id}
+                    >
+                      Get direction
+                    </Link>
+                  </Row>
+                </Column>
               </Row>
             </Column>
+            <div>
+              {Math.abs(moment(booking.checkIn).diff(moment(), 'days')) > 0 ? (
+                <div
+                  style={{
+                    backgroundColor: 'red',
+                    color: 'white',
+                    fontSize: '1rem',
+                    padding: '1rem',
+                    width: '2rem',
+                  }}
+                >
+                  {Math.abs(moment(booking.checkIn).diff(moment(), 'days'))}{' '}
+                  days left
+                </div>
+              ) : null}
+            </div>
 
-            <ThumbNail src={booking.room.images[0].url} />
+            <ThumbNail src={booking.images[0].url} />
           </Card>
         ))}
       </div>
@@ -86,8 +154,8 @@ const Container = styled('div', {
 });
 
 const SubHeader = styled('p', {
-  fontSize: '$h5',
-  fontWeight: '600',
+  fontSize: '$l',
+  fontWeight: '500',
 });
 const Card = styled('div', {
   '&:hover': {
@@ -96,8 +164,10 @@ const Card = styled('div', {
   border1: '$gray200',
   borderRadius: '$m',
   boxShadow: '-1px 4px 10px 3px rgba(0,0,0,0.05)',
+  boxSizing: 'border-box',
   cursor: 'pointer',
   display: 'flex',
+
   flexDirection: 'Row',
   margin: '1rem 0',
   my: '$1',
@@ -106,8 +176,15 @@ const Card = styled('div', {
 });
 
 const Title = styled('span', {
-  fontSize: '$h5',
-  fontWeight: '500',
+  fontSize: '$l',
+  fontWeight: '400',
+});
+
+const Sumamry = styled('div', {
+  color: '$gray400',
+  fontSize: '$s',
+  fontWeight: '400',
+  marginTop: '1rem',
 });
 
 const Price = styled('span', {
@@ -117,11 +194,11 @@ const Price = styled('span', {
 });
 
 const Status = styled('span', {
-  backgroundColor: '$primary',
-  borderRadius: '$m',
+  backgroundColor: '$gray700',
+  borderRadius: '$s',
   color: 'white',
-  fontSize: '$l',
-  fontWeight: '600',
+  fontSize: '$m',
+  fontWeight: '500',
   marginLeft: '$3',
   px: '$2',
   py: '$1',
