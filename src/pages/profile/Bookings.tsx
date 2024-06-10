@@ -91,9 +91,7 @@ const Bookings: React.FC = () => {
                       {booking.currency} {booking.price}
                     </Price>
                     <Status>
-                      {Math.abs(
-                        moment(booking.checkIn).diff(moment(), 'days'),
-                      ) < 0
+                      {moment(booking.checkIn).diff(moment(), 'days') < 0
                         ? 'Expired'
                         : booking.status}
                     </Status>
@@ -118,7 +116,7 @@ const Bookings: React.FC = () => {
               </Row>
             </Column>
             <div>
-              {Math.abs(moment(booking.checkIn).diff(moment(), 'days')) > 0 ? (
+              {moment(booking.checkIn).diff(moment(), 'days') > 0 ? (
                 <div
                   style={{
                     backgroundColor: 'red',
