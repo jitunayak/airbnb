@@ -137,7 +137,7 @@ const OnboardingFormStep1: React.FC = () => {
                         }
                       }}
                       value={Number(
-                        field.state.value.replace(/,/g, '')
+                        field.state.value.replace(/,/g, ''),
                       ).toLocaleString()}
                       name={field.name}
                       onBlur={field.handleBlur}
@@ -294,5 +294,5 @@ const BottomWrapper = styled('div', {
   marginRight: '1rem',
   padding: '1rem',
   position: 'fixed',
-  width: '62%',
+  width: '62rem',
 });
