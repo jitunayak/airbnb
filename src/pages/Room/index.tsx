@@ -1,4 +1,4 @@
-import { Column, Row } from '@/components';
+import { Column, Divider, Row } from '@/components';
 import Header from '@/components/Header';
 import { styled } from '@/stitches.config';
 import { useQuery } from '@tanstack/react-query';
@@ -44,6 +44,7 @@ function RoomPage() {
   return (
     <Container>
       <Header />
+      <Divider orientation={'horizontal'} style={{ marginTop: '1rem' }} />
       <PageContainer>
         {/* RoomPage {roomId} */}
         <Title>{room.name}</Title>
@@ -211,4 +212,5 @@ const ShimmerLoaderWrapper = styled('div', {
   marginTop: '2rem',
   width: '70rem',
 });
+
 export default RoomPage;

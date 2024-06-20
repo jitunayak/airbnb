@@ -121,7 +121,7 @@ function Header() {
         <Button
           color={'lightText'}
           onClick={() => handleSwitchToHosting()}
-          size={'l'}
+          size={'m'}
           style={{ fontWeight: '600' }}
         >
           Switch to hosting

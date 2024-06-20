@@ -2,7 +2,7 @@ import { styled } from '@stitches/react';
 
 export const Divider = styled('div', {
   alignSelf: 'center',
-  backgroundColor: '#ccc',
+  backgroundColor: '$gray200',
   variants: {
     color: {
       invisible: {
