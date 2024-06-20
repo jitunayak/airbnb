@@ -1,7 +1,7 @@
-import { styled } from "@stitches/react";
+import { styled } from '@stitches/react';
 
-import CategoryActionBar from "./CategoryActionBar";
-import Header from "./Header";
+import CategoryActionBar from './CategoryActionBar';
+import Header from './Header';
 
 function StickyHeader() {
   return (
@@ -14,19 +14,19 @@ function StickyHeader() {
 }
 export default StickyHeader;
 
-const StickyHeaderWrapper = styled("div", {
-  backgroundColor: "white",
-  paddingTop: "1rem",
-  position: "fixed",
+const StickyHeaderWrapper = styled('div', {
+  backgroundColor: 'white',
+  paddingTop: '1rem',
+  position: 'fixed',
   top: 0,
-  width: "100%",
-  zIndex: "9",
+  width: '100%',
+  zIndex: '9',
 });
 
-const Line = styled("span", {
-  backgroundColor: "#eee",
-  display: "flex",
-  height: "1px",
-  margin: "1rem",
-  width: "100%",
+const Line = styled('span', {
+  backgroundColor: '#eee',
+  display: 'flex',
+  height: '1px',
+  margin: '1rem',
+  width: '100%',
 });

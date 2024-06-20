@@ -1,5 +1,5 @@
 import { Column, Divider, Row } from '@/components';
-import Header from '@/components/Header';
+import HeaderAnimate from '@/components/HeaderAnimate';
 import { styled } from '@/stitches.config';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
@@ -43,8 +43,11 @@ function RoomPage() {
 
   return (
     <Container>
-      <Header />
-      <Divider orientation={'horizontal'} style={{ marginTop: '1rem' }} />
+      <HeaderAnimate />
+      <Divider
+        orientation={'horizontal'}
+        style={{ marginBottom: '2rem', marginTop: '3.6rem' }}
+      />
       <PageContainer>
         {/* RoomPage {roomId} */}
         <Title>{room.name}</Title>

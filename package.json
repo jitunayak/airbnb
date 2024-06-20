@@ -21,6 +21,7 @@
     "@tanstack/react-router": "^1.34.9",
     "@tanstack/zod-form-adapter": "^0.20.3",
     "axios": "^1.7.2",
+    "framer-motion": "^11.2.11",
     "lucide-react": "^0.383.0",
     "moment": "^2.30.1",
     "react": "^18.3.1",
