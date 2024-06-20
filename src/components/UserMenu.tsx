@@ -12,16 +12,11 @@ export default function UserMenu({
     <FloatWrapper ref={menuRef}>
       <MenuItem variant="primary">Messages</MenuItem>
       <MenuItem variant="primary">Notifications</MenuItem>
-      <MenuItem variant="primary">
-        <Link style={{ color: 'black' }} to="/profile/bookings">
-          Bookings
-        </Link>
+      <MenuItem to="/profile/bookings" variant="primary">
+        Bookings
       </MenuItem>
-      {/* <MenuItem variant="primary">'Trips</MenuItem> */}
-      <MenuItem variant="primary">
-        <Link style={{ display: 'flex' }} to="/wishlists">
-          Wishlists
-        </Link>
+      <MenuItem to="/wishlists" variant="primary">
+        Wishlists
       </MenuItem>
       <Divider />
       <MenuItem variant="secondary">Airbnb your home</MenuItem>
@@ -57,7 +52,7 @@ const Divider = styled('div', {
   margin: '.8rem 0rem',
   width: '100%',
 });
-const MenuItem = styled('span', {
+const MenuItem = styled(Link, {
   '&:hover': {
     backgroundColor: '#f6f6f6',
   },
