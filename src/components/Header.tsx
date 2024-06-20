@@ -2,7 +2,7 @@ import { styled } from '@/stitches.config';
 import { setLocalStorage } from '@/utils/LocalStorage';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useNavigate } from '@tanstack/react-router';
-import { MapPin, Search } from 'lucide-react';
+import { Globe, MapPin, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 import { AirBnbIcon, HumBurgerIcon } from '../assets';
@@ -118,9 +118,15 @@ function Header() {
       </Button>
 
       <GroupWrapper>
-        <Button color={'lightText'} onClick={() => handleSwitchToHosting()}>
-          Switching to hosting
+        <Button
+          color={'lightText'}
+          onClick={() => handleSwitchToHosting()}
+          size={'l'}
+          style={{ fontWeight: '600' }}
+        >
+          Switch to hosting
         </Button>
+        <Globe size={20} />
         {isAuthenticated && !isLoading && user && (
           <Button
             color={'outline'}
