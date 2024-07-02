@@ -5,8 +5,8 @@ import { setLocalStorage } from '@/utils/LocalStorage';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useMutation } from '@tanstack/react-query';
 import { useLocation } from '@tanstack/react-router';
+import dayjs from 'dayjs';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import moment from 'moment';
 import React, { useState } from 'react';
 
 import { styled } from '../../stitches.config';
@@ -26,7 +26,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
   const [showGuestDetails, setShowGuestDetails] = useState(false);
   const [reserveDates, setReserveDates] = useState({
     checkIn: new Date().toISOString().split('T')[0],
-    checkOut: moment().add(1, 'days').toISOString().split('T')[0],
+    checkOut: dayjs().add(1, 'days').toISOString().split('T')[0],
   });
 
   const [guestDetails, setGuestDetails] = useState({
@@ -156,7 +156,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
               CHECK OUT
             </div>
             <input
-              min={moment(reserveDates.checkIn)
+              min={dayjs(reserveDates.checkIn)
                 .add(1, 'days')
                 .format('YYYY-MM-DD')}
               onChange={(e) =>
@@ -298,12 +298,12 @@ const Reserve: React.FC<IProps> = ({ room }) => {
         <ReserveButton onClick={() => handleReserve()}>
           {sendBookingConfirmation.isPending
             ? 'Reserving...'
-            : `Book ${moment(reserveDates.checkOut).diff(
-                moment(reserveDates.checkIn),
+            : `Book ${dayjs(reserveDates.checkOut).diff(
+                dayjs(reserveDates.checkIn),
                 'days',
               )}  ${
-                moment(reserveDates.checkOut).diff(
-                  moment(reserveDates.checkIn),
+                dayjs(reserveDates.checkOut).diff(
+                  dayjs(reserveDates.checkIn),
                   'days',
                 ) > 1
                   ? 'nights'
@@ -317,8 +317,8 @@ const Reserve: React.FC<IProps> = ({ room }) => {
       <GuestRow>
         <span style={{ fontWeight: '300', textDecoration: 'underline' }}>
           ₹{room.price.discountedPrice} x
-          {moment(reserveDates.checkOut).diff(
-            moment(reserveDates.checkIn),
+          {dayjs(reserveDates.checkOut).diff(
+            dayjs(reserveDates.checkIn),
             'days',
           )}{' '}
           nights{' '}
@@ -327,8 +327,8 @@ const Reserve: React.FC<IProps> = ({ room }) => {
           ₹
           {Number(
             room.price.discountedPrice *
-              moment(reserveDates.checkOut).diff(
-                moment(reserveDates.checkIn),
+              dayjs(reserveDates.checkOut).diff(
+                dayjs(reserveDates.checkIn),
                 'days',
               ),
           ).toLocaleString()}
@@ -368,8 +368,8 @@ const Reserve: React.FC<IProps> = ({ room }) => {
         <span style={{ fontWeight: '500' }}>
           {`₹${(
             room.price.discountedPrice *
-              moment(reserveDates.checkOut).diff(
-                moment(reserveDates.checkIn),
+              dayjs(reserveDates.checkOut).diff(
+                dayjs(reserveDates.checkIn),
                 'days',
               ) +
             room.price.serviceCharge

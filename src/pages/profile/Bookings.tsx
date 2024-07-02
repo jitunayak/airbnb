@@ -4,8 +4,8 @@ import { styled } from '@/stitches.config';
 import client from '@/utils/AxiosClient';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
+import dayjs from 'dayjs';
 import { Map } from 'lucide-react';
-import moment from 'moment';
 import React from 'react';
 
 const Bookings: React.FC = () => {
@@ -63,15 +63,15 @@ const Bookings: React.FC = () => {
                 >
                   <div>
                     <div style={{ fontSize: '1.4rem' }}>
-                      {moment(booking.checkIn).format('D')}-
-                      {moment(booking.checkOut).format('D')}
+                      {dayjs(booking.checkIn).format('D')}-
+                      {dayjs(booking.checkOut).format('D')}
                     </div>
                   </div>
                   <div style={{ fontSize: '1.4rem' }}>
-                    {moment(booking.checkIn).format('MMM')}
+                    {dayjs(booking.checkIn).format('MMM')}
                   </div>
                   <div style={{ fontSize: '1rem' }}>
-                    {moment(booking.checkIn).format('YYYY')}
+                    {dayjs(booking.checkIn).format('YYYY')}
                   </div>
 
                   {/* <div style={{ fontWeight: '500', marginTop: '.6rem' }}>
@@ -91,7 +91,7 @@ const Bookings: React.FC = () => {
                       {booking.currency} {booking.price}
                     </Price>
                     <Status>
-                      {moment(booking.checkIn).diff(moment(), 'days') < 0
+                      {dayjs(booking.checkIn).diff(dayjs(), 'days') < 0
                         ? 'Expired'
                         : booking.status}
                     </Status>
@@ -116,7 +116,7 @@ const Bookings: React.FC = () => {
               </Row>
             </Column>
             <div>
-              {moment(booking.checkIn).diff(moment(), 'days') > 0 ? (
+              {dayjs(booking.checkIn).diff(dayjs(), 'days') > 0 ? (
                 <div
                   style={{
                     backgroundColor: 'red',
@@ -126,8 +126,8 @@ const Bookings: React.FC = () => {
                     width: '2rem',
                   }}
                 >
-                  {Math.abs(moment(booking.checkIn).diff(moment(), 'days'))}{' '}
-                  days left
+                  {Math.abs(dayjs(booking.checkIn).diff(dayjs(), 'days'))} days
+                  left
                 </div>
               ) : null}
             </div>
