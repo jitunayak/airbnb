@@ -58,12 +58,16 @@ const useRoomsApi = () => {
     });
   };
 
+  const bookRoom = async (payload: any) => {
+    return client.post(`/api/v1/bookings`, payload);
+  };
   const addRoom = async (payload: unknown) => {
     return client.post(`/api/v1/rooms`, payload);
   };
 
   return {
     addRoom,
+    bookRoom,
     fetchRooms,
     getRoomById,
     sendBookingEmail,

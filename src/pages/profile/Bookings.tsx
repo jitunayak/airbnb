@@ -192,10 +192,10 @@ const Price = styled('span', {
 });
 
 const Status = styled('span', {
-  backgroundColor: '$gray700',
+  backgroundColor: '$gray200',
   borderRadius: '$s',
-  color: 'white',
-  fontSize: '$m',
+  color: '$gray800',
+  fontSize: '$s',
   fontWeight: '500',
   marginLeft: '$3',
   px: '$2',

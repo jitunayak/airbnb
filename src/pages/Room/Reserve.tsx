@@ -18,10 +18,10 @@ const Reserve: React.FC<IProps> = ({ room }) => {
   const { isAuthenticated, login } = useKindeAuth();
   const { pathname } = useLocation();
   const { roomsApi } = useApi();
-
+  const { user } = useKindeAuth();
   const sendBookingConfirmation = useMutation({
-    mutationFn: roomsApi.sendBookingEmail,
-    mutationKey: ['sendBookingEmail'],
+    mutationFn: roomsApi.bookRoom,
+    mutationKey: ['room', room.id],
   });
   const [showGuestDetails, setShowGuestDetails] = useState(false);
   const [reserveDates, setReserveDates] = useState({
@@ -75,6 +75,10 @@ const Reserve: React.FC<IProps> = ({ room }) => {
       sendBookingConfirmation.mutateAsync({
         checkInDate: reserveDates.checkIn,
         checkOutDate: reserveDates.checkOut,
+        currency: 'INR',
+        price: room.price.discountedPrice,
+        roomId: room.id,
+        userId: user?.id || '',
       });
     }
   };

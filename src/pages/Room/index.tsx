@@ -195,6 +195,7 @@ const ImageHover = styled('img', {
   '&:hover': {
     filter: 'brightness(80%) saturate(120%)',
   },
+  objectFit: 'cover',
 });
 
 const HostTitle = styled('div', {

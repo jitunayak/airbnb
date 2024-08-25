@@ -219,7 +219,7 @@ const ImageWrapper = styled('div', {
 });
 const CardImage = styled('img', {
   borderRadius: '1rem',
-  objectFit: 'cover',
+  objectFit: 'fill',
   overflow: 'hidden',
   position: 'absolute',
   userSelect: 'none',
