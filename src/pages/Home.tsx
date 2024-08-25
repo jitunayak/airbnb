@@ -15,6 +15,8 @@ function Home() {
       navigate({ to: redirectUri });
       localStorage.removeItem('redirect_to');
     }
+
+    document.title = 'Airbnb | Holiday Rentals';
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -3,6 +3,7 @@ import HeaderAnimate from '@/components/HeaderAnimate';
 import { styled } from '@/stitches.config';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
+import { useEffect } from 'react';
 import { ShimmerFeaturedGallery, ShimmerTitle } from 'react-shimmer-effects';
 
 import Reserve from './Reserve';
@@ -21,6 +22,10 @@ function RoomPage() {
     isError,
     isLoading,
   } = useQuery(roomByQueryOptions(roomId));
+
+  useEffect(() => {
+    document.title = `Airbnb - ${room?.name}`;
+  }, [room]);
 
   if (!roomId) return <div>Room not found</div>;
 

@@ -193,9 +193,13 @@ const OnboardingFormStep1: React.FC = () => {
             isSuccess={addRoomQuery.isSuccess}
             type="submit"
           >
-            {addRoomQuery.isPending ? 'Saving...' : ''}
-            {addRoomQuery.isError ? 'Retry' : ''}
-            {addRoomQuery.isSuccess ? 'Saved' : 'Save'}
+            {addRoomQuery.isPending
+              ? 'Saving...'
+              : addRoomQuery.isError
+                ? 'Retry'
+                : addRoomQuery.isSuccess
+                  ? 'Saved'
+                  : 'Save'}
           </NextButton>
         </BottomWrapper>
       </div>

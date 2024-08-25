@@ -98,7 +98,7 @@ const Input = styled('input', {
   backgroundColor: 'transparent',
   border: 'none',
   borderRadius: '4px',
-  fontSize: '20px',
+  fontSize: '16px',
   outline: 'none',
   pt: '.6rem',
   width: '100%',
