@@ -10,7 +10,9 @@ export default function UserMenu({
   const { logout } = useKindeAuth();
   return (
     <FloatWrapper ref={menuRef}>
-      <MenuItem variant="primary">Messages</MenuItem>
+      <MenuItem to="/messages" variant="primary">
+        Messages
+      </MenuItem>
       <MenuItem variant="primary">Notifications</MenuItem>
       <MenuItem to="/profile/bookings" variant="primary">
         Bookings
