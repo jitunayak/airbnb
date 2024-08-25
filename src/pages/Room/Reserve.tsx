@@ -299,20 +299,33 @@ const Reserve: React.FC<IProps> = ({ room }) => {
       {sendBookingConfirmation.isPending ||
       sendBookingConfirmation.isError ||
       sendBookingConfirmation.isSuccess ? null : (
-        <ReserveButton onClick={() => handleReserve()}>
-          {sendBookingConfirmation.isPending
-            ? 'Reserving...'
-            : `Book ${dayjs(reserveDates.checkOut).diff(
-                dayjs(reserveDates.checkIn),
-                'days',
-              )}  ${
-                dayjs(reserveDates.checkOut).diff(
+        <ReserveButton
+          active={
+            dayjs(reserveDates.checkOut).diff(
+              dayjs(reserveDates.checkIn),
+              'days',
+            ) >= 1
+          }
+          onClick={() => handleReserve()}
+        >
+          {dayjs(reserveDates.checkOut).diff(
+            dayjs(reserveDates.checkIn),
+            'days',
+          ) < 1
+            ? 'Choose check out'
+            : sendBookingConfirmation.isPending
+              ? 'Reserving...'
+              : `Book ${dayjs(reserveDates.checkOut).diff(
                   dayjs(reserveDates.checkIn),
                   'days',
-                ) > 1
-                  ? 'nights'
-                  : 'night'
-              }`}
+                )}  ${
+                  dayjs(reserveDates.checkOut).diff(
+                    dayjs(reserveDates.checkIn),
+                    'days',
+                  ) > 1
+                    ? 'nights'
+                    : 'night'
+                }`}
         </ReserveButton>
       )}
       <ReservationMessage>You won't be charged yet</ReservationMessage>
@@ -393,16 +406,29 @@ const ReservationMessage = styled('div', {
   textAlign: 'center',
 });
 const ReserveButton = styled('button', {
-  '&:hover': {
-    opacity: '0.9',
-  },
-  backgroundColor: '$primary',
-  backgroundImage:
-    'linear-gradient(346deg, hsl(346,91%,51%) 0%, hsl(340,81%,58%) 100%)',
   color: 'white',
   height: '3rem',
   my: '0.2rem',
   transition: 'boxShadow 0.2s',
+  variants: {
+    active: {
+      false: {
+        '&:hover': {
+          opacity: '0.5',
+        },
+        backgroundColor: '$textSecondary',
+        opacity: '0.5',
+      },
+      true: {
+        '&:hover': {
+          opacity: '0.9',
+        },
+        backgroundColor: '$primary',
+        backgroundImage:
+          'linear-gradient(346deg, hsl(346,91%,51%) 0%, hsl(340,81%,58%) 100%)',
+      },
+    },
+  },
   width: '100%',
 });
 
