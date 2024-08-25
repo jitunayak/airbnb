@@ -86,6 +86,9 @@ export const Button = styled('button', {
       xl: {
         borderRadius: '100%',
       },
+      xs: {
+        borderRadius: '.4rem',
+      },
     },
     shadow: {
       0: {},

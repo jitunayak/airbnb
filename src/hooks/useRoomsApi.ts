@@ -48,6 +48,12 @@ const useRoomsApi = () => {
       .then((res) => res.data as Promise<IRoom>);
   };
 
+  const getRoomsByHost = async (hostId: string) => {
+    return client
+      .get(`/api/v1/rooms?hostId=${hostId}`)
+      .then((res) => res.data as Promise<IRoom[]>);
+  };
+
   const sendBookingEmail = async (
     payload: Pick<IBookingConfirmationPayload, 'checkInDate' | 'checkOutDate'>,
   ) => {
@@ -58,6 +64,7 @@ const useRoomsApi = () => {
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bookRoom = async (payload: any) => {
     return client.post(`/api/v1/bookings`, payload);
   };
@@ -70,6 +77,7 @@ const useRoomsApi = () => {
     bookRoom,
     fetchRooms,
     getRoomById,
+    getRoomsByHost,
     sendBookingEmail,
   };
 };
