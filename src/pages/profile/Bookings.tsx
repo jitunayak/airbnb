@@ -2,6 +2,7 @@
 import { Column, Divider, Row } from '@/components';
 import { styled } from '@/stitches.config';
 import client from '@/utils/AxiosClient';
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import dayjs from 'dayjs';
@@ -9,6 +10,7 @@ import { Map } from 'lucide-react';
 import React from 'react';
 
 const Bookings: React.FC = () => {
+  const { user } = useKindeAuth();
   const getBookingByUser = async (userId: string) => {
     const result = await client.get('/api/v1/bookings', {
       params: { userId },
@@ -22,8 +24,8 @@ const Bookings: React.FC = () => {
     isError,
     isPending,
   } = useQuery({
-    queryFn: () => getBookingByUser('fada82b0-3101-42d3-9b7b-0b7b386a4c78'),
-    queryKey: ['user', 'bookings'],
+    queryFn: () => getBookingByUser(user?.id || ''),
+    queryKey: ['user', 'bookings', user?.id],
   });
 
   if (isPending) return <div>Loading...</div>;
@@ -146,8 +148,8 @@ const Container = styled('div', {
   alignItems: 'initial',
   display: 'flex',
   flexDirection: 'column',
-  padding: '6rem',
   position: 'relative',
+  px: '6rem',
   width: '60rem',
 });
 
@@ -168,7 +170,7 @@ const Card = styled('div', {
 
   flexDirection: 'Row',
   margin: '1rem 0',
-  my: '$1',
+  my: '$6',
   //   padding: '1rem',
   width: '100%',
 });
@@ -186,8 +188,8 @@ const Sumamry = styled('div', {
 });
 
 const Price = styled('span', {
-  fontSize: '$h5',
-  fontWeight: '500',
+  fontSize: '$h6',
+  fontWeight: '400',
   width: 'fit-content',
 });
 

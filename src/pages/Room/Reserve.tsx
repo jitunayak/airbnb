@@ -76,6 +76,7 @@ const Reserve: React.FC<IProps> = ({ room }) => {
         checkInDate: reserveDates.checkIn,
         checkOutDate: reserveDates.checkOut,
         currency: 'INR',
+        email: user?.email || '',
         price: room.price.discountedPrice,
         roomId: room.id,
         userId: user?.id || '',
