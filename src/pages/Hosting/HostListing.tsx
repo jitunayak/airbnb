@@ -18,11 +18,7 @@ const HostListing: React.FC<IProps> = ({ room }) => {
       onMouseEnter={() => setisHovered(true)}
       onMouseLeave={() => setisHovered(false)}
     >
-      <div
-        style={{ fontSize: '14px', fontWeight: '500', marginBottom: '1rem' }}
-      >
-        {room.name.substring(0, 20)}...
-      </div>
+      <Title>{room.name.substring(0, 20)}...</Title>
       <img
         style={{
           borderRadius: '4px',
@@ -30,9 +26,9 @@ const HostListing: React.FC<IProps> = ({ room }) => {
         }}
         height={300}
         src={room.images[0].url}
-        width={260}
+        width={'100%'}
       />
-      <span>₹ {room.price.discountedPrice}</span>
+      <span>₹{room.price.discountedPrice}</span>
 
       <AnimatePresence>
         {isHovered && (
@@ -100,4 +96,11 @@ const Card = styled('div', {
   my: '$2',
   padding: '$2',
   position: 'relative',
+});
+
+const Title = styled('div', {
+  fontSize: '$s',
+  fontWeight: '500',
+  marginBottom: '1rem',
+  width: '100%',
 });

@@ -38,8 +38,8 @@ const HostingHeader: React.FC = () => {
       {roomQuery.isSuccess && (
         <div
           style={{
-            display: 'inline-flex',
-            overflowX: 'scroll',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             width: '100%',
           }}
         >
