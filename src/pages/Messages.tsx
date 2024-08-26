@@ -2,7 +2,7 @@ import { Row } from '@/components';
 import { Button } from '@/components/Button';
 import { socket } from '@/socket';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
-import { SendIcon } from 'lucide-react';
+import { PowerIcon, PowerOffIcon, SendIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 type IMessage = { message: string; user: string };
@@ -38,10 +38,16 @@ export const Messages: React.FC = () => {
   return (
     <div style={{ width: '40rem' }}>
       <h2>Welcome {user?.given_name ?? 'Guest'}</h2>
-      <div>
-        <p>Is connected: {isConnected ? 'Yes' : 'No'}</p>
+      <div
+        style={{ alignItems: 'center', display: 'inline-flex', gap: '1rem' }}
+      >
+        {isConnected ? (
+          <PowerIcon color="green" size={18} />
+        ) : (
+          <PowerOffIcon color="red" size={18} />
+        )}
+        <p>Socket connected: {isConnected ? 'Yes' : 'No'}</p>
       </div>
-
       <div
         style={{
           border: '1px solid #0101',
@@ -96,7 +102,7 @@ export const Messages: React.FC = () => {
           style={{
             backgroundColor: '#0101',
             border: '1px solid #0101',
-            borderRadius: '12spx',
+            borderRadius: '12px',
             fontSize: '18px',
             opacity: '0.8',
             padding: '14px',
