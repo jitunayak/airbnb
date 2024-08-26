@@ -1,14 +1,16 @@
 import { Row } from '@/components';
 import { Button } from '@/components/Button';
 import { socket } from '@/socket';
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { SendIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
+type IMessage = { message: string; user: string };
 export const Messages: React.FC = () => {
+  const { user } = useKindeAuth();
   const [inputText, setInputText] = useState('');
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [messages, setmessages] = useState<string[]>([]);
-
+  const [messages, setmessages] = useState<IMessage[]>([]);
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
@@ -18,7 +20,7 @@ export const Messages: React.FC = () => {
       setIsConnected(false);
     }
 
-    function onMessageEvent(value: string) {
+    function onMessageEvent(value: IMessage) {
       setmessages((previous) => [...previous, value]);
     }
 
@@ -34,37 +36,94 @@ export const Messages: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Messages</h1>
+    <div style={{ width: '40rem' }}>
+      <h2>Welcome {user?.given_name ?? 'Guest'}</h2>
       <div>
         <p>Is connected: {isConnected ? 'Yes' : 'No'}</p>
-        <p>Number of events: {messages.length}</p>
       </div>
 
-      {messages.map((event) => (
-        <p key={event}>{event}</p>
-      ))}
+      <div
+        style={{
+          border: '1px solid #0101',
+          borderRadius: '8px',
+          height: '400px',
+          marginBottom: '1rem',
+          overflow: 'auto',
+          padding: '20px',
+        }}
+      >
+        {messages.map((event) => (
+          <div
+            style={{
+              alignItems: 'center',
+              border: '1px solid #ccc',
+              borderRadius: '24px',
+              display: 'flex',
+              gap: '16px',
+              justifyContent: 'flex-start',
+              marginBottom: '1rem',
+              padding: '8px',
+              paddingRight: '1rem',
+              width: 'max-content',
+            }}
+            key={event.message}
+          >
+            <div>
+              <span
+                style={{
+                  alignItems: 'center',
+                  backgroundColor: 'black',
+                  borderRadius: '50%',
+                  color: 'white',
+                  display: 'inline-flex',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  height: '32px',
+                  justifyContent: 'center',
+                  width: '32px',
+                }}
+              >
+                {event.user}
+              </span>
+            </div>
+            <div style={{ fontSize: '14px' }}>{event.message}</div>
+          </div>
+        ))}
+      </div>
 
       <Row style={{ gap: '.6rem' }}>
         <input
           style={{
-            border: '1px solid #ccc',
-            borderRadius: '6px',
-            fontSize: '16px',
-            padding: '6px',
+            backgroundColor: '#0101',
+            border: '1px solid #0101',
+            borderRadius: '12spx',
+            fontSize: '18px',
+            opacity: '0.8',
+            padding: '14px',
+            width: '100%',
           }}
           onChange={(e) => setInputText(e.target.value)}
+          placeholder="Type a message"
           type="text"
           value={inputText}
         />
         <Button
           onClick={() => {
             socket.emit('message', inputText);
-            setmessages((previous) => [...previous, inputText]);
+            setmessages((previous) => [
+              ...previous,
+              {
+                message: inputText,
+                user:
+                  `${user?.given_name?.substring(0, 1).toUpperCase()}${user?.family_name?.substring(0, 1).toUpperCase()}` ||
+                  'Guest',
+              },
+            ]);
             setInputText('');
           }}
           color={'primary'}
-          round={'xs'}
+          round={'s'}
+          size={'l'}
         >
           <SendIcon size={16} />
           Send
