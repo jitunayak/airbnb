@@ -122,7 +122,7 @@ export const Messages: React.FC = () => {
                 message: inputText,
                 user:
                   `${user?.given_name?.substring(0, 1).toUpperCase()}${user?.family_name?.substring(0, 1).toUpperCase()}` ||
-                  'Guest',
+                  'G',
               },
             ]);
             setInputText('');

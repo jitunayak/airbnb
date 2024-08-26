@@ -1,12 +1,11 @@
-import { Button } from '@/components/Button';
 import { useApi } from '@/hooks';
 import { getLocalStorage } from '@/utils/LocalStorage';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
-import { PencilIcon, Trash2Icon } from 'lucide-react';
 
 import { AirBnbIcon } from '../../assets';
 import { styled } from '../../stitches.config';
+import HostListing from './HostListing';
 
 const HostingHeader: React.FC = () => {
   const navigate = useNavigate();
@@ -45,50 +44,7 @@ const HostingHeader: React.FC = () => {
           }}
         >
           {roomQuery.data.map((room) => (
-            <Card>
-              <div style={{ fontWeight: '500', marginBottom: '1rem' }}>
-                {room.name.substring(0, 20)}...
-              </div>
-              <img
-                style={{
-                  borderRadius: '4px',
-                  objectFit: 'cover',
-                }}
-                height={300}
-                src={room.images[0].url}
-                width={300}
-              />
-              <EditDeleteWrapper>
-                <Button
-                  color={'outline'}
-                  onClick={() => navigate({ to: `/hosting/edit/${room.id}` })}
-                  round={'xs'}
-                >
-                  <PencilIcon size={16} />
-                  Edit
-                </Button>
-                <Button
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        'Are you sure you want to delete this listing?',
-                      )
-                    ) {
-                      // roomsApi.deleteRoom(room.id).then(() => {
-                      //   roomQuery.refetch();
-                      // });
-                    }
-                  }}
-                  style={{
-                    color: 'red',
-                  }}
-                  color={'outline'}
-                  round={'xs'}
-                >
-                  <Trash2Icon size={16} />
-                </Button>
-              </EditDeleteWrapper>
-            </Card>
+            <HostListing key={room.id} room={room} />
           ))}
         </div>
       )}
@@ -131,21 +87,4 @@ const WelcomeMsg = styled('p', {
 const SubHeader = styled('p', {
   fontSize: '26px',
   fontWeight: '500',
-});
-
-const EditDeleteWrapper = styled('div', {
-  display: 'flex',
-  gap: '0.5rem',
-  justifyContent: 'center',
-  pb: '$2',
-  pl: '$2',
-});
-
-const Card = styled('div', {
-  border1: '$gray200',
-  borderRadius: '8px',
-  boxShadow: '$s',
-  mx: '$2',
-  my: '$2',
-  padding: '$2',
 });
