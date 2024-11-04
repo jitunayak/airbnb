@@ -1,16 +1,18 @@
 import { Row } from '@/components';
 import { Button } from '@/components/Button';
-import { socket } from '@/socket';
+import { getSocket } from '@/socket';
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 import { PowerIcon, PowerOffIcon, SendIcon } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 type IMessage = { message: string; user: string };
 export const Messages: React.FC = () => {
+  const socket = useMemo(() => getSocket(), []);
   const { user } = useKindeAuth();
   const [inputText, setInputText] = useState('');
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [messages, setmessages] = useState<IMessage[]>([]);
+
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
@@ -32,6 +34,7 @@ export const Messages: React.FC = () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
       socket.off('message', onMessageEvent);
+      socket.close();
     };
   }, []);
 

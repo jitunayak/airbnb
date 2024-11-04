@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { createRouter } from '@tanstack/react-router';
+import { NuqsAdapter } from 'nuqs/adapters/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -33,6 +34,8 @@ export type IRouter = typeof router;
 
 ReactDOM.createRoot(document.getElementById('app')!).render(
   <React.StrictMode>
-    <App router={router} />
+    <NuqsAdapter>
+      <App router={router} />
+    </NuqsAdapter>
   </React.StrictMode>,
 );

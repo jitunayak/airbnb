@@ -7,7 +7,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useLocation } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import React, { useState } from 'react';
+import { useQueryState } from 'nuqs';
+import React, { useEffect, useState } from 'react';
 
 import { styled } from '../../stitches.config';
 
@@ -15,6 +16,9 @@ type IProps = {
   room: IRoom;
 };
 const Reserve: React.FC<IProps> = ({ room }) => {
+  const [fromDate, setFromDate] = useQueryState('checkIn');
+  const [toDate, setToDate] = useQueryState('checkOut');
+
   const { isAuthenticated, login } = useKindeAuth();
   const { pathname } = useLocation();
   const { roomsApi } = useApi();
@@ -25,9 +29,15 @@ const Reserve: React.FC<IProps> = ({ room }) => {
   });
   const [showGuestDetails, setShowGuestDetails] = useState(false);
   const [reserveDates, setReserveDates] = useState({
-    checkIn: new Date().toISOString().split('T')[0],
-    checkOut: dayjs().add(1, 'days').toISOString().split('T')[0],
+    checkIn: fromDate ?? dayjs().format('YYYY-MM-DD'),
+    checkOut: toDate ?? dayjs().add(1, 'day').format('YYYY-MM-DD'),
   });
+
+  useEffect(() => {
+    setFromDate(reserveDates.checkIn);
+    setToDate(reserveDates.checkOut);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reserveDates]);
 
   const [guestDetails, setGuestDetails] = useState({
     adults: 1,
